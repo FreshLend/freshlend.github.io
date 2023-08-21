@@ -1,5 +1,5 @@
   // Устанавливаем начальную дату
-  var startDate = new Date("2010-02-20");
+  var startDate = new Date("27.08.2008");
 
   // Получаем текущую дату
   var currentDate = new Date();
