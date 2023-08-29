@@ -111,7 +111,7 @@
 
 
 
-    <div><a target="_blank" href="http://q32.link/?ref=80063"><img src="//q32.link/banners/banner468x60-2.gif" /></a></div>
+    <iframe allowtransparency="true" scrolling="no" frameborder="no" src="https://w.soundcloud.com/icon/?url=http%3A%2F%2Fsoundcloud.com%2FFreshLend_Music&color=orange_white&size=64" style="width: 64px; height: 64px;"></iframe>
 
 
 
@@ -199,73 +199,14 @@
                                 <h1 class="button1">FreshLend Music</h1>
 
 
-<div id="musicPlayer">
-  <button class="button" onclick="previousTrack()">&lt;</button>
-  <button class="button" onclick="playPause()">Play/Pause</button>
-  <button class="button" onclick="nextTrack()">&gt;</button>
-  <span id="trackName"></span>
-  <iframe id="music" width="100%" height="166" scrolling="no" frameborder="no"></iframe>
-</div>
+<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1603510398&color=%23166fa3&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/oleg-vasin-664436106" title="FreshGame" target="_blank" style="color: #cccccc; text-decoration: none;">FreshGame</a> · <a href="https://soundcloud.com/oleg-vasin-664436106/space-survival" title="Space Survival" target="_blank" style="color: #cccccc; text-decoration: none;">Space Survival</a>
 
-<script>
-var tracks = [
-  { name: "Space Survival", url: "https://soundcloud.com/oleg-vasin-664436106/space-survival/s-AmEBPOHI5dJ?si=46b73952cfee425a8bdac60dfccbf945&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" }
-];
-var currentTrackIndex = 0;
-var trackNameElement = document.getElementById("trackName");
-
-function updateTrackName() {
-  trackNameElement.textContent = tracks[currentTrackIndex].name;
-}
-
-function playPause() {
-  var iframe = document.getElementById("music");
-  if (iframe.contentWindow.postMessage) {
-    iframe.contentWindow.postMessage('{"event":"play"}', '*');
-  }
-}
-
-function previousTrack() {
-  currentTrackIndex--;
-  if (currentTrackIndex < 0) {
-    currentTrackIndex = tracks.length - 1;
-  }
-  var iframe = document.getElementById("music");
-  iframe.src = tracks[currentTrackIndex].url;
-  updateTrackName();
-}
-
-function nextTrack() {
-  currentTrackIndex++;
-  if (currentTrackIndex >= tracks.length) {
-    currentTrackIndex = 0;
-  }
-  var iframe = document.getElementById("music");
-  iframe.src = tracks[currentTrackIndex].url;
-  updateTrackName();
-}
-
-// Подставьте URL вашего трека в tracks[0].url
-var iframe = document.getElementById("music");
-iframe.src = tracks[0].url;
-updateTrackName();
-</script>
+                                        </div>
                               
-                              <style>
-                              .button {
-                                font-size: 30px;
-                              }
-                              
-                              .button1 {
-                                font-size: 50px;
-                              }
-                              </style>
-                              
-                                                              </div>
+                                </div>
 
 
-
-                            </div>
+                        </div>
 
 
 
