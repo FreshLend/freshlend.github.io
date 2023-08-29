@@ -1,5 +1,5 @@
 var tracks = [
-  { name: "Space Survival", url: "music/Space_Survival.mp3" }
+  { name: "Space Survival", url: "Space_Survival.mp3" }
 ];
 var currentTrackIndex = 0;
 var audio = document.getElementById("music");
