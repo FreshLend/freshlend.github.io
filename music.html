@@ -43,7 +43,7 @@
     <script src="js/freshgame.js" defer></script>
 
 
-    <script src="js/music.js" defer></script>
+    <script src="music.js" defer></script>
 
 
 
@@ -199,24 +199,23 @@
                                 <h1 class="button1">FreshLend Music</h1>
 
 
-                                    <div id="musicPlayer">
-  <button class="button" onclick="previousTrack()">«</button>
-  <button class="button" onclick="playPause()">Старт/Стоп</button>
-  <button class="button" onclick="nextTrack()">»</button>
+<div id="musicPlayer">
+  <button class="button" onclick="previousTrack()">&lt;</button>
+  <button class="button" onclick="playPause()">Play/Pause</button>
+  <button class="button" onclick="nextTrack()">&gt;</button>
   <span id="trackName"></span>
-  <audio id="music"></audio>
+  <audio id="music" src=""></audio>
 </div>
                               
-    <style>
-    .button {
-      font-size: 50px;
-    }
+                              <style>
+                              .button {
+                                font-size: 30px;
+                              }
                               
-    .button1 {
-      font-size: 50px;
-    }
-    </style>
-
+                              .button1 {
+                                font-size: 50px;
+                              }
+                              </style>
                               
                                                               </div>
 
