@@ -204,8 +204,52 @@
   <button class="button" onclick="playPause()">Play/Pause</button>
   <button class="button" onclick="nextTrack()">&gt;</button>
   <span id="trackName"></span>
-  <audio id="music" src="music/Space_Survival.mp3"></audio>
+  <iframe id="music" width="100%" height="166" scrolling="no" frameborder="no"></iframe>
 </div>
+
+<script>
+var tracks = [
+  { name: "Space Survival", url: "https://soundcloud.com/oleg-vasin-664436106/space-survival/s-AmEBPOHI5dJ?si=46b73952cfee425a8bdac60dfccbf945&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" }
+];
+var currentTrackIndex = 0;
+var trackNameElement = document.getElementById("trackName");
+
+function updateTrackName() {
+  trackNameElement.textContent = tracks[currentTrackIndex].name;
+}
+
+function playPause() {
+  var iframe = document.getElementById("music");
+  if (iframe.contentWindow.postMessage) {
+    iframe.contentWindow.postMessage('{"event":"play"}', '*');
+  }
+}
+
+function previousTrack() {
+  currentTrackIndex--;
+  if (currentTrackIndex < 0) {
+    currentTrackIndex = tracks.length - 1;
+  }
+  var iframe = document.getElementById("music");
+  iframe.src = tracks[currentTrackIndex].url;
+  updateTrackName();
+}
+
+function nextTrack() {
+  currentTrackIndex++;
+  if (currentTrackIndex >= tracks.length) {
+    currentTrackIndex = 0;
+  }
+  var iframe = document.getElementById("music");
+  iframe.src = tracks[currentTrackIndex].url;
+  updateTrackName();
+}
+
+// Подставьте URL вашего трека в tracks[0].url
+var iframe = document.getElementById("music");
+iframe.src = tracks[0].url;
+updateTrackName();
+</script>
                               
                               <style>
                               .button {
