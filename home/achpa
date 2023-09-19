@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://jenil.github.io/bulmaswatch/darkly/bulmaswatch.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6280559275672339"
+     crossorigin="anonymous"></script>
+    <link rel="icon" href="../favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style1.css">
+    <script src="js/smoteo.js" defer></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Tilt+Prism">
+
+  <style>
+    body {
+      font-family: 'Tilt Prism', serif;
+      font-size: 24px;
+    }
+  </style>
+    <title>Профиль / Achpa</title>
+</head>
+<body style="background-image: url(img/freshlend.jpg); background-size: cover;">
+    <section class="section">
+        <div class="container">
+            <a href="#" onclick="goBack()">< Назад</a>
+                <div style="text-align: center;">
+    <div><a target="_blank" href="http://q32.link/?ref=80063"><img src="//q32.link/banners/banner468x60-2.gif" /></a></div>
+                </div>
+            <div class="block">
+                <h1 class="title is-1">Профиль Achpa</h1>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function goBack() {
+            history.back();
+        }
+    </script>
+  
+                    <div class="column">
+                        <div class="card">
+                            <div class="card-content">
+                                <h1>О Achpa</h1>
+                                <p>Achpa - Работник студии и Тестер.</p>
+                                </div>
+                            </div>
+                        </div>
+    </secкtion>
+    <footer class="footer block">
+        <div class="content">
+            <b>(©) 2021-2023 FreshLend Studio</b>
+	        <p>Сайт сделал: <a href="https://youtube.com/@FreshGame_YT" target="_blank">@FreshGame_YT</a></p>
+	        <p>contact with me: <a href="mailto:FreshGame.AD.List@gmail.com?subject=FreshLend Studio"><strong>FreshGame.AD.List@gmail.com</strong></a></p>
+        </div>
+    </footer>
+</body>
+</html>
