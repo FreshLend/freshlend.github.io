@@ -1,4 +1,4 @@
-var onlineCount = 0;
+    var onlineCount = 0;
 
     // Создание WebSocket-соединения
     var socket = new WebSocket("ws://freshlend.github.io/counter");
