@@ -1,25 +1,10 @@
-    var onlineCount = 0;
+document.addEventListener("DOMContentLoaded", function() {
+  var currentDate = new Date();  // текущая дата
+  var targetDate = new Date("2021-08-07");  // целевая дата
 
-    // Создание WebSocket-соединения
-    var socket = new WebSocket("ws://freshlend.github.io/counter");
+  var timeDiff = Math.abs(currentDate.getTime() - targetDate.getTime());  // разница в миллисекундах
+  var yearsDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 365));  // разница в годах
 
-    // Обработка события открытия соединения
-    socket.onopen = function(event) {
-      console.log("WebSocket connection opened");
-    };
-
-    // Обработка события получения сообщения от сервера
-    socket.onmessage = function(event) {
-      onlineCount = parseInt(event.data);
-      updateCount();
-    };
-
-    // Обработка события закрытия соединения
-    socket.onclose = function(event) {
-      console.log("WebSocket connection closed");
-    };
-
-    function updateCount() {
-      var countElement = document.getElementById("count");
-      countElement.innerText = onlineCount;
-    }
+  var countElement = document.getElementById("count");
+  countElement.innerText = "Прошло " + yearsDiff + " лет с 7 августа 2021 года.";
+});
