@@ -24,13 +24,41 @@
   }
 </style>
     <title>FreshLend Studio</title>
+
+   <script>
+        var onlineCount = 0;
+
+        function registerUserOnline() {
+            onlineCount++;
+            updateCount();
+        }
+
+        function updateUserOffline() {
+            onlineCount--;
+            updateCount();
+        }
+
+        function updateCount() {
+            var countElement = document.getElementById("count");
+            countElement.innerText = onlineCount;
+        }
+    </script>
+	
 </head>
 <body style="background-image: url(img/freshgame.jpg); background-size: cover;">
 
 
 
 
+<h1>Онлайн-счетчик</h1>
+    <p>Количество пользователей онлайн: <span id="count">0</span></p>
 
+    <script>
+        // Пример использования функций
+        registerUserOnline();
+        registerUserOnline();
+        updateUserOffline();
+    </script>
 
 
 
