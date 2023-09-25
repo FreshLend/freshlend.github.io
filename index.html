@@ -16,6 +16,7 @@
     <link rel="icon" href="favicon.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style1.css">
+    <script>src="1.js"</script>	
 <style>
   body {
     font-size: 24px;
@@ -31,34 +32,6 @@
 
 <h1>Онлайн-счетчик</h1>
   <p>Количество пользователей онлайн: <span id="count">0</span></p>
-
-  <script>
-    var onlineCount = 0;
-
-    // Создание WebSocket-соединения
-    var socket = new WebSocket("ws://freshlend.github.io/counter");
-
-    // Обработка события открытия соединения
-    socket.onopen = function(event) {
-      console.log("WebSocket connection opened");
-    };
-
-    // Обработка события получения сообщения от сервера
-    socket.onmessage = function(event) {
-      onlineCount = parseInt(event.data);
-      updateCount();
-    };
-
-    // Обработка события закрытия соединения
-    socket.onclose = function(event) {
-      console.log("WebSocket connection closed");
-    };
-
-    function updateCount() {
-      var countElement = document.getElementById("count");
-      countElement.innerText = onlineCount;
-    }
-  </script>
 
 
 
