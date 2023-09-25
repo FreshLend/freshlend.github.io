@@ -28,25 +28,28 @@
    <script>
         var onlineCount = 0;
 
-        function registerUserOnline() {
-            onlineCount++;
-            updateCount();
-        }
+        // Создание WebSocket-соединения
+        var socket = new WebSocket("ws://example.com/counter");
 
-        function updateUserOffline() {
-            onlineCount--;
+        // Обработка события открытия соединения
+        socket.onopen = function(event) {
+            console.log("WebSocket connection opened");
+        };
+
+        // Обработка события получения сообщения от сервера
+        socket.onmessage = function(event) {
+            onlineCount = parseInt(event.data);
             updateCount();
-        }
+        };
+
+        // Обработка события закрытия соединения
+        socket.onclose = function(event) {
+            console.log("WebSocket connection closed");
+        };
 
         function updateCount() {
             var countElement = document.getElementById("count");
             countElement.innerText = onlineCount;
-        }
-
-        // Вызывать функцию registerUserOnline() при подключении нового пользователя
-        // Например, при нажатии на кнопку "Войти" или при загрузке новой страницы
-        function onUserConnect() {
-            registerUserOnline();
         }
     </script>
 	
@@ -58,9 +61,6 @@
 
 <h1>Онлайн-счетчик</h1>
     <p>Количество пользователей онлайн: <span id="count">0</span></p>
-
-    <button onclick="onUserConnect()">Войти</button>
-
 
 
 
