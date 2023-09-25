@@ -1,14 +1,25 @@
-  // Устанавливаем начальную дату
-  var startDate = new Date("2021-06-07");
+var onlineCount = 0;
 
-  // Получаем текущую дату
-  var currentDate = new Date();
+    // Создание WebSocket-соединения
+    var socket = new WebSocket("ws://freshlend.github.io/counter");
 
-  // Вычисляем количество прошедших лет
-  var yearsPassed = currentDate.getFullYear() - startDate.getFullYear();
+    // Обработка события открытия соединения
+    socket.onopen = function(event) {
+      console.log("WebSocket connection opened");
+    };
 
-  // Вычисляем значение счетчика
-  var counterValue = 0 + yearsPassed;
+    // Обработка события получения сообщения от сервера
+    socket.onmessage = function(event) {
+      onlineCount = parseInt(event.data);
+      updateCount();
+    };
 
-  // Обновляем текст в элементе с id "counter"
-  document.getElementById("counter").textContent = counterValue;
+    // Обработка события закрытия соединения
+    socket.onclose = function(event) {
+      console.log("WebSocket connection closed");
+    };
+
+    function updateCount() {
+      var countElement = document.getElementById("count");
+      countElement.innerText = onlineCount;
+    }
