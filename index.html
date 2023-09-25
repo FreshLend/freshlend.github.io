@@ -42,6 +42,12 @@
             var countElement = document.getElementById("count");
             countElement.innerText = onlineCount;
         }
+
+        // Вызывать функцию registerUserOnline() при подключении нового пользователя
+        // Например, при нажатии на кнопку "Войти" или при загрузке новой страницы
+        function onUserConnect() {
+            registerUserOnline();
+        }
     </script>
 	
 </head>
@@ -53,12 +59,7 @@
 <h1>Онлайн-счетчик</h1>
     <p>Количество пользователей онлайн: <span id="count">0</span></p>
 
-    <script>
-        // Пример использования функций
-        registerUserOnline();
-        registerUserOnline();
-        updateUserOffline();
-    </script>
+    <button onclick="onUserConnect()">Войти</button>
 
 
 
