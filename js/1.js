@@ -1,6 +1,39 @@
+var WebSocketServer = require('websocket').server;
+var http = require('http');
+
+// Создание HTTP-сервера
+var server = http.createServer(function(request, response) {
+    // Обработка запросов
+});
+
+// Запуск сервера
+server.listen(8080, function() {
+    console.log('Сервер запущен на порту 8080');
+});
+
+// Создание WebSocket-сервера
+var wsServer = new WebSocketServer({
+    httpServer: server
+});
+
+// Слушатель подключения клиента
+wsServer.on('request', function(request) {
+    var connection = request.accept(null, request.origin);
+
+    // Слушатель сообщений от клиента
+    connection.on('message', function(message) {
+        // Обработка сообщения от клиента
+    });
+
+    // Слушатель закрытия соединения клиента
+    connection.on('close', function(reasonCode, description) {
+        // Обработка закрытия соединения
+    });
+});
+
 var nicknameEntered = false;
 
-        function checkNickname() {
+function checkNickname() {
     var nickname = document.getElementById("nickname").value;
     if (nickname.trim() === "FreshGame" || nickname.trim() === "FreshGame_Dev" || nickname.trim() === "FreshLend") {
         var password = prompt("Введите пароль:");
@@ -22,7 +55,7 @@ var nicknameEntered = false;
     }
 }
 
-        function sendMessage() {
+function sendMessage() {
     var nickname = document.getElementById("nickname").value;
     var message = document.getElementById("message").value;
     var chatMessages = document.getElementById("chat-messages");
@@ -45,4 +78,4 @@ var nicknameEntered = false;
 
     // Очистка поля ввода сообщения
     document.getElementById("message").value = "";
-        }
+                }
