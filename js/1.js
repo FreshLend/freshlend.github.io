@@ -1,10 +1,48 @@
-document.addEventListener("DOMContentLoaded", function() {
-  var currentDate = new Date();  // текущая дата
-  var targetDate = new Date("2021-08-07");  // целевая дата
+var nicknameEntered = false;
 
-  var timeDiff = Math.abs(currentDate.getTime() - targetDate.getTime());  // разница в миллисекундах
-  var yearsDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 365));  // разница в годах
+        function checkNickname() {
+    var nickname = document.getElementById("nickname").value;
+    if (nickname.trim() === "FreshGame" || nickname.trim() === "FreshGame_Dev" || nickname.trim() === "FreshLend") {
+        var password = prompt("Введите пароль:");
+        if (password === "FreshLend12FreshLend") {
+            nicknameEntered = true;
+            document.getElementById("nickname-input").style.display = "none";
+            document.getElementById("message-input").style.display = "block";
+            document.getElementById("nickname").style.color = "darkred";
+            document.getElementById("chat-messages").style.color = "red";
+        } else {
+            alert("Неверный пароль. Попробуйте еще раз.");
+        }
+    } else {
+        nicknameEntered = true;
+        document.getElementById("nickname-input").style.display = "none";
+        document.getElementById("message-input").style.display = "block";
+        document.getElementById("nickname").style.color = "black";
+        document.getElementById("chat-messages").style.color = "aqua";
+    }
+}
 
-  var countElement = document.getElementById("count");
-  countElement.innerText = "Прошло " + yearsDiff + " лет с 7 августа 2021 года.";
-});
+        function sendMessage() {
+    var nickname = document.getElementById("nickname").value;
+    var message = document.getElementById("message").value;
+    var chatMessages = document.getElementById("chat-messages");
+
+    var chatMessage = document.createElement("p");
+    chatMessage.innerHTML = "<strong>" + nickname + ":</strong> " + message;
+
+    // Ограничение символов в сообщении
+    if (message.length > 1024) {
+        alert("Максимальное количество символов в сообщении: 1024");
+        return;
+    }
+
+    // Удаление старых сообщений при превышении 3
+    if (chatMessages.childElementCount >= 3) {
+        chatMessages.removeChild(chatMessages.firstChild);
+    }
+
+    chatMessages.appendChild(chatMessage);
+
+    // Очистка поля ввода сообщения
+    document.getElementById("message").value = "";
+        }
