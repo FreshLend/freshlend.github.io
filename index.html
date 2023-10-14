@@ -16,7 +16,7 @@
     <link rel="icon" href="favicon.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style1.css">
-    <script src="js/1d.js"></script>	
+    <script src="https://api.imbachat.com/imbachat/v1/24593/widget"></script>	
 <style>
   body {
     font-size: 24px;
@@ -76,33 +76,8 @@
    </div>
 </div>
 
-<div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-  <button id="chat-toggle" style="background-color: aqua; border: 3px solid blue; border-radius: 50%; width: 50px; height: 50px; color: blue;">💬</button>
-  <div id="chat-container" style="display: none; border: 2px solid aqua; padding: 10px; opacity: 1.0; background: linear-gradient(to bottom right, #00b4b4, #00b4b4, #000cb4); backdrop-filter: blur(0); max-width: 468px; border-radius: 10px;">
-    <h1 style="text-align: center; color: white;">Чат</h1>
-    <div id="chat-messages"></div>
-    <div id="nickname-input" style="text-align: center;">
-      <input type="text" id="nickname" placeholder="Введите псевдоним">
-      <button onclick="checkNickname()">Готово</button>
-    </div>
-    <div id="message-input" style="display: none; text-align: center;">
-      <input type="text" id="message" placeholder="Введите сообщение">
-      <button onclick="sendMessage()">Отправить</button>
-    </div>
-  </div>
-</div>
-<script src="https://api.imbachat.com/imbachat/v1/24593/widget"></script>
 <script>
 window.imbaApi.load();
-</script>
-					
-<script>
-  var chatContainer = document.getElementById("chat-container");
-  var chatToggle = document.getElementById("chat-toggle");
-
-  chatToggle.addEventListener("click", function() {
-    chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
-  });
 </script>
 
 
