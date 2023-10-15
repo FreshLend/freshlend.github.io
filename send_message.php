@@ -1,5 +1,6 @@
 <?php
+$nickname = $_POST['nickname'];
 $message = $_POST['message'];
 
-echo $message;
+echo $nickname . ': ' . $message;
 ?>
