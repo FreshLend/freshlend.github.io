@@ -12,49 +12,25 @@
     <button id="send-button" disabled>Отправить</button>
 </div>
 <script>
-    var nicknameInput = document.getElementById('nickname-input');
-    var readyButton = document.getElementById('ready-button');
-    var messageInput = document.getElementById('message-input');
-    var sendButton = document.getElementById('send-button');
-    var chatMessages = document.getElementById('chat-messages');
-    var nickname = '';
+document.addEventListener('DOMContentLoaded', function() {
+        var messageInput = document.getElementById('message-input');
+        var sendButton = document.getElementById('send-button');
+        var chatMessages = document.getElementById('chat-messages');
 
-    readyButton.addEventListener('click', function() {
-        nickname = nicknameInput.value;
-        if (nickname.trim() !== '') {
-            nicknameInput.disabled = true;
-            readyButton.disabled = true;
-            messageInput.disabled = false;
-            sendButton.disabled = false;
+        sendButton.addEventListener('click', function() {
+            var message = messageInput.value;
+            if (message.trim() !== '') {
+                sendMessage(message);
+            }
+            messageInput.value = '';
+        });
+
+        function sendMessage(message) {
+            var messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            chatMessages.appendChild(messageElement);
         }
     });
-
-    sendButton.addEventListener('click', function() {
-        var message = messageInput.value;
-        if (message.trim() !== '') {
-            sendMessage(nickname, message);
-        }
-        messageInput.value = '';
-    });
-
-    function sendMessage(nickname, message) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'send_message.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var response = xhr.responseText;
-            displayMessage(response);
-        }
-    };
-    xhr.send('nickname=' + encodeURIComponent(nickname) + '&message=' + encodeURIComponent(message));
-}
-
-function displayMessage(message) {
-    var messageElement = document.createElement('div');
-    messageElement.textContent = message;
-    chatMessages.appendChild(messageElement);
-}
 </script>
 </body>
 </html>
