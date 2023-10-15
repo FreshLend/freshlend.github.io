@@ -12,25 +12,36 @@
     <button id="send-button" disabled>Отправить</button>
 </div>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-        var messageInput = document.getElementById('message-input');
-        var sendButton = document.getElementById('send-button');
-        var chatMessages = document.getElementById('chat-messages');
+    var nicknameInput = document.getElementById('nickname-input');
+    var readyButton = document.getElementById('ready-button');
+    var messageInput = document.getElementById('message-input');
+    var sendButton = document.getElementById('send-button');
+    var chatMessages = document.getElementById('chat-messages');
+    var nickname = '';
 
-        sendButton.addEventListener('click', function() {
-            var message = messageInput.value;
-            if (message.trim() !== '') {
-                sendMessage(message);
-            }
-            messageInput.value = '';
-        });
-
-        function sendMessage(message) {
-            var messageElement = document.createElement('div');
-            messageElement.textContent = message;
-            chatMessages.appendChild(messageElement);
+    readyButton.addEventListener('click', function() {
+        nickname = nicknameInput.value;
+        if (nickname.trim() !== '') {
+            nicknameInput.disabled = true;
+            readyButton.disabled = true;
+            messageInput.disabled = false;
+            sendButton.disabled = false;
         }
     });
+
+    sendButton.addEventListener('click', function() {
+        var message = messageInput.value;
+        if (message.trim() !== '') {
+            sendMessage(nickname, message);
+        }
+        messageInput.value = '';
+    });
+
+    function sendMessage(nickname, message) {
+        var messageElement = document.createElement('div');
+        messageElement.textContent = nickname + ': ' + message;
+        chatMessages.appendChild(messageElement);
+    }
 </script>
 </body>
 </html>
