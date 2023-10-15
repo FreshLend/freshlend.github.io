@@ -75,6 +75,55 @@
    </div>
 </div>
 
+<h1>Простой чат</h1>
+    <div id="chat-container">
+        <div id="chat-messages"></div>
+        <input type="text" id="message-input" placeholder="Введите сообщение">
+        <button id="send-button">Отправить</button>
+    </div>
+
+    <h1>Простой чат</h1>
+    <div id="chat-container">
+        <div id="chat-messages"></div>
+        <input type="text" id="message-input" placeholder="Введите сообщение">
+        <button id="send-button">Отправить</button>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var messageInput = document.getElementById('message-input');
+    var sendButton = document.getElementById('send-button');
+    var chatMessages = document.getElementById('chat-messages');
+
+    sendButton.addEventListener('click', function() {
+        var message = messageInput.value;
+        if (message.trim() !== '') {
+            sendMessage(message);
+        }
+        messageInput.value = '';
+    });
+
+    function sendMessage(message) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'send_message.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = xhr.responseText;
+                displayMessage(response);
+            }
+        };
+        xhr.send('message=' + encodeURIComponent(message));
+    }
+
+    function displayMessage(message) {
+        var messageElement = document.createElement('div');
+        messageElement.textContent = message;
+        chatMessages.appendChild(messageElement);
+    }
+});
+</script>
+					
 <script id="chatBroEmbedCode">/* Chatbro Widget Embed Code Start */function ChatbroLoader(chats,async){async=!1!==async;var params={embedChatsParameters:chats instanceof Array?chats:[chats],lang:navigator.language||navigator.userLanguage,needLoadCode:'undefined'==typeof Chatbro,embedParamsVersion:localStorage.embedParamsVersion,chatbroScriptVersion:localStorage.chatbroScriptVersion},xhr=new XMLHttpRequest;xhr.withCredentials=!0,xhr.onload=function(){eval(xhr.responseText)},xhr.onerror=function(){console.error('Chatbro loading error')},xhr.open('GET','https://www.chatbro.com/embed.js?'+btoa(unescape(encodeURIComponent(JSON.stringify(params)))),async),xhr.send()}/* Chatbro Widget Embed Code End */ChatbroLoader({encodedChatId: '98wgp'});</script>
 
 
