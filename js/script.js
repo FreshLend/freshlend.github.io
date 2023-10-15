@@ -1,32 +1,30 @@
-document.addEventListener('DOMContentLoaded', function() {
+var nicknameInput = document.getElementById('nickname-input');
+    var readyButton = document.getElementById('ready-button');
     var messageInput = document.getElementById('message-input');
     var sendButton = document.getElementById('send-button');
     var chatMessages = document.getElementById('chat-messages');
+    var nickname = '';
+
+    readyButton.addEventListener('click', function() {
+        nickname = nicknameInput.value;
+        if (nickname.trim() !== '') {
+            nicknameInput.disabled = true;
+            readyButton.disabled = true;
+            messageInput.disabled = false;
+            sendButton.disabled = false;
+        }
+    });
 
     sendButton.addEventListener('click', function() {
         var message = messageInput.value;
         if (message.trim() !== '') {
-            sendMessage(message);
+            sendMessage(nickname, message);
         }
         messageInput.value = '';
     });
 
-    function sendMessage(message) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'send_message.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var response = xhr.responseText;
-                displayMessage(response);
-            }
-        };
-        xhr.send('message=' + encodeURIComponent(message));
-    }
-
-    function displayMessage(message) {
+    function sendMessage(nickname, message) {
         var messageElement = document.createElement('div');
-        messageElement.textContent = message;
+        messageElement.textContent = nickname + ': ' + message;
         chatMessages.appendChild(messageElement);
     }
-});
