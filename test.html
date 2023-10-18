@@ -3,45 +3,82 @@
 <head>
     <title>Простой чат</title>
 </head>
-<h1>Простой чат</h1>
-<div id="chat-container">
+
+<div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
+  <button id="chat-toggle" style="background-color: aqua; border: 3px solid blue; border-radius: 50%; width: 50px; height: 50px; color: blue;">💬</button>
+  <div id="chat-container" style="display: none; border: 2px solid aqua; padding: 10px; opacity: 1.0; background: linear-gradient(to bottom right, #00b4b4, #00b4b4, #000cb4); backdrop-filter: blur(0); max-width: 468px; border-radius: 10px;">
+    <h1 style="text-align: center; color: white;">Чат</h1>
     <div id="chat-messages"></div>
-    <input type="text" id="nickname-input" placeholder="Введите ник">
-    <button id="ready-button">Готово</button>
-    <input type="text" id="message-input" placeholder="Введите сообщение" disabled>
-    <button id="send-button" disabled>Отправить</button>
+    <div id="nickname-input" style="text-align: center;">
+      <input type="text" id="nickname" placeholder="Введите псевдоним">
+      <button onclick="checkNickname()">Готово</button>
+    </div>
+    <div id="message-input" style="display: none; text-align: center;">
+      <input type="text" id="message" placeholder="Введите сообщение">
+      <button onclick="sendMessage()">Отправить</button>
+    </div>
+  </div>
 </div>
+
 <script>
-    var nicknameInput = document.getElementById('nickname-input');
-    var readyButton = document.getElementById('ready-button');
-    var messageInput = document.getElementById('message-input');
-    var sendButton = document.getElementById('send-button');
-    var chatMessages = document.getElementById('chat-messages');
-    var nickname = '';
+  var chatContainer = document.getElementById("chat-container");
+  var chatToggle = document.getElementById("chat-toggle");
 
-    readyButton.addEventListener('click', function() {
-        nickname = nicknameInput.value;
-        if (nickname.trim() !== '') {
-            nicknameInput.disabled = true;
-            readyButton.disabled = true;
-            messageInput.disabled = false;
-            sendButton.disabled = false;
-        }
-    });
-
-    sendButton.addEventListener('click', function() {
-        var message = messageInput.value;
-        if (message.trim() !== '') {
-            sendMessage(nickname, message);
-        }
-        messageInput.value = '';
-    });
-
-    function sendMessage(nickname, message) {
-        var messageElement = document.createElement('div');
-        messageElement.textContent = nickname + ': ' + message;
-        chatMessages.appendChild(messageElement);
-    }
+  chatToggle.addEventListener("click", function() {
+    chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
+  });
 </script>
+
+<script>
+    var nicknameEntered = false;
+
+function checkNickname() {
+    var nickname = document.getElementById("nickname").value;
+    if (nickname.trim() === "FreshGame" || nickname.trim() === "FreshGame_Dev" || nickname.trim() === "FreshLend") {
+        var password = prompt("Введите пароль:");
+        if (password === "FreshLend12FreshLend") {
+            nicknameEntered = true;
+            document.getElementById("nickname-input").style.display = "none";
+            document.getElementById("message-input").style.display = "block";
+            document.getElementById("nickname").style.color = "darkred";
+            document.getElementById("chat-messages").style.color = "red";
+        } else {
+            alert("Неверный пароль. Попробуйте еще раз.");
+        }
+    } else {
+        nicknameEntered = true;
+        document.getElementById("nickname-input").style.display = "none";
+        document.getElementById("message-input").style.display = "block";
+        document.getElementById("nickname").style.color = "black";
+        document.getElementById("chat-messages").style.color = "aqua";
+    }
+}
+
+function sendMessage() {
+    var nickname = document.getElementById("nickname").value;
+    var message = document.getElementById("message").value;
+    var chatMessages = document.getElementById("chat-messages");
+
+    var chatMessage = document.createElement("p");
+    chatMessage.innerHTML = "<strong>" + nickname + ":</strong> " + message;
+
+    // Ограничение символов в сообщении
+    if (message.length > 1024) {
+        alert("Максимальное количество символов в сообщении: 1024");
+        return;
+    }
+
+    // Удаление старых сообщений при превышении 3
+    if (chatMessages.childElementCount >= 3) {
+        chatMessages.removeChild(chatMessages.firstChild);
+    }
+
+    chatMessages.appendChild(chatMessage);
+
+    // Очистка поля ввода сообщения
+    document.getElementById("message").value = "";
+}
+</script>
+    
 </body>
 </html>
