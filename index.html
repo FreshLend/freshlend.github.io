@@ -19,6 +19,27 @@
     <!-- Yandex.RTB -->
 <script>window.yaContextCb=window.yaContextCb||[]</script>
 <script src="https://yandex.ru/ads/system/context.js" async></script>
+
+<style>
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    #loader-text {
+      color: white;
+      font-size: 24px;
+    }
+</style>
+	
 <style>
   body {
     font-size: 24px;
@@ -33,6 +54,18 @@
     <title>FreshLend Studio</title>
 	
 </head>
+
+  <div id="loader">
+    <p id="loader-text">Загрузка...</p>
+  </div>
+
+  <script>
+    window.addEventListener("load", function() {
+      var loader = document.getElementById("loader");
+      loader.style.display = "none";
+    });
+  </script>
+	
 <body style="background-image: url(img/freshgame.jpg); background-size: cover;">
 
 
