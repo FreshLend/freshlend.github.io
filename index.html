@@ -20,6 +20,47 @@
 <script>window.yaContextCb=window.yaContextCb||[]</script>
 <script src="https://yandex.ru/ads/system/context.js" async></script>
 
+<style>
+  #loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  .loader-circle {
+    width: 100px;
+    height: 100px;
+    border: 8px solid blue;
+    border-top: 8px solid lightblue;
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .loader-text {
+    color: blue;
+    font-size: 24px;
+    margin-top: 10px;
+  }
+</style>
+
+<div id="loader">
+  <div class="loader-circle"></div>
+  <p class="loader-text">Загрузка...</p>
+</div>
+
 <body style="background-image: url(img/freshgame.jpg); background-size: cover;">
 
 
@@ -69,7 +110,7 @@ window.yaContextCb.push(()=>{
 </div>
 <div style="display: flex; justify-content: center; align-items: center;">
   <div class="hero-contentp" style="margin-top: 15px; margin-right: 20px;"><a href="music" target="_self" class="button btn-2" style="color: aqua; background: linear-gradient(to bottom right, blue, lightblue);"><b>Музыка FreshLend</b></a></div>
-  <div class="hero-content__p" style="margin-top: 15px; margin-bottom: 20px;"><a href="support" target="_self" class="button btn-2" style="color: aqua; background: linear-gradient(to bottom right, blue, lightblue);"><b>Поддержать нас</b></a></div>
+  <div class="hero-content__p" style="margin-top: 15px;"><a href="support" target="_self" class="button btn-2" style="color: aqua; background: linear-gradient(to bottom right, blue, lightblue);"><b>Поддержать нас</b></a></div>
 </div>
    </div>
 </div>
