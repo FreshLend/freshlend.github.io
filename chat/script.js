@@ -1,3 +1,44 @@
+// server.js
+const express = require('express');
+const fs = require('fs');
+const cors = require('cors');
+const app = express();
+const port = 3000;
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Эндпоинт для получения сообщений
+app.get('/chat', (req, res) => {
+  fs.readFile('chat.txt', 'utf-8', (err, data) => {
+    if (err) {
+      res.status(500).send('An error occurred');
+    } else {
+      res.send(data);
+    }
+  });
+});
+
+// Эндпоинт для сохранения сообщений
+app.post('/chat', (req, res) => {
+  const message = req.body.message + '\n';  // Добавление новой строки
+  fs.appendFile('chat.txt', message, (err) => {
+    if (err) {
+      res.status(500).send('Unable to save the message');
+    } else {
+      res.status(200).send('Message saved');
+    }
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
+});
+
+
+
+
 // Helper function to get current timestamp
 function getCurrentTimestamp() {
   const now = new Date();
@@ -5,23 +46,34 @@ function getCurrentTimestamp() {
 }
 
 // Helper function to store chat messages to chat.txt
-function storeChatMessages(messages) {
-  const txt = messages.join('\n');
-  const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
-  const anchor = document.createElement('a');
-  anchor.download = 'chat.txt';
-  anchor.href = URL.createObjectURL(blob);
-  anchor.click();
+function storeChatMessages(message) {
+  fetch('http://localhost:3000/chat', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ message: message })
+  })
+  .then(response => response.text())
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 }
 
 // Load previous chat messages if available
 function loadChatMessages() {
-  fetch('chat.txt')
+  fetch('http://localhost:3000/chat')
     .then((response) => response.text())
     .then((data) => {
       const chatContainer = document.getElementById('messages-container');
-      chatContainer.innerHTML = data;
-      chatContainer.scrollTop = chatContainer.scrollHeight;
+      chatContainer.innerHTML = data.replace(/\n/g, '<br>'); // Конвертируем новые строки в теги <br> для HTML
+      chatContainer.scrollTop = chatContainer.scrollHeight; // Прокручиваем до последнего сообщения
+    })
+    .catch((error) => {
+      console.error('Error:', error);
     });
 }
 
@@ -103,6 +155,12 @@ function handleMessageSubmission() {
     const updatedMessages = chatMessages.map((chatMessage) => chatMessage.outerHTML);
     storeChatMessages(updatedMessages);
   }
+}
+
+// Получить HTML всех сообщений
+  const updatedMessages = chatMessages.map((chatMessage) => chatMessage.outerHTML).join('\n');
+  // Отправить сообщения на сервер для сохранения
+  storeChatMessages(updatedMessages);
 }
 
 // Refresh chat by loading messages again
