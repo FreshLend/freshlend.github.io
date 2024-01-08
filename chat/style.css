@@ -1,0 +1,51 @@
+#chat-container {
+  width: 400px;
+  height: 300px;
+  border: 2px solid blue;
+  position: relative;
+  overflow: hidden;
+}
+
+#chat-header {
+  background: linear-gradient(to bottom right, blue, lightblue);
+  padding: 10px;
+  color: white;
+}
+
+#messages-container {
+  height: calc(100% - 100px);
+  overflow: auto;
+  padding: 10px;
+}
+
+#input-container {
+  padding: 10px;
+  background-color: #f1f1f1;
+}
+
+#nickname-input, #message-input {
+  width: 70%;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+#nickname-button, #message-button {
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+}
+
+.dark-red-text {
+  color: darkred;
+}
+
+.grey-text {
+  color: grey;
+}
+
+#refresh-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
