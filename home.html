@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ru">
 
 <head>
@@ -15,11 +14,124 @@
     <link rel="stylesheet" href="css/style1.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Tilt+Prism">
+        href="https://fonts.googleapis.com/css?family=Lemon">
+
+<style>
+        /* Стили синего и голубого дизайна с градиентами */
+        body {
+            background: linear-gradient(to bottom, #1a237e, #03a9f4);
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-top: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #game-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .game {
+            width: 400px;
+            padding: 20px;
+            margin: 30px;
+            background: linear-gradient(to bottom, #039be5, #00bcd4);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .game:hover {
+            transform: scale(1.1);
+        }
+
+        .game h2 {
+            color: #fff;
+            font-size: 30px;
+            margin-top: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .game img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            object-position: center;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border: 5px solid #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .game p {
+            color: #fff;
+            margin-top: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s;
+        }
+
+        .game.expand p {
+            max-height: 1000px;
+        }
+
+        .game button {
+            background: blue;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .game button:hover {
+            background: #02c7e0;
+        }
+
+        .scroll-container {
+            overflow-y: scroll;
+            height: 600px; /* задайте желаемую высоту контейнера */
+        }
+
+        .scroll-content {
+            width: 100%; /* или другое значение по вашему выбору */
+            overflow: auto;
+            height: auto;
+        }
+
+        .tag-menu {
+            position: fixed;
+            top: 50px; /* Расположение меню с отступом сверху страницы */
+            left: 10px; /* Расположение меню с отступом слева от края страницы */
+            z-index: 1000; /* Поверх остального контента */
+        }
+        .tag-menu button {
+            display: block; /* Каждая кнопка на новой строке */
+            margin: 5px 0; /* Отступ между кнопками */
+        }
+
+        .txt {
+          margin-top: 50px;
+        }
+
+        /* Дополнительные стили для элементов вашего сайта */
+
+    </style>
 
   <style>
     body {
-      font-family: 'Tilt Prism', serif;
+      font-family: 'Lemon', serif;
       font-size: 32px;
     }
   </style>
@@ -32,13 +144,20 @@
             margin-bottom: 0px !important;
         }
 
-	.button is-primary {
+        	.button is-primary {
             font-size: 26px;
         }
     </style>
-    <title>FreshLend Studio Главная</title>
 </head>
-<body style="background-image: url(img/freshgame.jpg); background-size: cover;">
+<body>
+    <title>FreshLend Studio Главная</title>
+  
+  <div class="tag-menu">
+  <button style="background-color: blue;" class="button" onclick="scrollToElement('games')">Каталог игр</button>
+  <button style="background-color: blue;" class="button" onclick="scrollToElement('bots')">Каталог ботов</button>
+  <button style="background-color: blue;" class="button" onclick="scrollToElement('websites')">Каталог сайтов</button>
+</div>
+  
     <section class="section">
         <div class="container">
             <a href="index" onclick="goBack()">< Домой</a>
@@ -56,8 +175,6 @@
             history.back();
         }
     </script>
-</head>
-<body>
         <div class="container">
             <div class="block">
                 <h3 class="title is-3">О нас</h3>
@@ -95,7 +212,7 @@
                                     <i class="fa fa-circle" style="margin-right: 0.5em; margin-bottom: 0.5em; color: gold;"></i>
                                     Разработчик сайта
                                     </span>
-				    <span class="tag" style="background-color: blue;">
+				                                  <span class="tag" style="background-color: blue;">
                                     <i class="fa fa-circle" style="margin-right: 0.5em; margin-bottom: 0.5em; color: #44ff00;"></i>
                                     Программист
                                     </span>
@@ -221,87 +338,121 @@
                             </div>
                         </div>
                     </div>
-		 </div>
-	      </div>
-            <div class="block">
-                <h3 class="title is-3">Наши игры</h3>
-                <div class="columns">
-                    <div class="column">
-                        <div class="card">
-                            <div class="card-image">
-                                <figure class="image is-16by9">
-                                    <img src="screenshots/freshlend.png">
-                                </figure>
-                            </div>
-                            <div class="card-content">
-                                <div class="media">
-                                    <div class="media-content">
-                                        <h3 class="title is-3">FreshLend</h3>
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p><i class="fa fa-times"></i>Не разрабатывается</p>
-                                    <a href="home/games/freshlend" class="button" style="background-color: green;">На страницу игры</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="card">
-                            <div class="card-image">
-                                <figure class="image is-16by9">
-                                    <img src="screenshots/freshcoin.png">
-                                </figure>
-                            </div>
-                            <div class="card-content">
-                                <div class="media">
-                                    <div class="media-content">
-                                        <p class="title is-3">FreshCoin</p>
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p><i class="fa fa-times"></i>Не разрабатывается</p>
-                                    <a href="home/games/freshcoin" class="button" style="background-color: green;">На страницу игры</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-            <div class="block">
-                <h3 class="title is-3">Наши Дискорд боты</h3>
-                <div class="columns">
-                    <div class="column">
-                        <div class="card">
-                            <div class="card-image">
-                                <figure class="image is-16by9">
-                                    <img src="screenshots/Petya_Ai.png">
-                                </figure>
-                            </div>
-                            <div class="card-content">
-                                <div class="media">
-                                    <div class="media-content">
-                                        <h3 class="title is-3">Petya_Ai</h3>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p><i class="fa fa-wrench"></i>В разработке (доступна альфа версия)</p>
-                                    <a href="home/bots/petya_ai" class="button" style="background-color: blue;">На страницу бота</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <h1>Наши Проекты</h1>
+  
+<div class="scroll-container">
+  <div class="scroll-content">
+    <h1 id="games">Каталог игр</h1>
+
+    <!-- Здесь может быть шапка сайта, навигационное меню и другие элементы дизайна -->
+
+    <div id="game-list">
+        <!-- Здесь будут отображаться игры -->
+        <div class="game">
+            <h2>FreshLend</h2>
+            <img src="home/games/img/FreshLend.jpg" alt="Изображение игры 1">
+            <p>Описание игры 1</p>
+            <button class="expand-btn">Развернуть</button>
+            <a href="home/games/freshlend">
+              <button class="download-btn">На страницу игры</button>
+            </a>
         </div>
-    </section>
-    <footer class="footer block">
-        <div class="content">
-            <b>(©) 2021-2023 FreshLend Studio</b>
-	    <p>Сайт сделал: <a href="https://freshlend.github.io/home/profils/freshgame" target="_blank">@FreshGame_YT</a></p>
-            <p>связаться со мной: <a href="mailto:freshlend.studio@gmail.com?subject=FreshLend Studio"><strong>freshlend.studio@gmail.com</strong></a></p>
+
+        <div class="game">
+            <h2>FreshCoin</h2>
+            <img src="home/games/img/freshcoin.png" alt="Изображение игры 2">
+            <p>Описание игры 2</p>
+            <button class="expand-btn">Развернуть</button>
+            <a href="home/games/freshcoin">
+              <button class="download-btn">На страницу игры</button>
+            </a>
         </div>
-    </footer>
+      
+
+
+        <!-- Добавьте другие игры с аналогичной структурой -->
+    </div>
+    
+<div id="bots">
+  <h1 class="txt">Каталог Ботов</h1>
+  
+  <div id="game-list">
+    
+    <div class="game">
+        <h2>Petya_Ai</h2>
+        <h2><i class="fa fa-wrench"></i>В разработке</h2>
+        <img src="home/bots/img/petya_ai.png" alt="Изображение бота 1">
+        <p>Описание игры 2</p>
+        <button class="expand-btn">Развернуть</button>
+        <a href="home/bots/petya_ai">
+          <button class="download-btn">На страницу бота</button>
+        </a>
+    </div>
+  </div>
+</div>
+
+<div id="websites">
+    <h1 class="txt">Каталог сайтов (пока нету!)</h1>
+    
+  <div style="display: none;" id="game-list">
+    
+    <div class="game">
+        <h2>site</h2>
+        <h2><i class="fa fa-wrench"></i>В разработке</h2>
+        <img src="home/websites/img/img.png" alt="Изображение сайта 1">
+        <p>Описание игры 2</p>
+        <button class="expand-btn">Развернуть</button>
+        <a href="home/websites/site.zip" download>
+          <button class="download-btn">Скачать</button>
+          <a href="https://freshlend.github.io/home/websites/site.html"><button class="download-btn">Посмотреть</button></a>
+        </a>
+    </div>
+    
+    </div>
+   </div>
+  </div>
+ </div>
+
+    <script>
+        // Добавляем функциональность кнопкам "Развернуть" и "Свернуть"
+        const expandButtons = document.querySelectorAll('.expand-btn');
+
+        expandButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                const game = button.parentNode;
+                game.classList.toggle('expand');
+                const description = game.querySelector('p');
+                if (game.classList.contains('expand')) {
+                    button.textContent = "Свернуть";
+                    description.style.maxHeight = description.scrollHeight + "px";
+                } else {
+                    button.textContent = "Развернуть";
+                    description.style.maxHeight = "0";
+                }
+            });
+        });
+    </script>
+<script>
+// Функция для плавной прокрутки до элемента с выбранным id
+function scrollToElement(elementId) {
+  document.getElementById(elementId).scrollIntoView({ behavior: 'smooth' });
+}
+</script>
 </body>
-            </html>
+  <footer class="footer block">
+
+        <div class="content">
+
+            <b>(©) 2021-2023 FreshLend Studio</b>
+
+        <p>Сайт сделал: <a href="https://freshlend.github.io/home/profils/freshgame" target="_blank">@FreshGame_YT</a></p>
+
+        <p>связаться со мной: <a href="mailto:freshlend.studio@gmail.com?subject=FreshLend Studio"><strong>freshlend.studio@gmail.com</strong></a></p>
+
+        </div>
+
+    </footer>
+	</html>
+																    
