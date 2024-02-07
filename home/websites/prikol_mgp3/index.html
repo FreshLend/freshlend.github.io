@@ -5,7 +5,7 @@
 <style> 
     body { 
       background-color: #121212; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-      margin: 0; padding: 0; background-image: url('files/Matrix.jpg'); 
+      margin: 0; padding: 0; background-image: url('files/background.jpg'); 
       background-size: cover; 
       background-position: center; 
       background-attachment: fixed; }
@@ -108,20 +108,58 @@
 </head>
 <body>
 <!-- Добавленная навигационная панель -->
-    <nav class="navbar">
-        <a href="https://freshlend.github.io/home">Главная</a>
-        <a href="https://freshlend.github.io/news">Новости</a>
-        <a href="https://freshlend.github.io">Контакты</a>
-        <a href="https://freshlend.github.io">О нас</a>
-        <a href="https://freshlend.github.io/home">Сервисы</a>
-    </nav>
-  
-  
-    <div class="container">
-        <h1>Добро пожаловать на мою супер крутую страницу!</h1>
-        <p>Описание страницы или какая-то другая информация</p>
-        <a href="#" class="button" onclick="playSoundAndShowGif(); return false;">Нажми меня!</a>
-    </div>
+<nav class="navbar">
+    <a href="#" class="active" onclick="changeContent('home')">Главная</a>
+    <a href="#" onclick="changeContent('news')">Новости</a>
+    <a href="#" onclick="changeContent('contacts')">Контакты</a>
+    <a href="#" onclick="changeContent('about')">О нас</a>
+    <a href="#" onclick="changeContent('services')">Сервисы</a>
+</nav>
+
+<div class="container content-change-animation" id="content">
+    <h1>Добро пожаловать на мою супер крутую страницу!</h1>
+    <p>Описание страницы или какая-то другая информация</p>
+    <a href="#" class="button" onclick="playSoundAndShowGif(); return false;">Нажми меня!</a>
+</div>
+
+<script>
+function changeContent(page) {
+    const content = document.getElementById('content');
+    const navLinks = document.querySelectorAll('.navbar a');
+
+    // Удаление класса active со всех ссылок
+    navLinks.forEach(link => link.classList.remove('active'));
+
+    // Добавление класса active к нажатой ссылке
+    event.target.classList.add('active');
+
+    // Изменение содержимого в зависимости от выбранной страницы
+    switch (page) {
+        case 'home':
+            content.innerHTML = '<h1>Добро пожаловать на мою супер крутую страницу!</h1><p>Описание страницы или какая-то другая информация.</p><a href="#" class="button" onclick="playSoundAndShowGif(); return false;">Нажми меня!</a>';
+            break;
+        case 'news':
+            content.innerHTML = '<h1>Новости</h1><p>Здесь будут последние новости.</p>';
+            break;
+        case 'contacts':
+            content.innerHTML = '<h1>Контакты</h1><p>Как с нами связаться.</p>';
+            break;
+        case 'about':
+            content.innerHTML = '<h1>О нас</h1><p>Информация о нашей компании.</p>';
+            break;
+        case 'services':
+            content.innerHTML = '<h1>Сервисы</h1><p>Описание предоставляемых нами услуг.</p>';
+            break;
+        default:
+            content.innerHTML = '<h1>404</h1><p>Страница не найдена.</p>';
+    }
+
+    // Добавляем анимацию
+    content.classList.remove('content-change-animation');
+    void content.offsetWidth; // Трик для сброса анимации
+    content.classList.add('content-change-animation');
+}
+</script>
   
   <!-- GIF-файл, который будет показан на весь экран -->
     <img src="files/screem.gif" alt="Screen" id="screen-gif">
@@ -129,39 +167,39 @@
     <!-- Аудиофайл, который будет воспроизводиться -->
     <video src="files/screem.mp3" id="screen-audio" preload="auto"></video>
   
-<script>
-// переменная для отслеживания количества нажатий
-var clickCount = 0;
-
-function playSoundAndShowGif() {
-    // Увеличиваем количество нажатий
-    clickCount++;
-
-    // Отображаем предупреждение при втором нажатии
-    if (clickCount === 2) {
-        alert('Осторожно, скримеры!');
-    }
-
-    // Получаем элементы по их ID
-    var gif = document.getElementById('screen-gif');
-    var audio = document.getElementById('screen-audio');
-
-    // Отображаем GIF и воспроизводим звук только если это первое нажатие
-    if (clickCount = 1) {
-        // Отображаем GIF
-        gif.style.display = 'block';
-
-        // Воспроизводим звук
-        audio.play();
-
-        // Останавливаем проигрывание и скрываем GIF после окончания звука
-        audio.addEventListener('ended', function() {
-            gif.style.display = 'none';
-            audio.currentTime = 0;
-        }, false);
-    }
-}
-    </script>
+    <script>
+        // переменная для отслеживания количества нажатий
+        var clickCount = 0;
+        
+        function playSoundAndShowGif() {
+            // Увеличиваем количество нажатий
+            clickCount++;
+        
+            // Отображаем предупреждение при втором нажатии
+            if (clickCount === 2) {
+                alert('Осторожно, скримеры!');
+            }
+        
+            // Получаем элементы по их ID
+            var gif = document.getElementById('screen-gif');
+            var audio = document.getElementById('screen-audio');
+        
+            // Отображаем GIF и воспроизводим звук только если это первое нажатие
+            if (clickCount = 1) {
+                // Отображаем GIF
+                gif.style.display = 'block';
+        
+                // Воспроизводим звук
+                audio.play();
+        
+                // Останавливаем проигрывание и скрываем GIF после окончания звука
+                audio.addEventListener('ended', function() {
+                    gif.style.display = 'none';
+                    audio.currentTime = 0;
+                }, false);
+            }
+        }
+</script>
 
 </body>
 </html>
