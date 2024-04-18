@@ -8,8 +8,6 @@
     <meta name="description" content="FreshLend Studio - это начинающая студия, основанная 7 августа 2021 года.">
     <link rel="stylesheet" href="https://jenil.github.io/bulmaswatch/darkly/bulmaswatch.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6280559275672339"
-     crossorigin="anonymous"></script>
     <link rel="icon" href="favicon.png">
     <link rel="stylesheet" href="css/style1.css">
     <link rel="stylesheet" href="css/style.css">
@@ -21,7 +19,8 @@
         body {
             background: linear-gradient(to bottom, #1a237e, #03a9f4);
             color: #fff;
-            font-family: Arial, sans-serif;
+            font-family: 'Lemon', serif;
+            font-size: 32px;
             margin: 0;
             padding: 0;
         }
@@ -112,30 +111,37 @@
 
         .tag-menu {
             position: fixed;
-            top: 50px; /* Расположение меню с отступом сверху страницы */
-            left: 10px; /* Расположение меню с отступом слева от края страницы */
+            top: 0; /* Фиксируем меню сверху страницы */
+            left: 50%; /* Располагаем по центру */
+            transform: translateX(-50%); /* Центрируем по горизонтали */
             z-index: 1000; /* Поверх остального контента */
+            background-color: rgba(0, 0, 0, 0.5); /* Цвет фона */
+            padding: 10px; /* Поля вокруг кнопок */
+            border-radius: 0 0 10px 10px; /* Закругляем нижние углы */
+            display: flex; /* Располагаем кнопки в ряд */
+            justify-content: center; /* Центрируем кнопки по горизонтали */
+            width: 100%; /* Растягиваем по ширине страницы */
         }
+
         .tag-menu button {
-            display: block; /* Каждая кнопка на новой строке */
-            margin: 5px 0; /* Отступ между кнопками */
+            margin: 0 10px; /* Отступы между кнопками */
+            background-color: #03a9f4; /* Цвет кнопок */
+            border: none; /* Убираем границы */
+            color: #fff; /* Цвет текста */
+            padding: 10px 20px; /* Поля вокруг текста */
+            border-radius: 5px; /* Закругляем углы */
+            cursor: pointer; /* Курсор при наведении */
+            transition: background-color 0.3s; /* Плавное изменение цвета при наведении */
+        }
+  
+        .tag-menu button:hover {
+            background-color: #039be5; /* Цвет кнопок при наведении */
         }
 
         .txt {
           margin-top: 50px;
         }
-
-        /* Дополнительные стили для элементов вашего сайта */
-
-    </style>
-
-  <style>
-    body {
-      font-family: 'Lemon', serif;
-      font-size: 32px;
-    }
-  </style>
-    <style>
+  
         .fa {
             margin-right: 8px;
         }
@@ -147,16 +153,17 @@
         	.button is-primary {
             font-size: 26px;
         }
+
     </style>
 </head>
 <body>
     <title>FreshLend Studio Главная</title>
   
   <div class="tag-menu">
-  <button style="background-color: blue;" class="button" onclick="scrollToElement('games')">Каталог игр</button>
-  <button style="background-color: blue;" class="button" onclick="scrollToElement('apps')">Каталог программ</button>
-  <button style="background-color: blue;" class="button" onclick="scrollToElement('bots')">Каталог ботов</button>
-  <button style="background-color: blue;" class="button" onclick="scrollToElement('websites')">Каталог сайтов</button>
+  <button class="btn-3" onclick="scrollToElement('games')">Каталог игр</button>
+  <button class="btn-3" onclick="scrollToElement('apps')">Каталог программ</button>
+  <button class="btn-3" onclick="scrollToElement('bots')">Каталог ботов</button>
+  <button class="btn-3" onclick="scrollToElement('websites')">Каталог сайтов</button>
 </div>
   
     <section class="section">
@@ -272,7 +279,6 @@
   <h1>Наши Проекты</h1>
   
 <div class="scroll-container">
-  <div class="scroll-content">
     <h1 id="games">Каталог игр</h1>
 
     <!-- Здесь может быть шапка сайта, навигационное меню и другие элементы дизайна -->
@@ -281,6 +287,7 @@
         <!-- Здесь будут отображаться игры -->
         <div class="game">
             <h2>FreshLend</h2>
+            <h2><i class="fa fa-window-close"></i>Не разрабатывается</h2>
             <img src="home/games/img/freshlend.png" alt="Изображение игры">
             <p>главный персонаж решил вживить себе в мозг ИИ помощника, но после вживления ИИ в операционной открывается портал и из него вылазеет Монстр...</p>
             <button class="expand-btn">Развернуть</button>
@@ -291,6 +298,7 @@
 
         <div class="game">
             <h2>FreshCoin</h2>
+            <h2><i class="fa fa-window-close"></i>Не разрабатывается</h2>
             <img src="home/games/img/freshcoin.png" alt="Изображение игры">
             <p>FreshCoin - Заработок на рекламе</p>
             <button class="expand-btn">Развернуть</button>
@@ -301,10 +309,8 @@
     </div>
 
 <div id="apps">
-  <h1 class="txt">Каталог Ботов</h1>
-  
+  <h1 class="txt">Каталог программ</h1>
   <div id="game-list">
-    
     <div class="game">
         <h2>FreshBrows</h2>
         <h2><i class="fa fa-wrench"></i>В разработке</h2>
@@ -312,6 +318,8 @@
         <p>FreshBrows - это простой браузер, написанный на языке программирования Python. Он создан для тех, кто ищет простой и быстрый способ просматривать веб-страницы без лишних функций.</p>
         <button class="expand-btn">Развернуть</button>
         <a href="home/apps/FreshBrows">
+          <a href="home/websites/downloads/prikol_mgp3.zip" download>
+          <button class="download-btn">Скачать</button>
           <button class="download-btn">На страницу программы</button>
         </a>
     </div>
@@ -320,9 +328,7 @@
     
 <div id="bots">
   <h1 class="txt">Каталог Ботов</h1>
-  
   <div id="game-list">
-    
     <div class="game">
         <h2>Petya_Ai</h2>
         <h2><i class="fa fa-wrench"></i>В разработке</h2>
@@ -337,10 +343,8 @@
 </div>
 
 <div id="websites">
-    <h1 class="txt">Каталог сайтов</h1>
-    
+  <h1 class="txt">Каталог сайтов</h1>
   <div id="game-list">
-    
     <div class="game">
         <h2>prikol_mgp3</h2>
         <img src="home/websites/img/prikol_mgp3.png" alt="Изображение сайта">
@@ -359,22 +363,41 @@
 
     <script>
         // Добавляем функциональность кнопкам "Развернуть" и "Свернуть"
-        const expandButtons = document.querySelectorAll('.expand-btn');
+const expandButtons = document.querySelectorAll('.expand-btn');
 
-        expandButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                const game = button.parentNode;
-                game.classList.toggle('expand');
-                const description = game.querySelector('p');
-                if (game.classList.contains('expand')) {
-                    button.textContent = "Свернуть";
-                    description.style.maxHeight = description.scrollHeight + "px";
-                } else {
-                    button.textContent = "Развернуть";
-                    description.style.maxHeight = "0";
+expandButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        const game = button.closest('.game'); // Находим родительский элемент игры, к которому относится кнопка
+        const description = game.querySelector('p'); // Находим текстовое описание игры внутри родительского элемента
+
+        // Проверяем, что родительский элемент игры содержит и кнопку "Развернуть" и описание
+        if (game && description) {
+            // Закрываем все описания игр, кроме текущей
+            const allGames = document.querySelectorAll('.game');
+            allGames.forEach(function(otherGame) {
+                if (otherGame !== game && otherGame.classList.contains('expand')) {
+                    otherGame.classList.remove('expand');
+                    otherGame.querySelector('.expand-btn').textContent = "Развернуть";
+                    const otherDescription = otherGame.querySelector('p');
+                    otherDescription.style.maxHeight = "0";
                 }
             });
-        });
+
+            // Если описание уже раскрыто, то закрываем его, иначе открываем
+            if (game.classList.contains('expand')) {
+                game.classList.remove('expand');
+                button.textContent = "Развернуть";
+                description.style.maxHeight = "0";
+            } else {
+                game.classList.add('expand');
+                button.textContent = "Свернуть";
+                description.style.maxHeight = description.scrollHeight + "px";
+            }
+        } else {
+            console.error('Не удалось найти родительский элемент игры или описание игры.');
+        }
+    });
+});
     </script>
 <script>
 // Функция для плавной прокрутки до элемента с выбранным id
@@ -397,4 +420,3 @@ function scrollToElement(elementId) {
 
     </footer>
 	</html>
-																    
