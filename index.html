@@ -20,25 +20,15 @@
 <script>window.yaContextCb=window.yaContextCb||[]</script>
 <script src="https://yandex.ru/ads/system/context.js" async></script>
 <style>
-
   body {
-
     font-size: 24px;
-
   }
-
-
-
+	
   .button {
-
     font-size: 17px;
-
     width: 200px;
-
     height: 45px;
-
   }
-
 </style>
 <style>
   #loader {
@@ -86,6 +76,59 @@
     width: 128px; /* Ширина изображения */
     height: 128px; /* Высота изображения */
 }
+
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #00bfff, #87cefa); /* Градиентный фон */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.close {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный белый цвет */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.close::before,
+.close::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 25px;
+    background-color: #00bfff; /* Синий цвет */
+}
+
+.close::before {
+    transform: rotate(45deg);
+}
+
+.close::after {
+    transform: rotate(-45deg);
+}
 </style>
 
 <div id="loader">
@@ -97,6 +140,70 @@
       var loader = document.getElementById("loader");
       loader.style.display = "none";
     });
+</script>
+
+<div class="popup-container" id="popupContainer">
+        <div class="popup">
+            <span class="close" id="closePopup">&times;</span>
+          <img style="width: 120px; height: 120px;"src="home/bots/img/petya_ai.png" alt="Popup Image">
+          <img style="width: 120px; height: 120px;"src="home/bots/img/petya_ai-angry.png" alt="Popup Image">
+          <img style="width: 120px; height: 120px;"src="home/bots/img/petya_ai-sad.png" alt="Popup Image">
+          <img style="width: 120px; height: 120px;"src="home/bots/img/Petya_Ai-Halloween.png" alt="Popup Image">
+          <img style="width: 120px; height: 120px;"src="home/bots/img/Petya_Ai-vesna.png" alt="Popup Image">
+          <img style="width: 120px; height: 120px;"src="home/bots/img/petya_ai-leto.png" alt="Popup Image">
+          <img style="width: 120px; height: 120px;"src="home/bots/img/petya_ai-osen.png" alt="Popup Image">
+            <img style="width: 120px; height: 120px;"src="home/bots/img/petya_ai-zima.png" alt="Popup Image">
+          <div>
+            <b><p>Привет!</p><p>У нас есть свой собственный ИИ!<p>Он тупинький, но если вы будете говорить с ним, он будет становится умнее, так что <a style="color: aqua;" href="https://clck.ru/36G6dJ">добавляйте его к себе</a> на сервер дискорд!</p><p>Поддержите нас: <a style="color: orange;" href="https://www.donationalerts.com/r/freshgame_">DonationAlerts</a></p></b>
+          </div>
+        </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var popupContainer = document.getElementById("popupContainer");
+    var closePopup = document.getElementById("closePopup");
+
+    // Check if the popup should be displayed
+    if (shouldDisplayPopup()) {
+        popupContainer.style.display = "block";
+    }
+
+    closePopup.addEventListener("click", function() {
+        popupContainer.style.display = "none";
+        // Set a cookie to remember the last display time
+        setLastDisplayTime();
+    });
+});
+
+function shouldDisplayPopup() {
+    var lastDisplayTime = getLastDisplayTime();
+
+    if (!lastDisplayTime || Date.now() - lastDisplayTime > 7 * 24 * 60 * 60 * 1000) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getLastDisplayTime() {
+    // Get the value of the "lastDisplayTime" cookie
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.startsWith("lastDisplayTime=")) {
+            return parseInt(cookie.substring("lastDisplayTime=".length));
+        }
+    }
+    return null;
+}
+
+function setLastDisplayTime() {
+    // Set a cookie with the current time as the last display time
+    var currentTime = Date.now();
+    var expiryTime = new Date(currentTime + 7 * 24 * 60 * 60 * 1000); // 7 days expiry
+    document.cookie = "lastDisplayTime=" + currentTime + "; expires=" + expiryTime.toUTCString() + "; path=/";
+}
 </script>
 	
 <body style="background-image: url(img/freshgame.jpg); background-size: cover;">
