@@ -7,6 +7,9 @@ body {
   padding: 10px 20px;
   border-radius: 20px;
   margin-right: 10px;
+  font-size: 17px;
+  width: 200px;
+  height: 45px;
 }
 
 .btn-1 {
@@ -18,12 +21,6 @@ body {
   background-color: green;
   color: greenyellow;
 }
-
-.btn-3 {
-    font-size: 17px;
-    width: 200px;
-    height: 45px;
-  }
 
 #loader {
     position: fixed;
