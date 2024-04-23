@@ -1,6 +1,10 @@
 body {
     font-size: 24px;
-  }
+}
+
+.a {
+    style="color: aqua;"
+}
 
 .button {
   display: inline-block;
