@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLauncher - FreshLend Studio</title>
+    <link rel="stylesheet" href="../data/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>FreshLend Studio</h1>
+            <nav>
+                <ul>
+                    <div class="cta-buttons">
+                        <a href="/" class="tab-btn">
+                            <i class="fas fa-home"></i> Главная
+                        </a>
+                        <a href="../projects.html" class="tab-btn">
+                            <i class="fas fa-project-diagram"></i> Проекты
+                        </a>
+                        <a href="../news.html" class="tab-btn">
+                            <i class="fas fa-newspaper"></i> Новости
+                        </a>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="project-page">
+            <div class="project-page-header">
+                <div class="project-gallery">
+                    <div class="main-media-container">
+                        <img src="../data/images/flauncher/main.png" alt="FLauncher" class="main-media" id="main-media">
+                        <div class="media-indicator" id="media-indicator">Изображение 1/5</div>
+                        <button class="fullscreen-btn" id="fullscreen-btn">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="media-thumbnails">
+                        <img src="../data/images/flauncher/main.png" alt="Preview 1" class="thumbnail active" data-media="../data/images/flauncher/main.png" data-type="image">
+                        <img src="../data/images/flauncher/screen.png" alt="Preview 2" class="thumbnail" data-media="../data/images/flauncher/screen.png" data-type="image">
+                        <img src="../data/images/flauncher/screen1.png" alt="Preview 3" class="thumbnail" data-media="../data/images/flauncher/screen1.png" data-type="image">
+                        <img src="../data/images/flauncher/screen2.png" alt="Preview 4" class="thumbnail" data-media="../data/images/flauncher/screen2.png" data-type="image">
+                        <img src="../data/images/flauncher/screen3.png" alt="Preview 5" class="thumbnail" data-media="../data/images/flauncher/screen3.png" data-type="image">
+                    </div>
+                </div>
+
+                <div class="modal-overlay" id="modal-overlay">
+                    <div class="modal-content">
+                        <button class="modal-nav modal-prev" id="modal-prev">&lsaquo;</button>
+                        <div class="modal-media-container">
+                            <img src="" alt="" class="modal-media" id="modal-media">
+                            <video controls autoplay loop muted class="modal-media" id="modal-video" style="display: none;"></video>
+                        </div>
+                        <button class="modal-nav modal-next" id="modal-next">&rsaquo;</button>
+                        <div class="modal-indicator" id="modal-indicator"></div>
+                        <button class="modal-close" id="modal-close">&times;</button>
+                    </div>
+                </div>
+                
+                <div class="project-info">
+                    <h1 class="project-title">FLauncher <span class="status in-development">В РАЗРАБОТКЕ</span></h1>
+                    <p class="project-subtitle">FLauncher - VoxelCore Лаунчер на Python</p>
+                    
+                    <div class="project-page-description">
+                        <p>FLauncher - это удобный красивый лаунчер похожий на TLauncher но только для VoxelCore</p>
+                        <p>Особенности: Работа в оффлайн режиме, Discord Rich Presence, Интеграция других репозиториев, Похож на TLauncher</p>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <a href="https://drive.google.com/file/d/1H9M1bupWB_pGmeGQVHFAFgWGAv-BRu-z/view" target="_blank" rel="noopener noreferrer" class="download-btn">
+                            <i class="fas fa-download"></i> Скачать 0.4.0
+                        </a>
+                        <a href="https://github.com/FreshLend/FLauncher/archive/refs/tags/v0.4.0.zip" target="_blank" rel="noopener noreferrer" class="download-btn">
+                            <i class="fas fa-download"></i> Скачать исходный код 0.4.0
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="versions-section">
+                <h2 class="section-title">Версии и обновления</h2>
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 0.4.0</h3>
+                            <span class="version-date">25 мая 2025</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Значительно обновление</p>
+                        
+                        <div class="version-changes">
+                            <h4>Новые возможности:</h4>
+                            <ul>
+                                <li>Полная поддержка Discord RPC</li>
+                                <li>Добавлена возможность отключения Discord RPC</li>
+                                <li>Добавлена возможность подключить другие репозитории.</li>
+                                <li>Добавлены параметры запуска</li>
+                                <li>Добавлено оповещение об новой версии лаунчера.</li>
+                                <li>Версии прогружаются динамически, лаунчер открывается быстрее.</li>
+                            </ul>
+                        </div>
+
+                        <div class="version-downloads">
+                            <a href="https://github.com/FreshLend/FLauncher/archive/refs/tags/v0.4.0.zip" target="_blank" rel="noopener noreferrer" class="download-btn">
+                                <i class="fas fa-download"></i> Скачать исходный код 0.4.0
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 0.3.0</h3>
+                            <span class="version-date">9 февраля 2025</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Исправление и улучшения</p>
+                        
+                        <div class="version-changes">
+                            <h4>Новые возможности и исправления:</h4>
+                            <ul>
+                                <li>Добавлено поле ввода ника с поддержкой Neutron</li>
+                                <li>Исправлена сортировка версий</li>
+                            </ul>
+                        </div>
+
+                        <div class="version-downloads">
+                            <a href="https://github.com/FreshLend/FLauncher/archive/refs/tags/v0.3.0.zip" target="_blank" rel="noopener noreferrer" class="download-btn">
+                                <i class="fas fa-download"></i> Скачать исходный код 0.3.0
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 0.2.4</h3>
+                            <span class="version-date">15 января 2025</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Исправление бага</p>
+                        
+                        <div class="version-changes">
+                            <h4>Исправления:</h4>
+                            <ul>
+                                <li>Исправлен баг с discord rich presence - лаунчер не запускался без запущенного дискорда или интернета</li>
+                            </ul>
+                        </div>
+
+                        <div class="version-downloads">
+                            <a href="https://github.com/FreshLend/FLauncher/archive/refs/tags/v0.2.4.zip" target="_blank" rel="noopener noreferrer" class="download-btn">
+                                <i class="fas fa-download"></i> Скачать исходный код 0.2.4
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 0.2.3</h3>
+                            <span class="version-date">22 декабря 2024</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Discord Rich Presence</p>
+                        
+                        <div class="version-changes">
+                            <h4>Новые возможности:</h4>
+                            <ul>
+                                <li>добавлен Discord Rich Presence (пока только главная страница).</li>
+                            </ul>
+                        </div>
+
+                        <div class="version-downloads">
+                            <a href="https://github.com/FreshLend/FLauncher/archive/refs/tags/v0.2.3.zip" target="_blank" rel="noopener noreferrer" class="download-btn">
+                                <i class="fas fa-download"></i> Скачать исходный код 0.2.3
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 0.2.2</h3>
+                            <span class="version-date">18 декабря 2024</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Индикатор загрузки.</p>
+                        
+                        <div class="version-changes">
+                            <h4>Новые возможности:</h4>
+                            <ul>
+                                <li>Добавлен прогресс бар</li>
+                            </ul>
+                        </div>
+
+                        <div class="version-downloads">
+                            <a href="https://github.com/FreshLend/FLauncher/archive/refs/tags/v0.2.2.zip" target="_blank" rel="noopener noreferrer" class="download-btn">
+                                <i class="fas fa-download"></i> Скачать исходный код 0.2.2
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 0.2.0</h3>
+                            <span class="version-date">18 декабря 2024</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Изменение дизайна.</p>
+                        
+                        <div class="version-changes">
+                            <h4>Новые дизайн:</h4>
+                            <ul>
+                                <li>Изменён дизайн на более похожий на TLauncher</li>
+                            </ul>
+                        </div>
+
+                        <div class="version-downloads">
+                            <a href="https://github.com/FreshLend/FLauncher/archive/refs/tags/v0.2.0.zip" target="_blank" rel="noopener noreferrer" class="download-btn">
+                                <i class="fas fa-download"></i> Скачать исходный код 0.2.0
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 0.1.0</h3>
+                            <span class="version-date">17 декабря 2024</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Начало Лаунчера.</p>
+                        
+                        <div class="version-changes">
+                            <h4>Базовые возможности:</h4>
+                            <ul>
+                                <li>Базовое подключение к Github API</li>
+                                <li>Прогрузка версий</li>
+                                <li>Запуск и автоматическое скачивание версий</li>
+                            </ul>
+                        </div>
+
+                        <div class="version-downloads">
+                            <a href="https://github.com/FreshLend/FLauncher/archive/refs/tags/v0.1.0.zip" target="_blank" rel="noopener noreferrer" class="download-btn">
+                                <i class="fas fa-download"></i> Скачать исходный код 0.1.0
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>(©) 2021 FreshLend Studio</p>
+        </div>
+    </footer>
+
+    <script src="../data/js/script.js"></script>
+</body>
+</html>

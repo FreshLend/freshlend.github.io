@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petya_Ai - FreshLend Studio</title>
+    <link rel="stylesheet" href="../data/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>FreshLend Studio</h1>
+            <nav>
+                <ul>
+                    <div class="cta-buttons">
+                        <a href="/" class="tab-btn">
+                            <i class="fas fa-home"></i> Главная
+                        </a>
+                        <a href="../projects.html" class="tab-btn">
+                            <i class="fas fa-project-diagram"></i> Проекты
+                        </a>
+                        <a href="../news.html" class="tab-btn">
+                            <i class="fas fa-newspaper"></i> Новости
+                        </a>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="project-page">
+            <div class="project-page-header">
+                <div class="project-gallery">
+                    <div class="main-media-container">
+                        <img src="../data/images/petya_ai/main.png" alt="Petya_Ai" class="main-media" id="main-media">
+                        <div class="media-indicator" id="media-indicator">Изображение 1/8</div>
+                        <button class="fullscreen-btn" id="fullscreen-btn">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="media-thumbnails">
+                        <img src="../data/images/petya_ai/main.png" alt="Preview 1" class="thumbnail active" data-media="../data/images/petya_ai/main.png" data-type="image">
+                        <img src="../data/images/petya_ai/screen.png" alt="Preview 2" class="thumbnail" data-media="../data/images/petya_ai/screen.png" data-type="image">
+                        <img src="../data/images/petya_ai/screen1.png" alt="Preview 3" class="thumbnail" data-media="../data/images/petya_ai/screen1.png" data-type="image">
+                        <img src="../data/images/petya_ai/screen2.png" alt="Preview 4" class="thumbnail" data-media="../data/images/petya_ai/screen2.png" data-type="image">
+                        <img src="../data/images/petya_ai/screen3.png" alt="Preview 5" class="thumbnail" data-media="../data/images/petya_ai/screen3.png" data-type="image">
+                        <img src="../data/images/petya_ai/screen4.png" alt="Preview 6" class="thumbnail" data-media="../data/images/petya_ai/screen4.png" data-type="image">
+                        <img src="../data/images/petya_ai/screen5.png" alt="Preview 7" class="thumbnail" data-media="../data/images/petya_ai/screen5.png" data-type="image">
+                        <img src="../data/images/petya_ai/screen6.png" alt="Preview 8" class="thumbnail" data-media="../data/images/petya_ai/screen6.png" data-type="image">
+                    </div>
+                </div>
+
+                <div class="modal-overlay" id="modal-overlay">
+                    <div class="modal-content">
+                        <button class="modal-nav modal-prev" id="modal-prev">&lsaquo;</button>
+                        <div class="modal-media-container">
+                            <img src="" alt="" class="modal-media" id="modal-media">
+                            <video controls autoplay loop muted class="modal-media" id="modal-video" style="display: none;"></video>
+                        </div>
+                        <button class="modal-nav modal-next" id="modal-next">&rsaquo;</button>
+                        <div class="modal-indicator" id="modal-indicator"></div>
+                        <button class="modal-close" id="modal-close">&times;</button>
+                    </div>
+                </div>
+                
+                <div class="project-info">
+                    <h1 class="project-title">Petya_Ai <span class="status in-development">В РАЗРАБОТКЕ</span></h1>
+                    <p class="project-subtitle">Умный Discord бот с искусственным интеллектом</p>
+                    
+                    <div class="project-page-description">
+                        <p>Petya_Ai - это инновационный Discord бот, использующий современные технологии искусственного интеллекта для улучшения взаимодействия на серверах. Бот умеет поддерживать осмысленные диалоги, есть команды для развлечений и многое другое!</p>
+                        <p>Основные возможности включают в себя: естественное общение, развлечения, инструменты, экономика.</p>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <a href="https://discord.com/oauth2/authorize?client_id=1137405206288666634" target="_blank" rel="noopener noreferrer" class="download-btn">
+                            <i class="fas fa-download"></i> Добавить бота
+                        </a>
+                        <a href="https://discord.com/invite/95EyHeZmMz" target="_blank" rel="noopener noreferrer" class="download-btn discord-btn">
+                            <i class="fab fa-discord"></i> Discord сервер
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="versions-section">
+                <h2 class="section-title">Версии и обновления</h2>
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 2.1.0</h3>
+                            <span class="version-date">23 июля 2025</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Переписаны все команды с нуля и добавлены новые.</p>
+                        
+                        <div class="version-changes">
+                            <h4>🤖 Искусственный Интеллект</h4>
+                            <ul class="command-list">
+                                <li><code>/ask question:</code> - Задать вопрос ИИ</li>
+                                <li><code>/define term:</code> - Определить термин</li>
+                                <li><code>/get parameter: (system_prompt)</code> - Получить параметр</li>
+                                <li><code>/history limit:</code> - История запросов</li>
+                                <li><code>/model_info</code> - Информация о модели</li>
+                                <li><code>/queue_info</code> - Информация об очереди</li>
+                                <li><code>/reset parameter: (context, system_prompt, all)</code> - Сбросить параметры</li>
+                                <li><code>/set parameter: (system_prompt) value:</code> - Установить параметр</li>
+                                <li><code>/set_model mode: (Petya_Ai-IM2, Petya_Ai-IM2.5)</code> - Выбрать модель</li>
+                                <li><code>/summarize text:</code> - Суммаризировать текст</li>
+                                <li><code>/translate text: language:</code> - Перевести текст</li>
+                            </ul>
+                            
+                            <h4>🎪 Развлечения</h4>
+                            <ul class="command-list">
+                                <li><code>/8ball question:</code> - Магический шар</li>
+                                <li><code>/interact_bang user:</code> - Выстрелить в пользователя</li>
+                                <li><code>/interact_bye user:</code> - Попрощаться</li>
+                                <li><code>/interact_hi user:</code> - Поздороваться</li>
+                                <li><code>/interact_kiss user: cheeks: (True, False)</code> - Поцеловать</li>
+                                <li><code>/joke</code> - Случайная шутка</li>
+                                <li><code>/quote</code> - Случайная цитата</li>
+                                <li><code>/roll max_number:</code> - Случайное число</li>
+                            </ul>
+                            
+                            <h4>💰 Экономика</h4>
+                            <ul class="command-list">
+                                <li><code>/bank action: (create, list, rename, set_comission, set_service, info) name: set_comission: set_service, new_name</code> - Управление банком</li>
+                                <li><code>/deposit amount: currency: (Медные монеты, Серебряные монеты, Золотые монеты, Платиновые монеты)</code> - Внести депозит</li>
+                                <li><code>/exchange amount: from_currency: (Медные монеты, Серебряные монеты, Золотые монеты, Платиновые монеты) to_currency: (Медные монеты, Серебряные монеты, Золотые монеты, Платиновые монеты)</code> - Обмен валюты</li>
+                                <li><code>/inventory</code> - Инвентарь</li>
+                                <li><code>/profile create: (True, False) user:</code> - Профиль</li>
+                                <li><code>/set_bank name:</code> - Установить банк</li>
+                                <li><code>/shop black_store: (True, False)</code> - Магазин</li>
+                                <li><code>/transfer amount: currency: (Медные монеты, Серебряные монеты, Золотые монеты, Платиновые монеты) user:</code> - Перевести деньги</li>
+                                <li><code>/withdraw amount: currency: (Медные монеты, Серебряные монеты, Золотые монеты, Платиновые монеты)</code> - Снять деньги</li>
+                                <li><code>/work profession_list: (True, False)</code> - Работа</li>
+                                <li><code>/treasure</code> - Поиск различных вещей</li>
+                            </ul>
+                            
+                            <h4>🛠️ Инструменты</h4>
+                            <ul class="command-list">
+                                <li><code>/avatar user:</code> - Аватар пользователя</li>
+                                <li><code>/bot_channel action: (Установить канал, Сбросить настройки, Показать текущий) channel:</code> - Управление каналом бота</li>
+                                <li><code>/emoji action: (send, info) emoji: format: (png, gif)</code> - Информация об эмодзи</li>
+                                <li><code>/emoji_list server_id:</code> - Список эмодзи сервера</li>
+                                <li><code>/feedback</code> - Обратная связь</li>
+                                <li><code>/info bot_started: (True, False)</code> - Информация о боте</li>
+                                <li><code>/invite</code> - Пригласить бота</li>
+                                <li><code>/ping</code> - Проверка задержки</li>
+                                <li><code>/say text:</code> - Сказать от имени бота</li>
+                                <li><code>/servers content: (True, False)</code> - Список серверов</li>
+                                <li><code>/help category: (Искусственный Интеллект, Развлечения, Экономика, Инструменты)</code> - Эта команда</li>
+                                <li><code>/set_group user: group: (пользователь, покупатель, тестер, создатель)</code> - Установить группу (только создатель)</li>
+                                <li><code>/reboot</code> - Перезагрузить бота (только создатель)</li>
+                                <li><code>/shutdown</code> - Выключить бота (только создатель)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 2.0.0 "Global Update"</h3>
+                            <span class="version-date">12 июля 2025</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Новый обновленный Петя!</p>
+                        
+                        <div class="version-changes">
+                            <h4>Новые возможности:</h4>
+                            <ul>
+                                <li>Новая модель Petya_Ai-IM2</li>
+                                <li>Он стал умнее и теперь может поддерживать разговор.</li>
+                                <li>Знает несколько языков.</li>
+                                <li>Знает математику.</li>
+                                <li>Знает как кодить.</li>
+                                <li>Теперь можно использовать в любом месте</li>
+                                <li>Знает несколько языков</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 1.1.0</h3>
+                            <span class="version-date">13 декабря 2024</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Новая модель.</p>
+                        
+                        <div class="version-changes">
+                            <h4>Новые возможности:</h4>
+                            <ul>
+                                <li>Petya_Ai-IM1.5 стал умнее и осмысленнее.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 1.0.0 "Release"</h3>
+                            <span class="version-date">18 сентября 2024</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Зарождение интеллекта!</p>
+                        
+                        <div class="version-changes">
+                            <h4>Новые возможности:</h4>
+                            <ul>
+                                <li>Своя модель искусственного интеллекта Petya_Ai-IM1</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 0.2.0</h3>
+                            <span class="version-date">20 августа 2023</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Дополнительные команды.</p>
+                        
+                        <div class="version-changes">
+                            <h4>Новые возможности:</h4>
+                            <ul>
+                                <li>Инструменты для управления ботом</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 0.1.0</h3>
+                            <span class="version-date">6 августа 2023</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Начало жизни Пети.</p>
+                        
+                        <div class="version-changes">
+                            <h4>Базовые возможности:</h4>
+                            <ul>
+                                <li>Базовое подключение к Discord API</li>
+                                <li>Система обработки команд</li>
+                                <li>Логирование активности</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>(©) 2021 FreshLend Studio</p>
+        </div>
+    </footer>
+
+    <script src="../data/js/script.js"></script>
+</body>
+</html>

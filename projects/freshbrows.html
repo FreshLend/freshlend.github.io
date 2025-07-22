@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshBrows - FreshLend Studio</title>
+    <link rel="stylesheet" href="../data/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>FreshLend Studio</h1>
+            <nav>
+                <ul>
+                    <div class="cta-buttons">
+                        <a href="/" class="tab-btn">
+                            <i class="fas fa-home"></i> Главная
+                        </a>
+                        <a href="../projects.html" class="tab-btn">
+                            <i class="fas fa-project-diagram"></i> Проекты
+                        </a>
+                        <a href="../news.html" class="tab-btn">
+                            <i class="fas fa-newspaper"></i> Новости
+                        </a>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="project-page">
+            <div class="project-page-header">
+                <div class="project-gallery">
+                    <div class="main-media-container">
+                        <img src="../data/images/freshbrows/main.png" alt="FreshBrows" class="main-media" id="main-media">
+                        <div class="media-indicator" id="media-indicator">Изображение 1/5</div>
+                        <button class="fullscreen-btn" id="fullscreen-btn">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="media-thumbnails">
+                        <img src="../data/images/freshbrows/main.png" alt="Preview 1" class="thumbnail active" data-media="../data/images/freshbrows/main.png" data-type="image">
+                        <img src="../data/images/freshbrows/screen.png" alt="Preview 2" class="thumbnail" data-media="../data/images/freshbrows/screen.png" data-type="image">
+                    </div>
+                </div>
+
+                <div class="modal-overlay" id="modal-overlay">
+                    <div class="modal-content">
+                        <button class="modal-nav modal-prev" id="modal-prev">&lsaquo;</button>
+                        <div class="modal-media-container">
+                            <img src="" alt="" class="modal-media" id="modal-media">
+                            <video controls autoplay loop muted class="modal-media" id="modal-video" style="display: none;"></video>
+                        </div>
+                        <button class="modal-nav modal-next" id="modal-next">&rsaquo;</button>
+                        <div class="modal-indicator" id="modal-indicator"></div>
+                        <button class="modal-close" id="modal-close">&times;</button>
+                    </div>
+                </div>
+                
+                <div class="project-info">
+                    <h1 class="project-title">FreshBrows <span class="status abandoned">ЗАБРОШЕНО</span></h1>
+                    <p class="project-subtitle">FreshBrows - это экспериминтальный простой браузер, написанный на Python</p>
+                    
+                    <div class="project-page-description">
+                        <p>Он создан для тех, кто ищет простой и быстрый способ просматривать веб-страницы без лишних функций.</p>
+                        <p>Простой интерфейс: FreshBrows имеет простой и интуитивно понятный интерфейс, который позволяет быстро и легко находить нужные веб-страницы.</p>
+                        <p>Быстрое время загрузки: благодаря минималистичному дизайну, FreshBrows загружает веб-страницы быстро и эффективно.</p>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <a href="https://drive.google.com/file/d/139mPJt2cq4skje2YfXzujONQoSYMS_29/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="download-btn">
+                            <i class="fas fa-download"></i> Скачать 1.1.0
+                        </a>
+                        <a href="https://github.com/FreshLend/FreshBrows/archive/refs/tags/FreshBrows_1.1.0.zip" target="_blank" rel="noopener noreferrer" class="download-btn">
+                            <i class="fas fa-download"></i> Скачать исходный код 1.1.0
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="versions-section">
+                <h2 class="section-title">Версии и обновления</h2>
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 1.1.0</h3>
+                            <span class="version-date">13 апреля 2024</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Изменение дизайна.</p>
+                        
+                        <div class="version-changes">
+                            <h4>Новые дизайн:</h4>
+                            <ul>
+                                <li>Обновлена страница браузера</li>
+                            </ul>
+                        </div>
+
+                        <div class="version-downloads">
+                            <a href="https://drive.google.com/file/d/139mPJt2cq4skje2YfXzujONQoSYMS_29/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="download-btn">
+                                <i class="fas fa-download"></i> Скачать 1.1.0
+                            </a>
+                            <a href="https://github.com/FreshLend/FreshBrows/archive/refs/tags/FreshBrows_1.1.0.zip" target="_blank" rel="noopener noreferrer" class="download-btn">
+                                <i class="fas fa-download"></i> Скачать исходный код 1.1.0
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="version-card">
+                    <div class="version-header">
+                        <div>
+                            <h3 class="version-title">Версия 1.0.0</h3>
+                            <span class="version-date">11 февраля 2024</span>
+                        </div>
+                        <i class="fas fa-chevron-down version-expand"></i>
+                    </div>
+                    <div class="version-content">
+                        <p class="version-description">Начало FreshBrows.</p>
+                        
+                        <div class="version-changes">
+                            <h4>Плюсы:</h4>
+                            <ul>
+                                <li>Не требователен к ПК</li>
+                                <li>Всё необходимое для удобного использования</li>
+                            </ul>
+                            <h4>Минусы:</h4>
+                            <ul>
+                                <li>Не сохраняет вкладки</li>
+                                <li>Не сохраняет вход в Google аккаунт</li>
+                                <li>Некоторые видео на YouTube чаще всего прямые эфиры выдают ошибку</li>
+                                <li>Нельзя ничего скачать</li>
+                            </ul>
+                        </div>
+
+                        <div class="version-downloads">
+                            <a href="https://drive.google.com/file/d/1Wbc9wo731VlfUJggvyUQGoyJJnnfo-wz/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="download-btn">
+                                <i class="fas fa-download"></i> Скачать 1.0.0
+                            </a>
+                            <a href="https://github.com/FreshLend/FreshBrows/archive/refs/tags/FreshBrows_1.0.0.zip" target="_blank" rel="noopener noreferrer" class="download-btn">
+                                <i class="fas fa-download"></i> Скачать исходный код 1.0.0
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>(©) 2021 FreshLend Studio</p>
+        </div>
+    </footer>
+
+    <script src="../data/js/script.js"></script>
+</body>
+</html>
