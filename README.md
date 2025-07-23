@@ -2,9 +2,7 @@
 
 [![Website](https://img.shields.io/badge/Visit-Website-blue?style=for-the-badge&logo=google-chrome)](https://freshlend.github.io)
 
-<p align="center">
-  <img src="data/images/favicon.png" alt="FreshLend Studio Logo" width="200">
-</p>
+<p align="center"><img src="data/images/favicon.png" alt="FreshLend Studio Logo" width="200"></p>
 
 ## 🚀 О студии
 
