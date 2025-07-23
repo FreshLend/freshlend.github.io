@@ -368,113 +368,43 @@ footer {
 }
 
 .team-role {
-    padding: 4px 8px;
+    padding: 8px 16px;
     border-radius: 4px;
     font-size: 0.8rem;
     font-weight: bold;
     color: white;
 }
 
-
-/* Основные роли команды */
-
-/* Руководитель/лидер проекта */
-.team-role.leader {
-    background-color: #f44336; /* red */
+.team-role.founder {
+    background-color: #ff0000;
 }
 
-/* Менеджер проекта (PM) */
-.team-role.manager {
-    background-color: #FF9800; /* orange */
+.team-role.deputy {
+    background-color: #ee3a3a;
 }
 
-/* Разработчик (программист) */
 .team-role.developer {
-    background-color: #2196F3; /* blue */
+    background-color: #44ff00;
 }
 
-/* Дизайнер (UI/UX, графический) */
-.team-role.designer {
-    background-color: #9C27B0; /* purple */
-}
-
-/* Тестировщик (QA Engineer) */
-.team-role.tester {
-    background-color: #4CAF50; /* green */
-}
-
-
-/* Креативные/медийные роли */
-
-/* Сценарист (написание сценариев) */
-.team-role.screenwriter {
-    background-color: #795548; /* brown */
-}
-
-/* Продюсер (руководство производством) */
-.team-role.producer {
-    background-color: #607D8B; /* blue grey */
-}
-
-/* Режиссер (креативное руководство) */
-.team-role.director {
-    background-color: #E91E63; /* pink */
-}
-
-/* Художник/иллюстратор */
-.team-role.artist {
-    background-color: #CDDC39; /* lime */
-}
-
-/* Звукорежиссер/саунд-дизайнер */
 .team-role.sound {
-    background-color: #009688; /* teal */
+    background-color: #2d9dda;
 }
 
-
-/* Бизнес/маркетинг роли */
-
-/* Маркетолог (продвижение продукта) */
-.team-role.marketing {
-    background-color: #3F51B5; /* indigo */
+.team-role.designer {
+    background-color: #f8d120;
 }
 
-/* Копирайтер (написание текстов) */
-.team-role.copywriter {
-    background-color: #00BCD4; /* cyan */
+.team-role.screenwriter {
+    background-color: #e98400;
 }
 
-/* Бизнес-аналитик */
-.team-role.analyst {
-    background-color: #673AB7; /* deep purple */
+.team-role.tester {
+    background-color: #3b8722;
 }
 
-
-/* Технические/вспомогательные роли */
-
-/* Специалист поддержки */
-.team-role.support {
-    background-color: #8BC34A; /* light green */
-}
-
-/* Консультант (внешний эксперт) */
-.team-role.consultant {
-    background-color: #FFC107; /* amber */
-}
-
-/* Контент-менеджер */
-.team-role.content {
-    background-color: #FFEB3B; /* yellow */
-}
-
-/* PR-менеджер (связи с общественностью) */
-.team-role.pr {
-    background-color: #9E9E9E; /* grey */
-}
-
-/* Исследователь (UX Research, аналитика) */
-.team-role.researcher {
-    background-color: #00ACC1; /* cyan accent */
+.team-role.web-dev {
+    background-color: #00a1a7;
 }
 
 @media (max-width: 1024px) {
@@ -655,105 +585,36 @@ footer {
 }
 
 
-/* Основные роли команды */
-
-/* Руководитель/лидер проекта */
-.profile-role.leader {
-    background-color: #f44336; /* red */
+.profile-role.founder {
+    background-color: #ff0000;
 }
 
-/* Менеджер проекта (PM) */
-.profile-role.manager {
-    background-color: #FF9800; /* orange */
+.profile-role.deputy {
+    background-color: #ee3a3a;
 }
 
-/* Разработчик (программист) */
 .profile-role.developer {
-    background-color: #2196F3; /* blue */
+    background-color: #44ff00;
 }
 
-/* Дизайнер (UI/UX, графический) */
-.profile-role.designer {
-    background-color: #9C27B0; /* purple */
-}
-
-/* Тестировщик (QA Engineer) */
-.profile-role.tester {
-    background-color: #4CAF50; /* green */
-}
-
-
-/* Креативные/медийные роли */
-
-/* Сценарист (написание сценариев) */
-.profile-role.screenwriter {
-    background-color: #795548; /* brown */
-}
-
-/* Продюсер (руководство производством) */
-.profile-role.producer {
-    background-color: #607D8B; /* blue grey */
-}
-
-/* Режиссер (креативное руководство) */
-.profile-role.director {
-    background-color: #E91E63; /* pink */
-}
-
-/* Художник/иллюстратор */
-.profile-role.artist {
-    background-color: #CDDC39; /* lime */
-}
-
-/* Звукорежиссер/саунд-дизайнер */
 .profile-role.sound {
-    background-color: #009688; /* teal */
+    background-color: #2d9dda;
 }
 
-
-/* Бизнес/маркетинг роли */
-
-/* Маркетолог (продвижение продукта) */
-.profile-role.marketing {
-    background-color: #3F51B5; /* indigo */
+.profile-role.designer {
+    background-color: #f8d120;
 }
 
-/* Копирайтер (написание текстов) */
-.profile-role.copywriter {
-    background-color: #00BCD4; /* cyan */
+.profile-role.screenwriter {
+    background-color: #e98400;
 }
 
-/* Бизнес-аналитик */
-.profile-role.analyst {
-    background-color: #673AB7; /* deep purple */
+.profile-role.tester {
+    background-color: #3b8722;
 }
 
-
-/* Технические/вспомогательные роли */
-
-/* Специалист поддержки */
-.profile-role.support {
-    background-color: #8BC34A; /* light green */
-}
-
-/* Консультант (внешний эксперт) */
-.profile-role.consultant {
-    background-color: #FFC107; /* amber */
-}
-
-/* Контент-менеджер */
-.profile-role.content {
-    background-color: #FFEB3B; /* yellow */
-}
-
-/* PR-менеджер (связи с общественностью) */
-.profile-role.pr {
-    background-color: #9E9E9E; /* grey */
-}
-
-/* Исследователь (UX Research, аналитика) */
-.profile-role.researcher {
-    background-color: #00ACC1; /* cyan accent */
+.profile-role.web-dev {
+    background-color: #00a1a7;
 }
 
 .profile-info h2 {
