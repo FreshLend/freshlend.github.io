@@ -162,11 +162,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (fullscreenBtn) {
         fullscreenBtn.addEventListener('click', openModal);
     }
-    
+
     if (modalClose) {
         modalClose.addEventListener('click', closeModal);
     }
-    
+
     if (modalOverlay) {
         modalOverlay.addEventListener('click', function(e) {
             if (e.target === modalOverlay) {
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     if (modalPrev) {
         modalPrev.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateModal(newIndex);
         });
     }
-    
+
     if (modalNext) {
         modalNext.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -263,8 +263,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const updateHljsTheme = () => {
         const theme = document.documentElement.getAttribute('data-theme');
-        document.getElementById('hljs-light').disabled = theme === 'dark';
-        document.getElementById('hljs-dark').disabled = theme !== 'dark';
+        const hljsLight = document.getElementById('hljs-light');
+        const hljsDark = document.getElementById('hljs-dark');
+        
+        if (hljsLight && hljsDark) {
+            hljsLight.disabled = theme === 'dark';
+            hljsDark.disabled = theme !== 'dark';
+        }
     };
 
     const observer = new MutationObserver(updateHljsTheme);
