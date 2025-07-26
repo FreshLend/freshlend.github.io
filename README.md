@@ -1,4 +1,4 @@
-# FreshLend Studio
+# FreshLand Studio
 
 [![Website](https://img.shields.io/badge/Visit-Website-blue?style=for-the-badge&logo=google-chrome)](https://freshland.github.io)
 
