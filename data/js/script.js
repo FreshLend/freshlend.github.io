@@ -159,28 +159,39 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = '';
     }
 
-    fullscreenBtn.addEventListener('click', openModal);
-
-    modalClose.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', function(e) {
-        if (e.target === modalOverlay) {
-            closeModal();
-        }
-    });
-
-    modalPrev.addEventListener('click', function(e) {
-        e.stopPropagation();
-        let newIndex = currentMediaIndex - 1;
-        if (newIndex < 0) newIndex = thumbnails.length - 1;
-        updateModal(newIndex);
-    });
-
-    modalNext.addEventListener('click', function(e) {
-        e.stopPropagation();
-        let newIndex = currentMediaIndex + 1;
-        if (newIndex >= thumbnails.length) newIndex = 0;
-        updateModal(newIndex);
-    });
+    if (fullscreenBtn) {
+        fullscreenBtn.addEventListener('click', openModal);
+    }
+    
+    if (modalClose) {
+        modalClose.addEventListener('click', closeModal);
+    }
+    
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+    }
+    
+    if (modalPrev) {
+        modalPrev.addEventListener('click', function(e) {
+            e.stopPropagation();
+            let newIndex = currentMediaIndex - 1;
+            if (newIndex < 0) newIndex = thumbnails.length - 1;
+            updateModal(newIndex);
+        });
+    }
+    
+    if (modalNext) {
+        modalNext.addEventListener('click', function(e) {
+            e.stopPropagation();
+            let newIndex = currentMediaIndex + 1;
+            if (newIndex >= thumbnails.length) newIndex = 0;
+            updateModal(newIndex);
+        });
+    }
 
     document.addEventListener('keydown', function(e) {
         if (modalOverlay.classList.contains('active')) {
