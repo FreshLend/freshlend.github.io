@@ -1,6 +1,6 @@
 # FreshLend Studio
 
-[![Website](https://img.shields.io/badge/Visit-Website-blue?style=for-the-badge&logo=google-chrome)](https://freshlend.github.io)
+[![Website](https://img.shields.io/badge/Visit-Website-FF1B2D?style=for-the-badge&logo=opera-gx)](https://freshlend.github.io)
 
 <p><img src="data/images/favicon.png" alt="FreshLend Studio Logo" width="256"></p>
 
