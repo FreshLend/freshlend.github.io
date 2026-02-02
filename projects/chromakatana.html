@@ -247,6 +247,31 @@
         .katana-name {
             font-size: 1.5rem;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .katana-image {
+            width: 64px;
+            height: 64px;
+            background-color: var(--primary-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            overflow: hidden;
+        }
+
+        .katana-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 3px;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
         }
 
         .katana-status {
@@ -456,18 +481,27 @@
             text-align: center;
         }
 
-        .item-image {
-            width: 80px;
-            height: 80px;
+        .recipe-item-image {
+            width: 60px;
+            height: 60px;
             background-color: var(--primary-bg);
             border: 2px solid var(--border-color);
-            border-radius: 10px;
-            margin: 0 auto 15px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            color: var(--accent-light);
+            overflow: hidden;
+            margin: 0 auto 10px;
+        }
+
+        .recipe-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 3px;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
         }
 
         .item-name {
@@ -645,6 +679,16 @@
             .drops-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .katana-image {
+                width: 48px;
+                height: 48px;
+            }
+            
+            .recipe-item-image {
+                width: 48px;
+                height: 48px;
+            }
         }
     </style>
 </head>
@@ -774,7 +818,7 @@
                     "Рывок наносит в 1.5 раза больше урона",
                     "Рывок дает временную неуязвимость"
                 ],
-                tooltip: "ЛКМ: Обычный удар\nЗажмите ЛКМ: Начнется зарядка\nОтпустите для рывка в направлении курсора\n• Рывок наносит в 1.5 раза больше урона\n• Рывок дает временную неуязвимость"
+                image: "data/images/chromakatana/FracturedPrism.png"
             },
             {
                 id: 2,
@@ -795,7 +839,7 @@
                     "Рывок наносит двойной урон и накладывает 'В огне!'",
                     "Обычные удары поджигают врагов"
                 ],
-                tooltip: "ЛКМ: Обычный удар с огненным следом\nЗажмите ЛКМ: Зарядите огненную энергию\nОтпустите для рывка в направлении курсора\n• Рывок наносит двойной урон и накладывает 'В огне!'\n• Обычные удары поджигают врагов\n• Создает частицы огня при удержании"
+                image: "data/images/chromakatana/VermilionEdge.png"
             },
             {
                 id: 3,
@@ -808,7 +852,7 @@
                 crit: 15,
                 rarity: "Розовая (Pink)",
                 value: "5 золотых",
-                description: "Молниеносная катана, позволяющая телепортироваться на небольшие расстояния и создавать молнии, порожающие врагов.",
+                description: "Молниеносная катана, позволяющая телепортироваться на небольшие расстояния и создающая молнии, порожающие врагов.",
                 abilities: [
                     "ЛКМ: Обычный удар с молнией",
                     "Зажмите ЛКМ: Зарядите электрическую энергию",
@@ -816,7 +860,7 @@
                     "Шанс призвать молнию при обычных атаках",
                     "Телепортация создает взрыв молнии"
                 ],
-                tooltip: "ЛКМ: Обычный удар с молнией\nЗажмите ЛКМ: Зарядите электрическую энергию\nОтпустите для телепортации к курсору\n• Шанс призвать молнию при обычных атаках\n• Телепортация создает взрыв молнии\n• Накладывает 'Поражение током' на врагов\n• Цепная молния между ближайшими врагами"
+                image: "data/images/chromakatana/ZephyrsKiss.png"
             },
             {
                 id: 4,
@@ -837,7 +881,7 @@
                     "Нажмите на эхо-клон для телепортации и ледяного взрыва",
                     "Накладывает Обморожение (замедление) и Охлаждение"
                 ],
-                tooltip: "ЛКМ: Обычный удар с ледяными осколками\nЗажмите ЛКМ: Зарядите ледяную энергию\nОтпустите для создания эхо-клонов по направлению курсора\nНажмите на эхо-клон для телепортации и ледяного взрыва\n• Накладывает Обморожение (замедление) и Охлаждение\n• Критические удары призывают ледяные снаряды\n• Цепной урон между ближайшими врагами\n• Замороженные враги получают двойной урон"
+                image: "data/images/chromakatana/CrystalWhisper.png"
             },
             {
                 id: 5,
@@ -858,7 +902,7 @@
                     "Обычные удары накладывают стаки отравления",
                     "Максимум стаков вызывает взрыв яда"
                 ],
-                tooltip: "ЛКМ: Обычный удар с ядовитыми брызгами\nЗажмите ЛКМ: Зарядите токсичную энергию\nОтпустите для призыва ядовитых шипов вокруг себя\n• Обычные удары накладывают стаки отравления\n• Максимум стаков вызывает взрыв яда\n• Шипы автоматически атакуют ближайших врагов\n• Исчезновение шипов создает ядовитый взрыв\n• Критические удары распространяют яд на ближайших врагов"
+                image: "data/images/chromakatana/VenomsBane.png"
             },
             {
                 id: 6,
@@ -879,7 +923,7 @@
                     "Создает теневого клона на месте телепортации",
                     "Клон притягивает врагов и взрывается"
                 ],
-                tooltip: "ЛКМ: Обычный удар\nЗажмите ЛКМ: Зарядите пустотную энергию\nОтпустите для телепортации и серии теневых ударов\n• Создает теневого клона на месте телепортации\n• Клон притягивает врагов и взрывается\n• Критические удары призывают теневые пустоты\n• Накладывает Метку Тени на врагов\n• Метка Тени увеличивает получаемый урон на 20%"
+                image: "data/images/chromakatana/Shadowrend.png"
             },
             {
                 id: 8,
@@ -898,7 +942,7 @@
                     "Максимальный урон и универсальность",
                     "Уникальная ультимативная способность"
                 ],
-                tooltip: "В разработке"
+                image: "data/images/chromakatana/chromatic_katana.png"
             }
         ];
 
@@ -907,63 +951,195 @@
                 id: 1,
                 name: "Расколотая Призма",
                 ingredients: [
-                    { name: "Железный слиток", count: 12, icon: "fas fa-cube" },
-                    { name: "Серебряный слиток", count: 3, icon: "fas fa-cube" },
-                    { name: "Дерево", count: 10, icon: "fas fa-tree" },
-                    { name: "Алмаз", count: 1, icon: "fas fa-gem" }
+                    { 
+                        name: "Железный слиток", 
+                        count: 12, 
+                        image: "data/images/chromakatana/craft_items/iron_bar.png" 
+                    },
+                    { 
+                        name: "Серебряный слиток", 
+                        count: 3, 
+                        image: "data/images/chromakatana/craft_items/silver_bar.png" 
+                    },
+                    { 
+                        name: "Дерево", 
+                        count: 10, 
+                        image: "data/images/chromakatana/craft_items/wood.png" 
+                    },
+                    { 
+                        name: "Алмаз", 
+                        count: 1, 
+                        image: "data/images/chromakatana/craft_items/diamond.png" 
+                    }
                 ],
                 stations: ["Верстак", "Печь", "Наковальня"],
-                result: { name: "Расколотая Призма", icon: "fas fa-star" }
+                result: { 
+                    name: "Расколотая Призма", 
+                    image: "images/katanas/split_prism.png" 
+                }
             },
             {
                 id: 2,
                 name: "Алый Клинок",
                 ingredients: [
-                    { name: "Расколотая Призма", count: 1, icon: "fas fa-star" },
-                    { name: "Слиток адамантита", count: 15, icon: "fas fa-fire" },
-                    { name: "Обсидиан", count: 10, icon: "fas fa-mountain" },
-                    { name: "Рубин", count: 1, icon: "fas fa-gem" },
-                    { name: "Слиток метеорита", count: 5, icon: "fas fa-meteor" },
-                    { name: "Эбеновое дерево", count: 10, icon: "fas fa-tree" }
+                    { 
+                        name: "Расколотая Призма", 
+                        count: 1, 
+                        image: "images/katanas/split_prism.png" 
+                    },
+                    { 
+                        name: "Слиток адамантита", 
+                        count: 15, 
+                        image: "data/images/chromakatana/craft_items/adamantite_bar.png" 
+                    },
+                    { 
+                        name: "Обсидиан", 
+                        count: 10, 
+                        image: "data/images/chromakatana/craft_items/obsidian.png" 
+                    },
+                    { 
+                        name: "Рубин", 
+                        count: 1, 
+                        image: "data/images/chromakatana/craft_items/ruby.png" 
+                    },
+                    { 
+                        name: "Слиток метеорита", 
+                        count: 5, 
+                        image: "data/images/chromakatana/craft_items/meteorite_bar.png" 
+                    },
+                    { 
+                        name: "Эбеновое дерево", 
+                        count: 10, 
+                        image: "data/images/chromakatana/craft_items/ebonwood.png" 
+                    }
                 ],
                 stations: ["Адский алтарь", "Адская кузница", "Наковальня"],
-                result: { name: "Алый Клинок", icon: "fas fa-fire" }
+                result: { 
+                    name: "Алый Клинок", 
+                    image: "images/katanas/scarlet_blade.png" 
+                }
             },
             {
                 id: 3,
                 name: "Поцелуй Зефира",
                 ingredients: [
-                    { name: "Расколотая Призма", count: 1, icon: "fas fa-star" },
-                    { name: "Дождевое облако", count: 30, icon: "fas fa-cloud" },
-                    { name: "Перо", count: 10, icon: "fas fa-feather-alt" },
-                    { name: "Душа полета", count: 5, icon: "fas fa-wind" },
-                    { name: "Слиток адамантита", count: 15, icon: "fas fa-fire" },
-                    { name: "Слиток метеорита", count: 10, icon: "fas fa-meteor" },
-                    { name: "Золотой слиток", count: 20, icon: "fas fa-coins" },
-                    { name: "Падающая звезда", count: 5, icon: "fas fa-star" },
-                    { name: "Звездная ярость", count: 1, icon: "fas fa-star" },
-                    { name: "Зачарованный меч", count: 1, icon: "fas fa-sword" },
-                    { name: "Обсидиан", count: 25, icon: "fas fa-mountain" }
+                    { 
+                        name: "Расколотая Призма", 
+                        count: 1, 
+                        image: "images/katanas/split_prism.png" 
+                    },
+                    { 
+                        name: "Дождевое облако", 
+                        count: 30, 
+                        image: "data/images/chromakatana/craft_items/rain_cloud.png" 
+                    },
+                    { 
+                        name: "Перо", 
+                        count: 10, 
+                        image: "data/images/chromakatana/craft_items/feather.png" 
+                    },
+                    { 
+                        name: "Душа полета", 
+                        count: 5, 
+                        image: "data/images/chromakatana/craft_items/soul_of_flight.png" 
+                    },
+                    { 
+                        name: "Слиток адамантита", 
+                        count: 15, 
+                        image: "data/images/chromakatana/craft_items/adamantite_bar.png" 
+                    },
+                    { 
+                        name: "Слиток метеорита", 
+                        count: 10, 
+                        image: "data/images/chromakatana/craft_items/meteorite_bar.png" 
+                    },
+                    { 
+                        name: "Золотой слиток", 
+                        count: 20, 
+                        image: "data/images/chromakatana/craft_items/gold_bar.png" 
+                    },
+                    { 
+                        name: "Падающая звезда", 
+                        count: 5, 
+                        image: "data/images/chromakatana/craft_items/fallen_star.png" 
+                    },
+                    { 
+                        name: "Звездная ярость", 
+                        count: 1, 
+                        image: "data/images/chromakatana/craft_items/star_wrath.png" 
+                    },
+                    { 
+                        name: "Зачарованный меч", 
+                        count: 1, 
+                        image: "data/images/chromakatana/craft_items/enchanted_sword.png" 
+                    },
+                    { 
+                        name: "Обсидиан", 
+                        count: 25, 
+                        image: "data/images/chromakatana/craft_items/obsidian.png" 
+                    }
                 ],
                 stations: ["Верстак", "Адская кузница", "Наковальня"],
-                result: { name: "Поцелуй Зефира", icon: "fas fa-bolt" }
+                result: { 
+                    name: "Поцелуй Зефира", 
+                    image: "images/katanas/zephyr_kiss.png" 
+                }
             },
             {
                 id: 4,
                 name: "Шёпот Кристалла",
                 ingredients: [
-                    { name: "Поцелуй Зефира", count: 1, icon: "fas fa-bolt" },
-                    { name: "Осколки Кристалла", count: 35, icon: "fas fa-gem" },
-                    { name: "Слиток адамантита", count: 15, icon: "fas fa-cube" },
-                    { name: "Осколок кристалла", count: 30, icon: "fas fa-gem" },
-                    { name: "Душа света", count: 10, icon: "fas fa-sun" },
-                    { name: "Душа ночи", count: 10, icon: "fas fa-moon" },
-                    { name: "Ледяное ядро", count: 2, icon: "fas fa-snowflake" },
-                    { name: "Ледяное перо", count: 1, icon: "fas fa-feather-alt" },
-                    { name: "Сапфир", count: 5, icon: "fas fa-gem" }
+                    { 
+                        name: "Поцелуй Зефира", 
+                        count: 1, 
+                        image: "images/katanas/zephyr_kiss.png" 
+                    },
+                    { 
+                        name: "Осколки Кристалла", 
+                        count: 35, 
+                        image: "data/images/chromakatana/craft_items/crystal_shard.png" 
+                    },
+                    { 
+                        name: "Слиток адамантита", 
+                        count: 15, 
+                        image: "data/images/chromakatana/craft_items/adamantite_bar.png" 
+                    },
+                    { 
+                        name: "Осколок кристалла", 
+                        count: 30, 
+                        image: "data/images/chromakatana/craft_items/crystal_fragment.png" 
+                    },
+                    { 
+                        name: "Душа света", 
+                        count: 10, 
+                        image: "data/images/chromakatana/craft_items/soul_of_light.png" 
+                    },
+                    { 
+                        name: "Душа ночи", 
+                        count: 10, 
+                        image: "data/images/chromakatana/craft_items/soul_of_night.png" 
+                    },
+                    { 
+                        name: "Ледяное ядро", 
+                        count: 2, 
+                        image: "data/images/chromakatana/craft_items/ice_core.png" 
+                    },
+                    { 
+                        name: "Ледяное перо", 
+                        count: 1, 
+                        image: "data/images/chromakatana/craft_items/frozen_feather.png" 
+                    },
+                    { 
+                        name: "Сапфир", 
+                        count: 5, 
+                        image: "data/images/chromakatana/craft_items/sapphire.png" 
+                    }
                 ],
                 stations: ["Верстак", "Адамантитовая кузница", "Мифриловая наковальня"],
-                result: { name: "Шёпот Кристалла", icon: "fas fa-snowflake" }
+                result: { 
+                    name: "Шёпот Кристалла", 
+                    image: "images/katanas/crystal_whisper.png" 
+                }
             }
         ];
 
@@ -1055,8 +1231,9 @@
                 katanaCard.innerHTML = `
                     <div class="katana-header">
                         <div class="katana-name">
-                            <span class="element-icon ${elementClass}">
-                                <i class="${elementIcon}"></i>
+                            <span class="katana-image">
+                                <img src="${katana.image}" alt="${katana.name}" 
+                                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMTYxQjIyIi8+CjxwYXRoIGQ9Ik0xNiAxNkg0OFY0OEgxNlYxNloiIGZpbGw9IiMzMDM2M0QiLz4KPHBhdGggZD0iTTMxIDI1SDMzVjM5SDMxVjI1WiIgZmlsbD0iIzFGNkVGQiIvPgo8cGF0aCBkPSJNMzkgMjVINDJWMjhIMzlWMjVaIiBmaWxsPSIjNThBNkZGIi8+Cjwvc3ZnPg=='">
                             </span>
                             ${katana.name}
                         </div>
@@ -1131,8 +1308,9 @@
                 recipe.ingredients.forEach(ingredient => {
                     ingredientsHTML += `
                         <div class="recipe-item">
-                            <div class="item-image">
-                                <i class="${ingredient.icon}"></i>
+                            <div class="recipe-item-image">
+                                <img src="${ingredient.image}" alt="${ingredient.name}"
+                                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMEQxMTE3Ii8+CjxwYXRoIGQ9Ik0xMiAxMkg0OFY0OEgxMlYxMloiIGZpbGw9IiMxNjFCMjIiLz4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMTAiIGZpbGw9IiMxRjZFRkIiLz4KPHBhdGggZD0iTTI1IDMwSDM1IiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4='">
                             </div>
                             <div class="item-name">${ingredient.name}</div>
                             <div class="item-count">x${ingredient.count}</div>
@@ -1153,8 +1331,9 @@
                             <i class="fas fa-arrow-right"></i>
                         </div>
                         <div class="recipe-item">
-                            <div class="item-image">
-                                <i class="${recipe.result.icon}"></i>
+                            <div class="recipe-item-image">
+                                <img src="${recipe.result.image}" alt="${recipe.result.name}"
+                                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMEQxMTE3Ii8+CjxwYXRoIGQ9Ik0xMiAxMkg0OFY0OEgxMlYxMloiIGZpbGw9IiMxNjFCMjIiLz4KPHBhdGggZD0iTTM1IDIwTDI1IDQwIiBzdHJva2U9IiM1OEE2RkYiIHN0cm9rZS13aWR0aD0iMyIvPgo8cGF0aCBkPSJNMjUgMjBMMzUgNDAiIHN0cm9rZT0iIzFGNkVGQiIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjwvc3ZnPg=='">
                             </div>
                             <div class="item-name">${recipe.result.name}</div>
                             <div class="item-count">x1</div>
