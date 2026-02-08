@@ -26,6 +26,7 @@
             --poison-color: #6cc551;
             --shadow-color: #9d4edd;
             --lightning-color: #ffdd00;
+            --earth-color: #8B4513;
         }
 
         * {
@@ -405,6 +406,11 @@
         .element-lightning {
             background-color: var(--lightning-color);
             color: #333;
+        }
+
+        .element-earth {
+            background-color: var(--earth-color);
+            color: white;
         }
 
         .crafting-section {
@@ -801,7 +807,7 @@
         const katanas = [
             {
                 id: 1,
-                name: "Расколотая Призма",
+                name: "Призма Раскола",
                 type: "core",
                 status: "implemented",
                 element: "basic",
@@ -885,7 +891,7 @@
             },
             {
                 id: 5,
-                name: "Ядоплюй",
+                name: "Игла Баямета",
                 type: "main",
                 status: "implemented",
                 element: "poison",
@@ -924,6 +930,30 @@
                     "Клон притягивает врагов и взрывается"
                 ],
                 image: "/data/images/chromakatana/Shadowrend.png"
+            },
+            {
+                id: 7,
+                name: "Сейсмический Резак",
+                type: "main",
+                status: "implemented",
+                element: "earth",
+                damage: 42,
+                knockback: 8,
+                crit: 6,
+                rarity: "Зеленая (Green)",
+                value: "2 золотых",
+                description: "Земляная катана, концентрирующая сейсмическую энергию для разрушительных ударов и создания защитного каменного щита.",
+                abilities: [
+                    "ЛКМ: Обычный удар",
+                    "Зажмите ЛКМ: Зарядите сейсмическую энергию",
+                    "Отпустите для сейсмического удара",
+                    "Стойка на земле дает +5 к защите",
+                    "Нажмите E для активации Каменного Щита",
+                    "Щит блокирует снаряды и повреждает врагов",
+                    "Щит дает +10 к защите пока активен",
+                    "Сейсмический удар создает трещины, замедляющие врагов"
+                ],
+                image: "/data/images/chromakatana/TerraCleaver.png"
             },
             {
                 id: 8,
@@ -1145,20 +1175,32 @@
 
         const dropSources = [
             {
-                name: "Рассекатель Теней",
+                name: "Рассекатель Теней (временный дроп)",
                 icon: "fas fa-ghost",
                 sources: [
-                    { name: "Разрушитель", chance: "5% (обычный режим)", icon: "fas fa-skull" },
-                    { name: "Разрушитель", chance: "15% (эксперт режим)", icon: "fas fa-skull-crossbones" },
-                    { name: "Разрушитель", chance: "30% (мастер режим)", icon: "fas fa-crown" }
+                    { name: "Уничтожитель", chance: "15% (обычный режим)", icon: "fas fa-skull" },
+                    { name: "Уничтожитель", chance: "30% (эксперт режим)", icon: "fas fa-skull-crossbones" },
+                    { name: "Уничтожитель", chance: "60% (мастер режим)", icon: "fas fa-crown" }
                 ]
             },
             
             {
-                name: "Ядоплюй",
+                name: "Игла Баямета (временный дроп)",
                 icon: "fas fa-skull-crossbones",
                 sources: [
-                    { name: "Пока не выпадает ни с кого", chance: "В разработке", icon: "fas fa-tools" }
+                    { name: "Уничтожитель", chance: "15% (обычный режим)", icon: "fas fa-skull" },
+                    { name: "Уничтожитель", chance: "30% (эксперт режим)", icon: "fas fa-skull-crossbones" },
+                    { name: "Уничтожитель", chance: "60% (мастер режим)", icon: "fas fa-crown" }
+                ]
+            },
+
+            {
+                name: "Сейсмический Резак (временный дроп)",
+                icon: "fas fa-skull-crossbones",
+                sources: [
+                    { name: "Уничтожитель", chance: "15% (обычный режим)", icon: "fas fa-skull" },
+                    { name: "Уничтожитель", chance: "30% (эксперт режим)", icon: "fas fa-skull-crossbones" },
+                    { name: "Уничтожитель", chance: "60% (мастер режим)", icon: "fas fa-crown" }
                 ]
             },
 
@@ -1183,6 +1225,7 @@
                 case 'poison': return 'fas fa-skull-crossbones';
                 case 'shadow': return 'fas fa-ghost';
                 case 'lightning': return 'fas fa-bolt';
+                case 'earth': return 'fas fa-mountain';
                 case 'all': return 'fas fa-rainbow';
                 default: return 'fas fa-sword';
             }
@@ -1195,6 +1238,7 @@
                 case 'poison': return 'element-poison';
                 case 'shadow': return 'element-shadow';
                 case 'lightning': return 'element-lightning';
+                case 'earth': return 'element-earth';
                 case 'all': return 'element-fire';
                 default: return '';
             }
