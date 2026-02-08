@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/data/images/favicon.png">
+    <title>Chroma Katana: The One Blade - Terraria Mod</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #0d1117;
+            --secondary-bg: #161b22;
+            --accent-color: #1f6feb;
+            --accent-light: #58a6ff;
+            --accent-glow: rgba(31, 111, 235, 0.3);
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --border-color: #30363d;
+            --card-bg: #161b22;
+            --success: #238636;
+            --warning: #9e6a03;
+            --craft-bg: #0d1117;
+            --header-height: 70px;
+            --fire-color: #e44d26;
+            --ice-color: #4d9de0;
+            --poison-color: #6cc551;
+            --shadow-color: #9d4edd;
+            --lightning-color: #ffdd00;
+            --earth-color: #8B4513;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--accent-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--secondary-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            height: var(--header-height);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            color: var(--accent-color);
+            font-size: 24px;
+            filter: drop-shadow(0 0 5px var(--accent-glow));
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        nav a.active {
+            color: var(--accent-light);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 10px;
+            right: 10px;
+            height: 2px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        main {
+            margin-top: var(--header-height);
+            min-height: calc(100vh - var(--header-height) - 100px);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(13, 17, 23, 0.9), rgba(13, 17, 23, 0.9)), 
+                        url('/data/images/chromakatana/background.png');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--text-secondary);
+        }
+
+        .mod-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-card i {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .katanas-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .katanas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .katana-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .katana-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--accent-glow);
+        }
+
+        .katana-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .katana-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .katana-image {
+            width: 64px;
+            height: 64px;
+            background-color: var(--primary-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            overflow: hidden;
+        }
+
+        .katana-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 3px;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .katana-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-implemented {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .status-pending {
+            background-color: var(--warning);
+            color: white;
+        }
+
+        .katana-content {
+            padding: 20px;
+        }
+
+        .katana-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            min-height: 80px;
+        }
+
+        .katana-abilities {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .katana-abilities li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .katana-abilities li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-size: 0.8rem;
+        }
+
+        .katana-type {
+            display: inline-block;
+            padding: 5px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .type-core {
+            border-color: #ffd700;
+            color: #ffd700;
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .type-main {
+            border-color: var(--accent-color);
+            color: var(--accent-light);
+            background: rgba(31, 111, 235, 0.1);
+        }
+
+        .type-chromatic {
+            border-color: #9d4edd;
+            color: #c77dff;
+            background: rgba(157, 78, 221, 0.1);
+        }
+
+        .katana-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .info-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-weight: 600;
+        }
+
+        .element-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: 8px;
+            font-size: 0.8rem;
+        }
+
+        .element-fire {
+            background-color: var(--fire-color);
+            color: white;
+        }
+
+        .element-ice {
+            background-color: var(--ice-color);
+            color: white;
+        }
+
+        .element-poison {
+            background-color: var(--poison-color);
+            color: white;
+        }
+
+        .element-shadow {
+            background-color: var(--shadow-color);
+            color: white;
+        }
+
+        .element-lightning {
+            background-color: var(--lightning-color);
+            color: #333;
+        }
+
+        .element-earth {
+            background-color: var(--earth-color);
+            color: white;
+        }
+
+        .crafting-section {
+            padding: 80px 0;
+            background-color: var(--craft-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .crafting-display {
+            background-color: var(--secondary-bg);
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 1px solid var(--border-color);
+        }
+
+        .crafting-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .craft-btn {
+            padding: 10px 20px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .craft-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-light);
+        }
+
+        .craft-btn.active {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: white;
+        }
+
+        .crafting-recipe {
+            display: none;
+        }
+
+        .crafting-recipe.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .recipe-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--accent-light);
+            text-align: center;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .recipe-item {
+            text-align: center;
+        }
+
+        .recipe-item-image {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 0 auto 10px;
+        }
+
+        .recipe-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 3px;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .item-count {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .recipe-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+
+        .drops-section {
+            padding: 80px 0;
+        }
+
+        .drops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .drop-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .drop-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .drop-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-bg);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .drop-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .drop-sources {
+            list-style: none;
+        }
+
+        .drop-sources li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+        }
+
+        .drop-sources li:last-child {
+            border-bottom: none;
+        }
+
+        .source-icon {
+            margin-right: 10px;
+            color: var(--text-secondary);
+        }
+
+        footer {
+            background-color: var(--secondary-bg);
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 15px;
+            }
+            
+            nav {
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                background-color: var(--secondary-bg);
+                border-top: 1px solid var(--border-color);
+                padding: 20px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s;
+            }
+            
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .katanas-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .katana-info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .recipe-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .drops-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .katana-image {
+                width: 48px;
+                height: 48px;
+            }
+            
+            .recipe-item-image {
+                width: 48px;
+                height: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-sword"></i>
+                </div>
+                <div class="logo-text">Chroma Katana</div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/news">News</a></li>
+                    <li><a href="/projects" class="active">Projects</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Chroma Katana: The One Blade</h1>
+                <p>A Terraria mod that adds a katana progression line with spectacular abilities! From tactical dashes to fire control, storms, ice, poison clouds, and shadow void manipulation.</p>
+                
+                <div class="mod-info">
+                    <div class="info-card">
+                        <i class="fas fa-code-branch"></i>
+                        <h3>Version</h3>
+                        <p>0.7.0</p>
+                    </div>
+                    <a href="https://steamcommunity.com/id/FreshGame_YT">
+                        <div class="info-card">
+                            <i class="fas fa-user"></i>
+                            <h3>Author</h3>
+                            <p>🗡FreshGame🗡</p>
+                        </div>
+                    </a>
+                    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3627201377">
+                        <div class="info-card">
+                            <i class="fas fa-gamepad"></i>
+                            <h3>tModLoader</h3>
+                            <p>ChromaKatana</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="katanas-section">
+            <div class="container">
+                <h2 class="section-title">Katanas</h2>
+                
+                <div class="katanas-grid" id="katanasGrid">
+                </div>
+            </div>
+        </section>
+
+        <section class="crafting-section">
+            <div class="container">
+                <h2 class="section-title">Crafting</h2>
+                
+                <div class="crafting-display">
+                    <div class="crafting-selector" id="craftingSelector">
+                    </div>
+                    
+                    <div id="craftingRecipes">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="drops-section">
+            <div class="container">
+                <h2 class="section-title">Drop Sources</h2>
+                
+                <div class="drops-grid" id="dropsGrid">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Chroma Katana</div>
+                
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/news">News</a>
+                    <a href="/projects">Projects</a>
+                </div>
+                
+                <div class="copyright">
+                    &copy; 2025 "Chroma Katana: The One Blade" mod by FreshGame. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const katanas = [
+            {
+                id: 1,
+                name: "Fractured Prism",
+                type: "core",
+                status: "implemented",
+                element: "basic",
+                damage: 18,
+                knockback: 4,
+                crit: 8,
+                rarity: "Blue",
+                value: "1 Gold 50 Silver",
+                description: "The core of most katanas. A tactical blade that allows you to dash in the attack direction for quick movement across the battlefield.",
+                abilities: [
+                    "LMB: Normal strike",
+                    "Hold LMB: Charge will begin",
+                    "Release to dash towards cursor",
+                    "Dash deals 1.5x damage",
+                    "Dash provides temporary invulnerability"
+                ],
+                image: "/data/images/chromakatana/FracturedPrism.png"
+            },
+            {
+                id: 2,
+                name: "Vermilion Edge",
+                type: "main",
+                status: "implemented",
+                element: "fire",
+                damage: 35,
+                knockback: 6,
+                crit: 12,
+                rarity: "Red",
+                value: "2 Gold 50 Silver",
+                description: "A fiery katana that creates area control zones that set enemies on fire and deal periodic damage.",
+                abilities: [
+                    "LMB: Normal strike with fiery trail",
+                    "Hold LMB: Charge fire energy",
+                    "Release to dash towards cursor",
+                    "Dash deals 2x damage and inflicts 'On Fire!'",
+                    "Normal attacks set enemies on fire"
+                ],
+                image: "/data/images/chromakatana/VermilionEdge.png"
+            },
+            {
+                id: 3,
+                name: "Zephyr's Kiss",
+                type: "main",
+                status: "implemented",
+                element: "lightning",
+                damage: 45,
+                knockback: 5,
+                crit: 15,
+                rarity: "Pink",
+                value: "5 Gold",
+                description: "A lightning katana that allows teleportation over short distances and creates lightning that strikes enemies.",
+                abilities: [
+                    "LMB: Normal strike with lightning",
+                    "Hold LMB: Charge electrical energy",
+                    "Release to teleport to cursor location",
+                    "Chance to summon lightning on normal attacks",
+                    "Teleport creates lightning explosion"
+                ],
+                image: "/data/images/chromakatana/ZephyrsKiss.png"
+            },
+            {
+                id: 4,
+                name: "Crystal Whisper",
+                type: "main",
+                status: "implemented",
+                element: "ice",
+                damage: 85,
+                knockback: 6,
+                crit: 12,
+                rarity: "Light Red",
+                value: "5 Gold",
+                description: "An icy blade that freezes enemies and creates ice barriers for tactical positioning control.",
+                abilities: [
+                    "LMB: Normal strike with ice shards",
+                    "Hold LMB: Charge frost energy",
+                    "Release to create echo clones in cursor direction",
+                    "Click echo clones to teleport and create frost explosion",
+                    "Inflicts Frostbite (slows movement) and Chilled"
+                ],
+                image: "/data/images/chromakatana/CrystalWhisper.png"
+            },
+            {
+                id: 5,
+                name: "Venom's Bane",
+                type: "main",
+                status: "implemented",
+                element: "poison",
+                damage: 43,
+                knockback: 2,
+                crit: 8,
+                rarity: "Green",
+                value: "2 Gold",
+                description: "A poisonous katana that creates toxic clouds that deal periodic damage and weaken enemies.",
+                abilities: [
+                    "LMB: Normal strike with venom splash",
+                    "Hold LMB: Charge toxic energy",
+                    "Release to summon toxic spikes around you",
+                    "Normal attacks apply poison stacks to enemies",
+                    "Max poison stacks trigger venom explosion"
+                ],
+                image: "/data/images/chromakatana/VenomsBane.png"
+            },
+            {
+                id: 6,
+                name: "Shadowrend",
+                type: "main",
+                status: "implemented",
+                element: "shadow",
+                damage: 85,
+                knockback: 3,
+                crit: 20,
+                rarity: "Purple",
+                value: "3 Gold 50 Silver",
+                description: "A shadow katana that manipulates the void and creates shadow copies to deceive enemies.",
+                abilities: [
+                    "LMB: Normal strike",
+                    "Hold LMB: Charge void energy",
+                    "Release to teleport and unleash a series of shadow strikes",
+                    "Creates a shadow clone at teleport location",
+                    "Clone attracts enemies and explodes"
+                ],
+                image: "/data/images/chromakatana/Shadowrend.png"
+            },
+            {
+                id: 7,
+                name: "Terra Cleaver",
+                type: "main",
+                status: "implemented",
+                element: "earth",
+                damage: 42,
+                knockback: 8,
+                crit: 6,
+                rarity: "Green",
+                value: "2 Gold",
+                description: "An earthen katana that concentrates seismic energy for devastating blows and creates a protective stone shield.",
+                abilities: [
+                    "LMB: Normal strike",
+                    "Hold LMB: Charge seismic energy",
+                    "Release to unleash a seismic slam",
+                    "Grounded stance grants +5 defense",
+                    "Press E to activate Stone Shield",
+                    "Shield blocks projectiles and damages enemies",
+                    "Shield grants +10 defense while active",
+                    "Seismic slam creates ground cracks that slow enemies"
+                ],
+                image: "/data/images/chromakatana/TerraCleaver.png"
+            },
+            {
+                id: 8,
+                name: "Chromatic Katana",
+                type: "chromatic",
+                status: "pending",
+                element: "all",
+                damage: 0,
+                knockback: 0,
+                crit: 0,
+                rarity: "???",
+                value: "???",
+                description: "The pinnacle of katana evolution, combining all elements and abilities in one perfect blade.",
+                abilities: [
+                    "Combination of all elemental effects",
+                    "Maximum damage and versatility",
+                    "Unique ultimate ability"
+                ],
+                image: "/data/images/chromakatana/chromatic_katana.png"
+            }
+        ];
+
+        const recipes = [
+            {
+                id: 1,
+                name: "Fractured Prism",
+                ingredients: [
+                    { 
+                        name: "Iron Bar", 
+                        count: 12, 
+                        image: "/data/images/chromakatana/craft_items/iron_bar.png" 
+                    },
+                    { 
+                        name: "Silver Bar", 
+                        count: 3, 
+                        image: "/data/images/chromakatana/craft_items/silver_bar.png" 
+                    },
+                    { 
+                        name: "Wood", 
+                        count: 10, 
+                        image: "/data/images/chromakatana/craft_items/wood.png" 
+                    },
+                    { 
+                        name: "Diamond", 
+                        count: 1, 
+                        image: "/data/images/chromakatana/craft_items/diamond.png" 
+                    }
+                ],
+                stations: ["Workbench", "Furnace", "Anvil"],
+                result: { 
+                    name: "Fractured Prism", 
+                    image: "/data/images/chromakatana/FracturedPrism.png" 
+                }
+            },
+            {
+                id: 2,
+                name: "Vermilion Edge",
+                ingredients: [
+                    { 
+                        name: "Fractured Prism", 
+                        count: 1, 
+                        image: "/data/images/chromakatana/FracturedPrism.png" 
+                    },
+                    { 
+                        name: "Hellstone Bar", 
+                        count: 15, 
+                        image: "/data/images/chromakatana/craft_items/hellstone_bar.png" 
+                    },
+                    { 
+                        name: "Obsidian", 
+                        count: 10, 
+                        image: "/data/images/chromakatana/craft_items/obsidian.png" 
+                    },
+                    { 
+                        name: "Ruby", 
+                        count: 1, 
+                        image: "/data/images/chromakatana/craft_items/ruby.png" 
+                    },
+                    { 
+                        name: "Meteorite Bar", 
+                        count: 5, 
+                        image: "/data/images/chromakatana/craft_items/meteorite_bar.png" 
+                    },
+                    { 
+                        name: "Ebonwood", 
+                        count: 10, 
+                        image: "/data/images/chromakatana/craft_items/ebonwood.png" 
+                    }
+                ],
+                stations: ["Demon Altar", "Hellforge", "Anvil"],
+                result: { 
+                    name: "Vermilion Edge", 
+                    image: "/data/images/chromakatana/VermilionEdge.png" 
+                }
+            },
+            {
+                id: 3,
+                name: "Zephyr's Kiss",
+                ingredients: [
+                    { 
+                        name: "Fractured Prism", 
+                        count: 1, 
+                        image: "/data/images/chromakatana/FracturedPrism.png" 
+                    },
+                    { 
+                        name: "Rain Cloud", 
+                        count: 30, 
+                        image: "/data/images/chromakatana/craft_items/rain_cloud.png" 
+                    },
+                    { 
+                        name: "Feather", 
+                        count: 10, 
+                        image: "/data/images/chromakatana/craft_items/feather.png" 
+                    },
+                    { 
+                        name: "Soul of Flight", 
+                        count: 5, 
+                        image: "/data/images/chromakatana/craft_items/soul_of_flight.png" 
+                    },
+                    { 
+                        name: "Hellstone Bar", 
+                        count: 15, 
+                        image: "/data/images/chromakatana/craft_items/hellstone_bar.png" 
+                    },
+                    { 
+                        name: "Meteorite Bar", 
+                        count: 10, 
+                        image: "/data/images/chromakatana/craft_items/meteorite_bar.png" 
+                    },
+                    { 
+                        name: "Gold Bar", 
+                        count: 20, 
+                        image: "/data/images/chromakatana/craft_items/gold_bar.png" 
+                    },
+                    { 
+                        name: "Fallen Star", 
+                        count: 5, 
+                        image: "/data/images/chromakatana/craft_items/fallen_star.png" 
+                    },
+                    { 
+                        name: "Starfury", 
+                        count: 1, 
+                        image: "/data/images/chromakatana/craft_items/starfury.png" 
+                    },
+                    { 
+                        name: "Enchanted Sword", 
+                        count: 1, 
+                        image: "/data/images/chromakatana/craft_items/enchanted_sword.png" 
+                    },
+                    { 
+                        name: "Obsidian", 
+                        count: 25, 
+                        image: "/data/images/chromakatana/craft_items/obsidian.png" 
+                    }
+                ],
+                stations: ["Workbench", "Hellforge", "Anvil"],
+                result: { 
+                    name: "Zephyr's Kiss", 
+                    image: "/data/images/chromakatana/ZephyrsKiss.png" 
+                }
+            },
+            {
+                id: 4,
+                name: "Crystal Whisper",
+                ingredients: [
+                    { 
+                        name: "Zephyr's Kiss", 
+                        count: 1, 
+                        image: "/data/images/chromakatana/ZephyrsKiss.png" 
+                    },
+                    { 
+                        name: "Crystal Shards", 
+                        count: 35, 
+                        image: "/data/images/chromakatana/craft_items/crystal_shards.png" 
+                    },
+                    { 
+                        name: "Adamantite Bar", 
+                        count: 15, 
+                        image: "/data/images/chromakatana/craft_items/adamantite_bar.png" 
+                    },
+                    { 
+                        name: "Crystal Shard", 
+                        count: 30, 
+                        image: "/data/images/chromakatana/craft_items/crystal_shard.png" 
+                    },
+                    { 
+                        name: "Soul of Light", 
+                        count: 10, 
+                        image: "/data/images/chromakatana/craft_items/soul_of_light.png" 
+                    },
+                    { 
+                        name: "Soul of Night", 
+                        count: 10, 
+                        image: "/data/images/chromakatana/craft_items/soul_of_night.png" 
+                    },
+                    { 
+                        name: "Frost Core", 
+                        count: 2, 
+                        image: "/data/images/chromakatana/craft_items/frost_core.png" 
+                    },
+                    { 
+                        name: "Ice Feather", 
+                        count: 1, 
+                        image: "/data/images/chromakatana/craft_items/ice_feather.png" 
+                    },
+                    { 
+                        name: "Sapphire", 
+                        count: 5, 
+                        image: "/data/images/chromakatana/craft_items/sapphire.png" 
+                    }
+                ],
+                stations: ["Workbench", "Adamantite Forge", "Mythril Anvil"],
+                result: { 
+                    name: "Crystal Whisper", 
+                    image: "/data/images/chromakatana/CrystalWhisper.png" 
+                }
+            }
+        ];
+
+        const dropSources = [
+            {
+                name: "Shadowrend (temporary drop)",
+                icon: "fas fa-ghost",
+                sources: [
+                    { name: "Skeletron Prime", chance: "15% (Normal Mode)", icon: "fas fa-skull" },
+                    { name: "Skeletron Prime", chance: "30% (Expert Mode)", icon: "fas fa-skull-crossbones" },
+                    { name: "Skeletron Prime", chance: "60% (Master Mode)", icon: "fas fa-crown" }
+                ]
+            },
+            
+            {
+                name: "Venom's Bane (temporary drop)",
+                icon: "fas fa-skull-crossbones",
+                sources: [
+                    { name: "Skeletron Prime", chance: "15% (Normal Mode)", icon: "fas fa-skull" },
+                    { name: "Skeletron Prime", chance: "30% (Expert Mode)", icon: "fas fa-skull-crossbones" },
+                    { name: "Skeletron Prime", chance: "60% (Master Mode)", icon: "fas fa-crown" }
+                ]
+            },
+
+            {
+                name: "Terra Cleaver (temporary drop)",
+                icon: "fas fa-mountain",
+                sources: [
+                    { name: "Skeletron Prime", chance: "15% (Normal Mode)", icon: "fas fa-skull" },
+                    { name: "Skeletron Prime", chance: "30% (Expert Mode)", icon: "fas fa-skull-crossbones" },
+                    { name: "Skeletron Prime", chance: "60% (Master Mode)", icon: "fas fa-crown" }
+                ]
+            },
+
+            {
+                name: "Crystal Shards",
+                icon: "fas fa-gem",
+                sources: [
+                    { name: "Ice Golem", chance: "High", icon: "fas fa-snowman" },
+                    { name: "Ice Elemental", chance: "Medium", icon: "fas fa-snowflake" },
+                    { name: "Ice Mermaid", chance: "Medium", icon: "fas fa-water" },
+                    { name: "Undead Viking", chance: "Medium", icon: "fas fa-helmet-battle" },
+                    { name: "Armored Viking", chance: "Medium", icon: "fas fa-shield-alt" },
+                    { name: "Ice Turtle", chance: "High", icon: "fas fa-dragon" }
+                ]
+            },
+        ];
+
+        function getElementIcon(element) {
+            switch(element) {
+                case 'fire': return 'fas fa-fire';
+                case 'ice': return 'fas fa-snowflake';
+                case 'poison': return 'fas fa-skull-crossbones';
+                case 'shadow': return 'fas fa-ghost';
+                case 'lightning': return 'fas fa-bolt';
+                case 'earth': return 'fas fa-mountain';
+                case 'all': return 'fas fa-rainbow';
+                default: return 'fas fa-sword';
+            }
+        }
+
+        function getElementClass(element) {
+            switch(element) {
+                case 'fire': return 'element-fire';
+                case 'ice': return 'element-ice';
+                case 'poison': return 'element-poison';
+                case 'shadow': return 'element-shadow';
+                case 'lightning': return 'element-lightning';
+                case 'earth': return 'element-earth';
+                case 'all': return 'element-fire';
+                default: return '';
+            }
+        }
+
+        function renderKatanas() {
+            const katanasGrid = document.getElementById('katanasGrid');
+            katanasGrid.innerHTML = '';
+            
+            katanas.forEach(katana => {
+                let typeClass = '';
+                let typeText = '';
+                
+                switch(katana.type) {
+                    case 'core':
+                        typeClass = 'type-core';
+                        typeText = 'Core';
+                        break;
+                    case 'main':
+                        typeClass = 'type-main';
+                        typeText = 'Main';
+                        break;
+                    case 'chromatic':
+                        typeClass = 'type-chromatic';
+                        typeText = 'Chromatic';
+                        break;
+                }
+                
+                const elementIcon = getElementIcon(katana.element);
+                const elementClass = getElementClass(katana.element);
+                
+                const katanaCard = document.createElement('div');
+                katanaCard.className = 'katana-card';
+                katanaCard.innerHTML = `
+                    <div class="katana-header">
+                        <div class="katana-name">
+                            <span class="katana-image">
+                                <img src="${katana.image}" alt="${katana.name}" 
+                                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMTYxQjIyIi8+CjxwYXRoIGQ9Ik0xNiAxNkg0OFY0OEgxNlYxNloiIGZpbGw9IiMzMDM2M0QiLz4KPHBhdGggZD0iTTMxIDI1SDMzVjM5SDMxVjI1WiIgZmlsbD0iIzFGNkVGQiIvPgo8cGF0aCBkPSJNMzkgMjVINDJWMjhIMzlWMjVaIiBmaWxsPSIjNThBNkZGIi8+Cjwvc3ZnPg=='">
+                            </span>
+                            ${katana.name}
+                        </div>
+                        <div class="katana-status ${katana.status === 'implemented' ? 'status-implemented' : 'status-pending'}">
+                            ${katana.status === 'implemented' ? 'Implemented' : 'In Development'}
+                        </div>
+                    </div>
+                    <div class="katana-content">
+                        <p class="katana-description">${katana.description}</p>
+                        <ul class="katana-abilities">
+                            ${katana.abilities.map(ability => `<li>${ability}</li>`).join('')}
+                        </ul>
+                        <div class="katana-info-grid">
+                            <div class="info-item">
+                                <div class="info-label">Damage</div>
+                                <div class="info-value">${katana.damage}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Knockback</div>
+                                <div class="info-value">${katana.knockback}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Critical Chance</div>
+                                <div class="info-value">${katana.crit}%</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Rarity</div>
+                                <div class="info-value">${katana.rarity}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Sell Value</div>
+                                <div class="info-value">${katana.value}</div>
+                            </div>
+                        </div>
+                        <div class="katana-type ${typeClass}">${typeText}</div>
+                    </div>
+                `;
+                
+                katanasGrid.appendChild(katanaCard);
+            });
+        }
+
+        function renderCrafting() {
+            const craftingSelector = document.getElementById('craftingSelector');
+            const craftingRecipes = document.getElementById('craftingRecipes');
+            
+            recipes.forEach((recipe, index) => {
+                const button = document.createElement('button');
+                button.className = `craft-btn ${index === 0 ? 'active' : ''}`;
+                button.textContent = recipe.name;
+                button.dataset.recipeId = recipe.id;
+                
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.craft-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    button.classList.add('active');
+                    
+                    showRecipe(recipe.id);
+                });
+                
+                craftingSelector.appendChild(button);
+            });
+            
+            recipes.forEach((recipe, index) => {
+                const recipeContainer = document.createElement('div');
+                recipeContainer.className = `crafting-recipe ${index === 0 ? 'active' : ''}`;
+                recipeContainer.id = `recipe-${recipe.id}`;
+                
+                let ingredientsHTML = '';
+                recipe.ingredients.forEach(ingredient => {
+                    ingredientsHTML += `
+                        <div class="recipe-item">
+                            <div class="recipe-item-image">
+                                <img src="${ingredient.image}" alt="${ingredient.name}"
+                                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMEQxMTE3Ii8+CjxwYXRoIGQ9Ik0xMiAxMkg0OFY0OEgxMlYxMloiIGZpbGw9IiMxNjFCMjIiLz4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMTAiIGZpbGw9IiMxRjZFRkIiLz4KPHBhdGggZD0iTTI1IDMwSDM1IiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4='">
+                            </div>
+                            <div class="item-name">${ingredient.name}</div>
+                            <div class="item-count">x${ingredient.count}</div>
+                        </div>
+                    `;
+                });
+                
+                let stationsHTML = '';
+                recipe.stations.forEach(station => {
+                    stationsHTML += `<div class="info-item"><i class="fas fa-hammer"></i> ${station}</div>`;
+                });
+                
+                recipeContainer.innerHTML = `
+                    <h3 class="recipe-title">Recipe: ${recipe.name}</h3>
+                    <div class="recipe-grid">
+                        ${ingredientsHTML}
+                        <div class="recipe-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="recipe-item">
+                            <div class="recipe-item-image">
+                                <img src="${recipe.result.image}" alt="${recipe.result.name}"
+                                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMEQxMTE3Ii8+CjxwYXRoIGQ9Ik0xMiAxMkg0OFY0OEgxMlYxMloiIGZpbGw9IiMxNjFCMjIiLz4KPHBhdGggZD0iTTM1IDIwTDI1IDQwIiBzdHJva2U9IiM1OEE2RkYiIHN0cm9rZS13aWR0aD0iMyIvPgo8cGF0aCBkPSJNMjUgMjBMMzUgNDAiIHN0cm9rZT0iIzFGNkVGQiIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjwvc3ZnPg=='">
+                            </div>
+                            <div class="item-name">${recipe.result.name}</div>
+                            <div class="item-count">x1</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 30px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                        <h4 style="margin-bottom: 10px; color: var(--accent-light);">Crafting Stations:</h4>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            ${stationsHTML}
+                        </div>
+                    </div>
+                `;
+                
+                craftingRecipes.appendChild(recipeContainer);
+            });
+        }
+
+        function renderDropSources() {
+            const dropsGrid = document.getElementById('dropsGrid');
+            dropsGrid.innerHTML = '';
+            
+            dropSources.forEach(drop => {
+                const dropCard = document.createElement('div');
+                dropCard.className = 'drop-card';
+                
+                let sourcesHTML = '';
+                drop.sources.forEach(source => {
+                    sourcesHTML += `
+                        <li>
+                            <i class="fas ${source.icon} source-icon"></i>
+                            <div>
+                                <div>${source.name}</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary);">Chance: ${source.chance}</div>
+                            </div>
+                        </li>
+                    `;
+                });
+                
+                dropCard.innerHTML = `
+                    <div class="drop-header">
+                        <div class="drop-icon">
+                            <i class="fas ${drop.icon}"></i>
+                        </div>
+                        <div class="drop-name">${drop.name}</div>
+                    </div>
+                    <ul class="drop-sources">
+                        ${sourcesHTML}
+                    </ul>
+                `;
+                
+                dropsGrid.appendChild(dropCard);
+            });
+        }
+
+        function showRecipe(recipeId) {
+            document.querySelectorAll('.crafting-recipe').forEach(recipe => {
+                recipe.classList.remove('active');
+            });
+            
+            const selectedRecipe = document.getElementById(`recipe-${recipeId}`);
+            if (selectedRecipe) {
+                selectedRecipe.classList.add('active');
+            }
+        }
+
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+            this.innerHTML = nav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                const nav = document.getElementById('mainNav');
+                nav.classList.remove('active');
+                document.getElementById('mobileMenuBtn').innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderKatanas();
+            renderCrafting();
+            renderDropSources();
+        });
+    </script>
+</body>
+</html>
