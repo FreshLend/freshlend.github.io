@@ -137,6 +137,69 @@
             cursor: pointer;
         }
 
+        .language-switcher {
+            display: flex;
+            gap: 5px;
+            margin-left: auto;
+            margin-right: 30px;
+        }
+        
+        .lang-btn {
+            padding: 6px 12px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .lang-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-light);
+            background-color: rgba(31, 111, 235, 0.1);
+        }
+        
+        .lang-btn.active {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: white;
+            cursor: default;
+        }
+        
+        .lang-btn.active:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .language-switcher {
+                margin-right: 15px;
+                margin-left: auto;
+            }
+            
+            .lang-btn {
+                padding: 5px 10px;
+                font-size: 0.85rem;
+                min-width: 45px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .language-switcher {
+                position: absolute;
+                top: 15px;
+                right: 60px;
+                margin: 0;
+            }
+        }
+
         main {
             margin-top: var(--header-height);
             min-height: calc(100vh - var(--header-height) - 100px);
@@ -719,6 +782,15 @@
                     <li><a href="/projects" class="active">Проекты</a></li>
                 </ul>
             </nav>
+
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="ru" title="Русский">
+                    <i class="fas fa-flag"></i>
+                </button>
+                <a href="chromakatana.en.html" class="lang-btn" data-lang="en" title="English">
+                    <i class="fas fa-globe"></i>
+                </a>
+            </div>
         </div>
     </header>
 
