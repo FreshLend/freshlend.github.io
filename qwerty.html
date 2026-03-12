@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История в фразеологизмах</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #0a0e14;
+            color: #edf3ff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .app {
+            width: 100%;
+            max-width: 1400px;
+            height: 95vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0 18px 0;
+            border-bottom: 2px solid #2f7fff;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #5d9eff;
+            letter-spacing: -0.5px;
+        }
+
+        .info-pill {
+            background: #182337;
+            border: 2px solid #2f7fff;
+            border-radius: 40px;
+            padding: 8px 28px;
+            font-size: 1.1rem;
+            color: #b8d2ff;
+        }
+
+        .card {
+            background: #141e2c;
+            border: 3px solid #2f7fff;
+            border-radius: 55px;
+            box-shadow: 0 20px 35px -5px rgba(0, 110, 255, 0.5);
+            padding: 45px 50px;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #4682ff;
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+
+        .intro-text {
+            background: #0f1825;
+            border: 2px solid #2f7fff;
+            border-radius: 60px;
+            padding: 35px 40px;
+            font-size: 1.4rem;
+            color: #d1e2ff;
+            margin: 25px 0 40px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            background: transparent;
+            border: 4px solid #2f7fff;
+            color: #2f7fff;
+            font-size: 2.2rem;
+            font-weight: 700;
+            padding: 18px 65px;
+            border-radius: 70px;
+            cursor: pointer;
+            transition: 0.1s linear;
+            box-shadow: 0 7px 0 #12417c;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: #2f7fff;
+            color: #0b121f;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px #2f7fff;
+        }
+
+        .btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 3px 0 #12417c;
+        }
+
+        .btn.centered {
+            display: block;
+            margin: 0 auto;
+            width: fit-content;
+        }
+
+        .progress-line {
+            background: #1d2a3c;
+            border: 2px solid #2f7fff;
+            height: 18px;
+            border-radius: 60px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-line-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #2f7fff, #94c2ff);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 15px #3a7fff;
+        }
+
+        .two-columns {
+            display: flex;
+            gap: 30px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .question-panel {
+            flex: 1;
+            background: #101b29;
+            border: 3px solid #2f7fff;
+            border-radius: 60px;
+            padding: 40px 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 25px #001a3a;
+        }
+
+        .question-panel p {
+            font-size: 2.3rem;
+            font-weight: 500;
+            line-height: 1.5;
+            color: #ffffff;
+            text-shadow: 0 2px 7px #0044aa;
+        }
+
+        .answers-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .answer-tile {
+            background: #152334;
+            border: 3px solid #2f7fff;
+            border-radius: 30px;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.12s;
+            box-shadow: 0 5px 0 #0f2642;
+            width: 100%;
+            min-height: 90px;
+        }
+
+        .answer-tile:hover {
+            background: #1e314b;
+            border-color: #8ab9ff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px #0045a3;
+        }
+
+        .answer-tile.selected {
+            background: #004a99;
+            border-color: #c2e1ff;
+            box-shadow: 0 0 25px #0077ff, 0 5px 0 #002f5a;
+        }
+
+        .answer-text {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #eaf2ff;
+            word-break: break-word;
+            padding-left: 15px;
+        }
+
+        .answer-letter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: #2f7fff;
+            border-radius: 15px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .next-btn {
+            background: transparent;
+            border: 4px solid #2f7fff;
+            color: #2f7fff;
+            font-size: 2rem;
+            font-weight: 700;
+            padding: 16px 60px;
+            border-radius: 70px;
+            cursor: pointer;
+            margin-top: 25px;
+            margin-left: auto;
+            transition: 0.1s;
+            box-shadow: 0 6px 0 #12417c;
+        }
+
+        .next-btn:hover {
+            background: #2f7fff20;
+        }
+
+        .next-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #12417c;
+        }
+
+        .next-btn.disabled {
+            opacity: 0.2;
+            pointer-events: none;
+            border-color: #6581b0;
+        }
+
+        .result-container {
+            background: #132131;
+            border: 4px solid #2f7fff;
+            border-radius: 75px;
+            padding: 50px 40px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin: 40px 0;
+        }
+
+        .result-circle {
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            background: #0f1e30;
+            border: 6px solid #2f7fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 60px #2f7fff;
+            animation: scaleUp 0.5s;
+        }
+
+        .result-circle .big-number {
+            font-size: 5.2rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1;
+        }
+
+        .result-circle .desc {
+            font-size: 1.5rem;
+            color: #adccff;
+        }
+
+        @keyframes scaleUp {
+            0% { transform: scale(0.2); opacity: 0; }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .restart-button {
+            background: transparent;
+            border: 4px solid #2f7fff;
+            color: #2f7fff;
+            font-size: 2rem;
+            font-weight: 700;
+            padding: 18px 70px;
+            border-radius: 70px;
+            margin: 20px auto 0;
+            cursor: pointer;
+            display: inline-block;
+            box-shadow: 0 7px 0 #12417c;
+        }
+
+        .restart-button:hover {
+            background: #2f7fff;
+            color: #030f1f;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .flex-grow {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="top-bar">
+            <span class="logo">ФРАЗЕОЛОГИЗМЫ</span>
+            <span class="info-pill">история слов</span>
+        </div>
+
+        <div id="startScreen" class="screen">
+            <div class="card">
+                <div class="main-title">ИСТОРИЯ<br>В ФРАЗЕОЛОГИЗМАХ</div>
+                <div class="intro-text">
+                    Добро пожаловать!<br><br>
+                    16 вопросов о происхождении крылатых фраз.<br>Проверьте свою интуицию и откройте тайны языка.
+                </div>
+                <button class="btn centered" id="startBtn">НАЧАТЬ</button>
+            </div>
+        </div>
+
+        <div id="quizScreen" class="screen hidden flex-grow" style="display: flex; flex-direction: column;">
+            <div class="progress-line">
+                <div class="progress-line-fill" id="progressFill"></div>
+            </div>
+            <div class="two-columns">
+                <div class="question-panel">
+                    <p id="questionText"></p>
+                </div>
+                <div class="answers-panel" id="answersPanel"></div>
+            </div>
+            <button class="next-btn" id="nextBtn">ДАЛЕЕ</button>
+        </div>
+
+        <div id="resultScreen" class="screen hidden flex-grow" style="display: flex; align-items: center;">
+            <div class="result-container">
+                <h2 style="font-size: 3.5rem; color: #5f9eff; margin-bottom: 20px;">ИТОГ</h2>
+                <div class="stats-row" id="statsRow"></div>
+                <button class="restart-button" id="restartBtn">ЗАНОВО</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const questions = [
+                {
+                    text: 'Что означает выражение "Бить баклуши"?',
+                    answers: [
+                        { label: 'драться' },
+                        { label: 'бездельничать' },
+                        { label: 'работать' },
+                        { label: 'сплетничать' }
+                    ],
+                    correct: 1
+                },
+                {
+                    text: 'Как появилось "Дело в шляпе"?',
+                    answers: [
+                        { label: 'почта' },
+                        { label: 'суд' },
+                        { label: 'взятка' },
+                        { label: 'головной убор' }
+                    ],
+                    correct: 2
+                },
+                {
+                    text: '"Точить лясы" — это?',
+                    answers: [
+                        { label: 'ножи точить' },
+                        { label: 'болтать' },
+                        { label: 'кружева' },
+                        { label: 'балясины' }
+                    ],
+                    correct: 1
+                },
+                {
+                    text: 'Какая фраза означает "обманывать"?',
+                    answers: [
+                        { label: 'водить за нос' },
+                        { label: 'намылить шею' },
+                        { label: 'втирать очки' },
+                        { label: 'держать в курсе' }
+                    ],
+                    correct: 0
+                },
+                {
+                    text: 'Кто такие "турусы на колёсах"?',
+                    answers: [
+                        { label: 'осадные башни' },
+                        { label: 'пустая болтовня' },
+                        { label: 'цирк' },
+                        { label: 'миф. животные' }
+                    ],
+                    correct: 0
+                },
+                {
+                    text: 'Что значит "Кануть в Лету"?',
+                    answers: [
+                        { label: 'утонуть' },
+                        { label: 'быть забытым' },
+                        { label: 'испариться' },
+                        { label: 'упасть в обморок' }
+                    ],
+                    correct: 1
+                },
+                {
+                    text: '"Гог и Магог" — это?',
+                    answers: [
+                        { label: 'библейские народы' },
+                        { label: 'великаны' },
+                        { label: 'богатыри' },
+                        { label: 'цари' }
+                    ],
+                    correct: 0
+                },
+                {
+                    text: 'Какой фразеологизм связан с наказанием?',
+                    answers: [
+                        { label: 'задать баню' },
+                        { label: 'кузькина мать' },
+                        { label: 'спустя рукава' },
+                        { label: 'на все корки' }
+                    ],
+                    correct: 0
+                },
+                {
+                    text: 'Первоначальный смысл "Собаку съел"?',
+                    answers: [
+                        { label: 'проголодался' },
+                        { label: 'приобрёл опыт' },
+                        { label: 'отравился' },
+                        { label: 'разозлился' }
+                    ],
+                    correct: 1
+                },
+                {
+                    text: 'Что такое "Филькина грамота"?',
+                    answers: [
+                        { label: 'документ-пустышка' },
+                        { label: 'древняя рукопись' },
+                        { label: 'письмо митрополита' },
+                        { label: 'школьная грамота' }
+                    ],
+                    correct: 0
+                },
+                {
+                    text: '"Перейти Рубикон" — это?',
+                    answers: [
+                        { label: 'построить мост' },
+                        { label: 'решительный шаг' },
+                        { label: 'разрушить границу' },
+                        { label: 'проиграть битву' }
+                    ],
+                    correct: 1
+                },
+                {
+                    text: 'Какая фраза означает "очень быстро"?',
+                    answers: [
+                        { label: 'во весь дух' },
+                        { label: 'черепашьим шагом' },
+                        { label: 'сломя голову' },
+                        { label: 'в мгновение ока' }
+                    ],
+                    correct: 2
+                },
+                {
+                    text: 'Источник "Кричать во всю Ивановскую"?',
+                    answers: [
+                        { label: 'площадь в Кремле' },
+                        { label: 'имя царя' },
+                        { label: 'колокольный звон' },
+                        { label: 'собор' }
+                    ],
+                    correct: 0
+                },
+                {
+                    text: '"Зарубить на носу" — что изначально?',
+                    answers: [
+                        { label: 'убить' },
+                        { label: 'зарубка на дощечке' },
+                        { label: 'унизить' },
+                        { label: 'запомнить' }
+                    ],
+                    correct: 3
+                },
+                {
+                    text: '"Дамоклов меч" символизирует?',
+                    answers: [
+                        { label: 'оружие' },
+                        { label: 'постоянную угрозу' },
+                        { label: 'возмездие' },
+                        { label: 'венец' }
+                    ],
+                    correct: 1
+                },
+                {
+                    text: 'Что значит "Пиррова победа"?',
+                    answers: [
+                        { label: 'блестящая' },
+                        { label: 'равна поражению' },
+                        { label: 'морская' },
+                        { label: 'случайная' }
+                    ],
+                    correct: 1
+                }
+            ];
+
+            let currentIndex = 0;
+            let userAnswers = new Array(questions.length).fill(null);
+            let quizCompleted = false;
+
+            const startScreen = document.getElementById('startScreen');
+            const quizScreen = document.getElementById('quizScreen');
+            const resultScreen = document.getElementById('resultScreen');
+            const startBtn = document.getElementById('startBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const restartBtn = document.getElementById('restartBtn');
+            const questionText = document.getElementById('questionText');
+            const answersPanel = document.getElementById('answersPanel');
+            const progressFill = document.getElementById('progressFill');
+            const statsRow = document.getElementById('statsRow');
+
+            function saveState() {
+                localStorage.setItem('quizAnswersSimple', JSON.stringify(userAnswers));
+                localStorage.setItem('quizIndexSimple', currentIndex);
+                localStorage.setItem('quizCompletedSimple', quizCompleted);
+            }
+            function loadState() {
+                const saved = localStorage.getItem('quizAnswersSimple');
+                const idx = localStorage.getItem('quizIndexSimple');
+                const compl = localStorage.getItem('quizCompletedSimple');
+                if (saved) userAnswers = JSON.parse(saved);
+                if (idx) currentIndex = parseInt(idx);
+                if (compl) quizCompleted = compl === 'true';
+            }
+            function clearState() {
+                localStorage.removeItem('quizAnswersSimple');
+                localStorage.removeItem('quizIndexSimple');
+                localStorage.removeItem('quizCompletedSimple');
+            }
+
+            function render() {
+                const q = questions[currentIndex];
+                questionText.innerText = q.text;
+
+                let html = '';
+                q.answers.forEach((ans, i) => {
+                    const selected = (userAnswers[currentIndex] === i);
+                    const letter = String.fromCharCode(65 + i);
+                    html += `
+                        <div class="answer-tile ${selected ? 'selected' : ''}" data-index="${i}">
+                            <div class="answer-letter">${letter}</div>
+                            <div class="answer-text">${ans.label}</div>
+                        </div>
+                    `;
+                });
+                answersPanel.innerHTML = html;
+
+                document.querySelectorAll('.answer-tile').forEach(tile => {
+                    tile.addEventListener('click', () => {
+                        const idx = parseInt(tile.dataset.index);
+                        userAnswers[currentIndex] = idx;
+                        saveState();
+                        render();
+                    });
+                });
+
+                updateNextButton();
+                updateProgress();
+            }
+
+            function updateNextButton() {
+                if (userAnswers[currentIndex] !== null && userAnswers[currentIndex] !== undefined) {
+                    nextBtn.classList.remove('disabled');
+                } else {
+                    nextBtn.classList.add('disabled');
+                }
+            }
+
+            function updateProgress() {
+                const answered = userAnswers.filter(a => a !== null).length;
+                progressFill.style.width = (answered / questions.length) * 100 + '%';
+            }
+
+            function goNext() {
+                if (nextBtn.classList.contains('disabled')) return;
+                if (currentIndex < questions.length - 1) {
+                    currentIndex++;
+                    render();
+                } else {
+                    quizCompleted = true;
+                    saveState();
+                    showResults();
+                }
+            }
+
+            function calculateScore() {
+                let correctCount = 0;
+                questions.forEach((q, i) => {
+                    if (userAnswers[i] === q.correct) correctCount++;
+                });
+                return correctCount;
+            }
+
+            function showResults() {
+                startScreen.classList.add('hidden');
+                quizScreen.classList.add('hidden');
+                resultScreen.classList.remove('hidden');
+
+                const correct = calculateScore();
+                const wrong = questions.length - correct;
+                statsRow.innerHTML = `
+                    <div class="result-circle"><span class="big-number">${correct}</span><span class="desc">верно</span></div>
+                    <div class="result-circle"><span class="big-number">${wrong}</span><span class="desc">неверно</span></div>
+                `;
+            }
+
+            function resetQuiz() {
+                userAnswers = new Array(questions.length).fill(null);
+                currentIndex = 0;
+                quizCompleted = false;
+                clearState();
+                startScreen.classList.add('hidden');
+                quizScreen.classList.remove('hidden');
+                resultScreen.classList.add('hidden');
+                render();
+            }
+
+            startBtn.addEventListener('click', resetQuiz);
+            nextBtn.addEventListener('click', goNext);
+            restartBtn.addEventListener('click', resetQuiz);
+
+            loadState();
+            if (userAnswers.some(a => a !== null) && !quizCompleted) {
+                startScreen.classList.add('hidden');
+                quizScreen.classList.remove('hidden');
+                resultScreen.classList.add('hidden');
+                render();
+            } else if (quizCompleted) {
+                startScreen.classList.add('hidden');
+                quizScreen.classList.add('hidden');
+                resultScreen.classList.remove('hidden');
+                showResults();
+            } else {
+                startScreen.classList.remove('hidden');
+                quizScreen.classList.add('hidden');
+                resultScreen.classList.add('hidden');
+            }
+        })();
+    </script>
+</body>
+</html>
