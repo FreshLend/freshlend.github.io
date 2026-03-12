@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head> 
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>История в фразеологизмах</title>
     <style>
         * {
@@ -19,13 +19,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 10px;
         }
 
         .app {
             width: 100%;
             max-width: 1400px;
-            height: 95vh;
+            height: 98vh;
             display: flex;
             flex-direction: column;
         }
@@ -34,13 +34,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0 18px 0;
+            padding: 8px 0 12px 0;
             border-bottom: 2px solid #2f7fff;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 600;
             color: #5d9eff;
             letter-spacing: -0.5px;
@@ -50,76 +52,82 @@
             background: #182337;
             border: 2px solid #2f7fff;
             border-radius: 40px;
-            padding: 8px 28px;
-            font-size: 1.1rem;
+            padding: 6px 20px;
+            font-size: 1rem;
             color: #b8d2ff;
+            white-space: nowrap;
         }
 
         .card {
             background: #141e2c;
             border: 3px solid #2f7fff;
-            border-radius: 55px;
-            box-shadow: 0 20px 35px -5px rgba(0, 110, 255, 0.5);
-            padding: 45px 50px;
+            border-radius: 40px;
+            box-shadow: 0 15px 25px -5px rgba(0, 110, 255, 0.5);
+            padding: 30px 20px;
         }
 
         .main-title {
-            font-size: 4rem;
+            font-size: 2.8rem;
             font-weight: 700;
             color: #4682ff;
             line-height: 1.2;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         .intro-text {
             background: #0f1825;
             border: 2px solid #2f7fff;
-            border-radius: 60px;
-            padding: 35px 40px;
-            font-size: 1.4rem;
+            border-radius: 40px;
+            padding: 25px 20px;
+            font-size: 1.2rem;
             color: #d1e2ff;
-            margin: 25px 0 40px;
-            line-height: 1.6;
+            margin: 20px 0 30px;
+            line-height: 1.5;
+            text-align: center;
         }
 
         .btn {
             background: transparent;
             border: 4px solid #2f7fff;
             color: #2f7fff;
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            padding: 18px 65px;
-            border-radius: 70px;
+            padding: 14px 40px;
+            border-radius: 60px;
             cursor: pointer;
             transition: 0.1s linear;
-            box-shadow: 0 7px 0 #12417c;
+            box-shadow: 0 5px 0 #12417c;
             letter-spacing: 1px;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
         }
 
         .btn:hover {
             background: #2f7fff;
             color: #0b121f;
-            transform: translateY(-4px);
-            box-shadow: 0 15px 30px #2f7fff;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px #2f7fff;
         }
 
         .btn:active {
-            transform: translateY(5px);
-            box-shadow: 0 3px 0 #12417c;
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #12417c;
         }
 
         .btn.centered {
             display: block;
-            margin: 0 auto;
             width: fit-content;
+            min-width: 240px;
         }
 
         .progress-line {
             background: #1d2a3c;
             border: 2px solid #2f7fff;
-            height: 18px;
+            height: 14px;
             border-radius: 60px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             overflow: hidden;
         }
 
@@ -128,53 +136,55 @@
             width: 0%;
             background: linear-gradient(90deg, #2f7fff, #94c2ff);
             transition: width 0.3s ease;
-            box-shadow: 0 0 15px #3a7fff;
+            box-shadow: 0 0 10px #3a7fff;
         }
 
         .two-columns {
             display: flex;
-            gap: 30px;
+            flex-direction: column;
+            gap: 20px;
             flex: 1;
             min-height: 0;
         }
 
         .question-panel {
-            flex: 1;
             background: #101b29;
             border: 3px solid #2f7fff;
-            border-radius: 60px;
-            padding: 40px 35px;
+            border-radius: 40px;
+            padding: 25px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 25px #001a3a;
+            box-shadow: inset 0 0 20px #001a3a;
         }
 
         .question-panel p {
-            font-size: 2.3rem;
+            font-size: 1.7rem;
             font-weight: 500;
-            line-height: 1.5;
+            line-height: 1.4;
             color: #ffffff;
-            text-shadow: 0 2px 7px #0044aa;
-            margin-bottom: 20px;
+            text-shadow: 0 2px 5px #0044aa;
+            margin-bottom: 15px;
+            text-align: center;
         }
 
         .question-status {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: #94c2ff;
             background: #1d2f45;
-            padding: 10px 25px;
+            padding: 8px 20px;
             border-radius: 40px;
             border: 2px solid #2f7fff;
-            margin-top: 15px;
+            margin-top: 10px;
+            text-align: center;
         }
 
         .answers-panel {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             justify-content: center;
         }
 
@@ -182,13 +192,13 @@
             background: #152334;
             border: 3px solid #2f7fff;
             border-radius: 30px;
-            padding: 20px 25px;
+            padding: 15px 18px;
             display: flex;
             align-items: center;
             transition: all 0.12s;
-            box-shadow: 0 5px 0 #0f2642;
+            box-shadow: 0 4px 0 #0f2642;
             width: 100%;
-            min-height: 90px;
+            min-height: 75px;
             position: relative;
         }
 
@@ -196,30 +206,30 @@
             background: #1e314b;
             border-color: #8ab9ff;
             transform: translateY(-2px);
-            box-shadow: 0 8px 15px #0045a3;
+            box-shadow: 0 6px 12px #0045a3;
         }
 
         .answer-tile.selected {
             background: #004a99;
             border-color: #c2e1ff;
-            box-shadow: 0 0 25px #0077ff, 0 5px 0 #002f5a;
+            box-shadow: 0 0 20px #0077ff, 0 4px 0 #002f5a;
         }
 
         .answer-tile.correct-answer {
             border-color: #4caf50;
-            box-shadow: 0 0 25px #4caf50;
+            box-shadow: 0 0 20px #4caf50;
         }
 
         .answer-tile.correct-selected {
             background: #2e7d32;
             border-color: #81c784;
-            box-shadow: 0 0 25px #4caf50;
+            box-shadow: 0 0 20px #4caf50;
         }
 
         .answer-tile.incorrect-selected {
             background: #c62828;
             border-color: #ff8a80;
-            box-shadow: 0 0 25px #f44336;
+            box-shadow: 0 0 20px #f44336;
         }
 
         .answer-tile.locked {
@@ -229,15 +239,15 @@
 
         .answer-tile.locked:hover {
             transform: none;
-            box-shadow: 0 5px 0 #0f2642;
+            box-shadow: 0 4px 0 #0f2642;
         }
 
         .answer-text {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 500;
             color: #eaf2ff;
             word-break: break-word;
-            padding-left: 15px;
+            padding-left: 10px;
             flex: 1;
         }
 
@@ -245,27 +255,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            height: 45px;
+            width: 38px;
+            height: 38px;
             background: #2f7fff;
-            border-radius: 15px;
-            font-size: 1.6rem;
+            border-radius: 12px;
+            font-size: 1.4rem;
             font-weight: 700;
             color: white;
-            margin-right: 15px;
+            margin-right: 10px;
             flex-shrink: 0;
         }
 
         .answer-mark {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: bold;
-            margin-left: 10px;
+            margin-left: 5px;
         }
 
         .answer-tile.correct-selected .answer-mark::after,
@@ -281,72 +291,48 @@
 
         .locked-message {
             text-align: center;
-            margin-top: 15px;
-            padding: 10px;
+            margin-top: 10px;
+            padding: 8px;
             background: #1d2f45;
             border-radius: 30px;
             border: 2px solid #2f7fff;
             color: #ffd700;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
 
         .nav-buttons {
             display: flex;
-            gap: 15px;
-            margin-top: 25px;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .next-btn {
+        .next-btn, .prev-btn {
             background: transparent;
             border: 4px solid #2f7fff;
             color: #2f7fff;
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            padding: 16px 60px;
-            border-radius: 70px;
+            padding: 12px 25px;
+            border-radius: 50px;
             cursor: pointer;
             transition: 0.1s;
-            box-shadow: 0 6px 0 #12417c;
+            box-shadow: 0 5px 0 #12417c;
+            flex: 1 1 auto;
+            min-width: 130px;
         }
 
-        .next-btn:hover:not(.disabled) {
+        .next-btn:hover:not(.disabled), .prev-btn:hover:not(.disabled) {
             background: #2f7fff20;
         }
 
-        .next-btn:active:not(.disabled) {
-            transform: translateY(4px);
+        .next-btn:active:not(.disabled), .prev-btn:active:not(.disabled) {
+            transform: translateY(3px);
             box-shadow: 0 2px 0 #12417c;
         }
 
-        .next-btn.disabled {
-            opacity: 0.2;
-            pointer-events: none;
-            border-color: #6581b0;
-        }
-
-        .prev-btn {
-            background: transparent;
-            border: 4px solid #2f7fff;
-            color: #2f7fff;
-            font-size: 2rem;
-            font-weight: 700;
-            padding: 16px 60px;
-            border-radius: 70px;
-            cursor: pointer;
-            transition: 0.1s;
-            box-shadow: 0 6px 0 #12417c;
-        }
-
-        .prev-btn:hover:not(.disabled) {
-            background: #2f7fff20;
-        }
-
-        .prev-btn:active:not(.disabled) {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #12417c;
-        }
-
-        .prev-btn.disabled {
+        .next-btn.disabled, .prev-btn.disabled {
             opacity: 0.2;
             pointer-events: none;
             border-color: #6581b0;
@@ -355,8 +341,8 @@
         .result-container {
             background: #132131;
             border: 4px solid #2f7fff;
-            border-radius: 75px;
-            padding: 50px 40px;
+            border-radius: 50px;
+            padding: 30px 20px;
             text-align: center;
             width: 100%;
         }
@@ -364,13 +350,14 @@
         .stats-row {
             display: flex;
             justify-content: center;
-            gap: 80px;
-            margin: 40px 0;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
         }
 
         .result-circle {
-            width: 210px;
-            height: 210px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             background: #0f1e30;
             border: 6px solid #2f7fff;
@@ -378,19 +365,19 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 60px #2f7fff;
+            box-shadow: 0 0 40px #2f7fff;
             animation: scaleUp 0.5s;
         }
 
         .result-circle .big-number {
-            font-size: 5.2rem;
+            font-size: 3.8rem;
             font-weight: 800;
             color: white;
             line-height: 1;
         }
 
         .result-circle .desc {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: #adccff;
         }
 
@@ -404,14 +391,14 @@
             background: transparent;
             border: 4px solid #2f7fff;
             color: #2f7fff;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            padding: 18px 70px;
-            border-radius: 70px;
-            margin: 20px auto 0;
+            padding: 14px 45px;
+            border-radius: 60px;
+            margin: 15px auto 0;
             cursor: pointer;
             display: inline-block;
-            box-shadow: 0 7px 0 #12417c;
+            box-shadow: 0 5px 0 #12417c;
         }
 
         .restart-button:hover {
@@ -425,6 +412,62 @@
 
         .flex-grow {
             flex: 1;
+        }
+
+        @media (min-width: 800px) {
+            .two-columns {
+                flex-direction: row;
+            }
+            .question-panel p {
+                font-size: 2rem;
+            }
+            .answer-text {
+                font-size: 1.4rem;
+            }
+            .logo {
+                font-size: 1.8rem;
+            }
+            .info-pill {
+                font-size: 1.1rem;
+                padding: 8px 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2.2rem;
+            }
+            .intro-text {
+                font-size: 1rem;
+                padding: 20px 15px;
+            }
+            .btn {
+                font-size: 1.5rem;
+                padding: 12px 25px;
+            }
+            .question-panel p {
+                font-size: 1.4rem;
+            }
+            .answer-letter {
+                width: 32px;
+                height: 32px;
+                font-size: 1.2rem;
+            }
+            .answer-text {
+                font-size: 1rem;
+            }
+            .next-btn, .prev-btn {
+                font-size: 1.2rem;
+                padding: 10px 15px;
+                min-width: 100px;
+            }
+            .result-circle {
+                width: 120px;
+                height: 120px;
+            }
+            .result-circle .big-number {
+                font-size: 3rem;
+            }
         }
     </style>
 </head>
@@ -468,7 +511,7 @@
 
         <div id="resultScreen" class="screen hidden flex-grow" style="display: flex; align-items: center;">
             <div class="result-container">
-                <h2 style="font-size: 3.5rem; color: #5f9eff; margin-bottom: 20px;">ИТОГ</h2>
+                <h2 style="font-size: 2.8rem; color: #5f9eff; margin-bottom: 15px;">ИТОГ</h2>
                 <div class="stats-row" id="statsRow"></div>
                 <button class="restart-button" id="restartBtn">ЗАНОВО</button>
             </div>
