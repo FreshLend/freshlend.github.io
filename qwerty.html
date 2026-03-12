@@ -145,6 +145,7 @@
             border-radius: 60px;
             padding: 40px 35px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             box-shadow: inset 0 0 25px #001a3a;
@@ -156,6 +157,17 @@
             line-height: 1.5;
             color: #ffffff;
             text-shadow: 0 2px 7px #0044aa;
+            margin-bottom: 20px;
+        }
+
+        .question-status {
+            font-size: 1.3rem;
+            color: #94c2ff;
+            background: #1d2f45;
+            padding: 10px 25px;
+            border-radius: 40px;
+            border: 2px solid #2f7fff;
+            margin-top: 15px;
         }
 
         .answers-panel {
@@ -173,14 +185,14 @@
             padding: 20px 25px;
             display: flex;
             align-items: center;
-            cursor: pointer;
             transition: all 0.12s;
             box-shadow: 0 5px 0 #0f2642;
             width: 100%;
             min-height: 90px;
+            position: relative;
         }
 
-        .answer-tile:hover {
+        .answer-tile:not(.locked):hover {
             background: #1e314b;
             border-color: #8ab9ff;
             transform: translateY(-2px);
@@ -193,12 +205,40 @@
             box-shadow: 0 0 25px #0077ff, 0 5px 0 #002f5a;
         }
 
+        .answer-tile.correct-answer {
+            border-color: #4caf50;
+            box-shadow: 0 0 25px #4caf50;
+        }
+
+        .answer-tile.correct-selected {
+            background: #2e7d32;
+            border-color: #81c784;
+            box-shadow: 0 0 25px #4caf50;
+        }
+
+        .answer-tile.incorrect-selected {
+            background: #c62828;
+            border-color: #ff8a80;
+            box-shadow: 0 0 25px #f44336;
+        }
+
+        .answer-tile.locked {
+            cursor: default;
+            opacity: 0.9;
+        }
+
+        .answer-tile.locked:hover {
+            transform: none;
+            box-shadow: 0 5px 0 #0f2642;
+        }
+
         .answer-text {
             font-size: 1.5rem;
             font-weight: 500;
             color: #eaf2ff;
             word-break: break-word;
             padding-left: 15px;
+            flex: 1;
         }
 
         .answer-letter {
@@ -216,6 +256,46 @@
             flex-shrink: 0;
         }
 
+        .answer-mark {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .answer-tile.correct-selected .answer-mark::after,
+        .answer-tile.correct-answer.correct-selected .answer-mark::after {
+            content: "✓";
+            color: #4caf50;
+        }
+
+        .answer-tile.incorrect-selected .answer-mark::after {
+            content: "✗";
+            color: #f44336;
+        }
+
+        .locked-message {
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            background: #1d2f45;
+            border-radius: 30px;
+            border: 2px solid #2f7fff;
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
         .next-btn {
             background: transparent;
             border: 4px solid #2f7fff;
@@ -225,22 +305,48 @@
             padding: 16px 60px;
             border-radius: 70px;
             cursor: pointer;
-            margin-top: 25px;
-            margin-left: auto;
             transition: 0.1s;
             box-shadow: 0 6px 0 #12417c;
         }
 
-        .next-btn:hover {
+        .next-btn:hover:not(.disabled) {
             background: #2f7fff20;
         }
 
-        .next-btn:active {
+        .next-btn:active:not(.disabled) {
             transform: translateY(4px);
             box-shadow: 0 2px 0 #12417c;
         }
 
         .next-btn.disabled {
+            opacity: 0.2;
+            pointer-events: none;
+            border-color: #6581b0;
+        }
+
+        .prev-btn {
+            background: transparent;
+            border: 4px solid #2f7fff;
+            color: #2f7fff;
+            font-size: 2rem;
+            font-weight: 700;
+            padding: 16px 60px;
+            border-radius: 70px;
+            cursor: pointer;
+            transition: 0.1s;
+            box-shadow: 0 6px 0 #12417c;
+        }
+
+        .prev-btn:hover:not(.disabled) {
+            background: #2f7fff20;
+        }
+
+        .prev-btn:active:not(.disabled) {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #12417c;
+        }
+
+        .prev-btn.disabled {
             opacity: 0.2;
             pointer-events: none;
             border-color: #6581b0;
@@ -347,10 +453,17 @@
             <div class="two-columns">
                 <div class="question-panel">
                     <p id="questionText"></p>
+                    <div class="question-status" id="questionStatus"></div>
                 </div>
                 <div class="answers-panel" id="answersPanel"></div>
             </div>
-            <button class="next-btn" id="nextBtn">ДАЛЕЕ</button>
+            <div class="locked-message hidden" id="lockedMessage">
+                ⚠️ Этот вопрос уже отвечен. Изменить ответ нельзя.
+            </div>
+            <div class="nav-buttons">
+                <button class="prev-btn" id="prevBtn">НАЗАД</button>
+                <button class="next-btn" id="nextBtn">ДАЛЕЕ</button>
+            </div>
         </div>
 
         <div id="resultScreen" class="screen hidden flex-grow" style="display: flex; align-items: center;">
@@ -364,169 +477,57 @@
 
     <script>
         (function() {
-            const questions = [
-                {
-                    text: 'Что означает выражение "Бить баклуши"?',
-                    answers: [
-                        { label: 'драться' },
-                        { label: 'бездельничать' },
-                        { label: 'работать' },
-                        { label: 'сплетничать' }
-                    ],
-                    correct: 1
-                },
-                {
-                    text: 'Как появилось "Дело в шляпе"?',
-                    answers: [
-                        { label: 'почта' },
-                        { label: 'суд' },
-                        { label: 'взятка' },
-                        { label: 'головной убор' }
-                    ],
-                    correct: 2
-                },
-                {
-                    text: '"Точить лясы" — это?',
-                    answers: [
-                        { label: 'ножи точить' },
-                        { label: 'болтать' },
-                        { label: 'кружева' },
-                        { label: 'балясины' }
-                    ],
-                    correct: 1
-                },
-                {
-                    text: 'Какая фраза означает "обманывать"?',
-                    answers: [
-                        { label: 'водить за нос' },
-                        { label: 'намылить шею' },
-                        { label: 'втирать очки' },
-                        { label: 'держать в курсе' }
-                    ],
-                    correct: 0
-                },
-                {
-                    text: 'Кто такие "турусы на колёсах"?',
-                    answers: [
-                        { label: 'осадные башни' },
-                        { label: 'пустая болтовня' },
-                        { label: 'цирк' },
-                        { label: 'миф. животные' }
-                    ],
-                    correct: 0
-                },
-                {
-                    text: 'Что значит "Кануть в Лету"?',
-                    answers: [
-                        { label: 'утонуть' },
-                        { label: 'быть забытым' },
-                        { label: 'испариться' },
-                        { label: 'упасть в обморок' }
-                    ],
-                    correct: 1
-                },
-                {
-                    text: '"Гог и Магог" — это?',
-                    answers: [
-                        { label: 'библейские народы' },
-                        { label: 'великаны' },
-                        { label: 'богатыри' },
-                        { label: 'цари' }
-                    ],
-                    correct: 0
-                },
-                {
-                    text: 'Какой фразеологизм связан с наказанием?',
-                    answers: [
-                        { label: 'задать баню' },
-                        { label: 'кузькина мать' },
-                        { label: 'спустя рукава' },
-                        { label: 'на все корки' }
-                    ],
-                    correct: 0
-                },
-                {
-                    text: 'Первоначальный смысл "Собаку съел"?',
-                    answers: [
-                        { label: 'проголодался' },
-                        { label: 'приобрёл опыт' },
-                        { label: 'отравился' },
-                        { label: 'разозлился' }
-                    ],
-                    correct: 1
-                },
-                {
-                    text: 'Что такое "Филькина грамота"?',
-                    answers: [
-                        { label: 'документ-пустышка' },
-                        { label: 'древняя рукопись' },
-                        { label: 'письмо митрополита' },
-                        { label: 'школьная грамота' }
-                    ],
-                    correct: 0
-                },
-                {
-                    text: '"Перейти Рубикон" — это?',
-                    answers: [
-                        { label: 'построить мост' },
-                        { label: 'решительный шаг' },
-                        { label: 'разрушить границу' },
-                        { label: 'проиграть битву' }
-                    ],
-                    correct: 1
-                },
-                {
-                    text: 'Какая фраза означает "очень быстро"?',
-                    answers: [
-                        { label: 'во весь дух' },
-                        { label: 'черепашьим шагом' },
-                        { label: 'сломя голову' },
-                        { label: 'в мгновение ока' }
-                    ],
-                    correct: 2
-                },
-                {
-                    text: 'Источник "Кричать во всю Ивановскую"?',
-                    answers: [
-                        { label: 'площадь в Кремле' },
-                        { label: 'имя царя' },
-                        { label: 'колокольный звон' },
-                        { label: 'собор' }
-                    ],
-                    correct: 0
-                },
-                {
-                    text: '"Зарубить на носу" — что изначально?',
-                    answers: [
-                        { label: 'убить' },
-                        { label: 'зарубка на дощечке' },
-                        { label: 'унизить' },
-                        { label: 'запомнить' }
-                    ],
-                    correct: 3
-                },
-                {
-                    text: '"Дамоклов меч" символизирует?',
-                    answers: [
-                        { label: 'оружие' },
-                        { label: 'постоянную угрозу' },
-                        { label: 'возмездие' },
-                        { label: 'венец' }
-                    ],
-                    correct: 1
-                },
-                {
-                    text: 'Что значит "Пиррова победа"?',
-                    answers: [
-                        { label: 'блестящая' },
-                        { label: 'равна поражению' },
-                        { label: 'морская' },
-                        { label: 'случайная' }
-                    ],
-                    correct: 1
-                }
+            const baseQuestions = [
+                { text: 'Что означает фразеологизм "Камень преткновения"?', answers: [ { label: 'препятствие на пути' }, { label: 'строительный материал' }, { label: 'памятник' }, { label: 'причина ссоры' } ], correct: 0 },
+                { text: 'Откуда пошло выражение "Тришкин кафтан"?', answers: [ { label: 'из басни Крылова' }, { label: 'из сказки о портном' }, { label: 'из истории о царе' }, { label: 'из народной песни' } ], correct: 0 },
+                { text: 'Что значит "Манна небесная"?', answers: [ { label: 'редкая удача' }, { label: 'вкусная еда' }, { label: 'неожиданная помощь' }, { label: 'сильный дождь' } ], correct: 2 },
+                { text: 'Откуда выражение "А Васька слушает да ест"?', answers: [ { label: 'из поговорки' }, { label: 'из басни Крылова' }, { label: 'из сказки Пушкина' }, { label: 'из летописи' } ], correct: 1 },
+                { text: 'Что означает "Сизифов труд"?', answers: [ { label: 'тяжелая работа' }, { label: 'бесполезный труд' }, { label: 'строительство' }, { label: 'наказание рабов' } ], correct: 1 },
+                { text: 'Откуда пошло "Гордиев узел"?', answers: [ { label: 'из легенды о царе Мидасе' }, { label: 'из мифа о царе Гордии' }, { label: 'из сказаний о Геракле' }, { label: 'из истории Рима' } ], correct: 1 },
+                { text: 'Что значит "Яблоко раздора"?', answers: [ { label: 'вкусный фрукт' }, { label: 'причина конфликта' }, { label: 'запретный плод' }, { label: 'символ власти' } ], correct: 1 },
+                { text: 'Кто такой "Гадкий утенок"?', answers: [ { label: 'страшный ребенок' }, { label: 'некрасивая птица' }, { label: 'ставший прекрасным' }, { label: 'обиженный всеми' } ], correct: 2 },
+                { text: 'Что означает "Танталовы муки"?', answers: [ { label: 'сильная боль' }, { label: 'недоступность желаемого' }, { label: 'голод и жажда' }, { label: 'вечные страдания' } ], correct: 1 },
+                { text: 'Откуда выражение "Домоклов меч"?', answers: [ { label: 'из римской легенды' }, { label: 'из греческого мифа' }, { label: 'из библейских сказаний' }, { label: 'из средневековья' } ], correct: 1 },
+                { text: 'Что означает выражение "Подвести под монастырь"?', answers: [ { label: 'отправить в ссылку' }, { label: 'поставить в трудное положение' }, { label: 'обратить в веру' }, { label: 'наказать провинившегося' } ], correct: 1 },
+                { text: 'Что означает "Витать в облаках"?', answers: [ { label: 'летать высоко' }, { label: 'мечтать, не замечая реальности' }, { label: 'путешествовать' }, { label: 'смотреть на небо' } ], correct: 1 },
+                { text: 'Когда говорят "Медведь на ухо наступил"?', answers: [ { label: 'когда сильно болит ухо' }, { label: 'когда человек злой' }, { label: 'когда нет музыкального слуха' }, { label: 'когда кто-то громко кричит' } ], correct: 2 },
+                { text: 'Что значит "Работать спустя рукава"?', answers: [ { label: 'работать в одежде с длинными рукавами' }, { label: 'трудиться очень старательно' }, { label: 'делать кое-как, лениво' }, { label: 'помогать другим' } ], correct: 2 },
+                { text: 'Что означает "Сесть в калошу"?', answers: [ { label: 'обуться' }, { label: 'оказаться в неловком положении' }, { label: 'испачкаться' }, { label: 'промочить ноги' } ], correct: 1 },
+                { text: 'Когда говорят "Делать из мухи слона"?', answers: [ { label: 'увеличивать предмет' }, { label: 'сильно преувеличивать' }, { label: 'заниматься скульптурой' }, { label: 'шутить' } ], correct: 1 }
             ];
 
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function shuffleQuestionsAndAnswers(questions) {
+                const shuffledQuestions = shuffleArray([...questions]);
+                
+                return shuffledQuestions.map(q => {
+                    const answersWithIndex = q.answers.map((answer, index) => ({
+                        ...answer,
+                        originalIndex: index
+                    }));
+                    
+                    shuffleArray(answersWithIndex);
+                    
+                    const newCorrect = answersWithIndex.findIndex(a => a.originalIndex === q.correct);
+                    
+                    return {
+                        text: q.text,
+                        answers: answersWithIndex.map(a => ({ label: a.label })),
+                        correct: newCorrect
+                    };
+                });
+            }
+
+            localStorage.clear();
+            
+            let questions = shuffleQuestionsAndAnswers(baseQuestions);
             let currentIndex = 0;
             let userAnswers = new Array(questions.length).fill(null);
             let quizCompleted = false;
@@ -536,66 +537,102 @@
             const resultScreen = document.getElementById('resultScreen');
             const startBtn = document.getElementById('startBtn');
             const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
             const restartBtn = document.getElementById('restartBtn');
             const questionText = document.getElementById('questionText');
+            const questionStatus = document.getElementById('questionStatus');
             const answersPanel = document.getElementById('answersPanel');
             const progressFill = document.getElementById('progressFill');
             const statsRow = document.getElementById('statsRow');
+            const lockedMessage = document.getElementById('lockedMessage');
 
-            function saveState() {
-                localStorage.setItem('quizAnswersSimple', JSON.stringify(userAnswers));
-                localStorage.setItem('quizIndexSimple', currentIndex);
-                localStorage.setItem('quizCompletedSimple', quizCompleted);
+            function checkAnswer(answerIndex) {
+                const correctIndex = questions[currentIndex].correct;
+                return answerIndex === correctIndex;
             }
-            function loadState() {
-                const saved = localStorage.getItem('quizAnswersSimple');
-                const idx = localStorage.getItem('quizIndexSimple');
-                const compl = localStorage.getItem('quizCompletedSimple');
-                if (saved) userAnswers = JSON.parse(saved);
-                if (idx) currentIndex = parseInt(idx);
-                if (compl) quizCompleted = compl === 'true';
-            }
-            function clearState() {
-                localStorage.removeItem('quizAnswersSimple');
-                localStorage.removeItem('quizIndexSimple');
-                localStorage.removeItem('quizCompletedSimple');
+
+            function isQuestionLocked() {
+                return userAnswers[currentIndex] !== null;
             }
 
             function render() {
                 const q = questions[currentIndex];
+                const isLocked = isQuestionLocked();
+                const userAnswer = userAnswers[currentIndex];
+                
                 questionText.innerText = q.text;
+                
+                if (isLocked) {
+                    const isCorrect = checkAnswer(userAnswer);
+                    questionStatus.innerText = isCorrect ? '✓ Правильно (ответ сохранён)' : '✗ Неправильно (ответ заблокирован)';
+                    questionStatus.style.color = isCorrect ? '#4caf50' : '#f44336';
+                    lockedMessage.classList.remove('hidden');
+                } else {
+                    questionStatus.innerText = 'Выберите ответ';
+                    questionStatus.style.color = '#94c2ff';
+                    lockedMessage.classList.add('hidden');
+                }
 
                 let html = '';
                 q.answers.forEach((ans, i) => {
-                    const selected = (userAnswers[currentIndex] === i);
+                    const selected = (userAnswer === i);
+                    let tileClass = 'answer-tile';
+                    
+                    if (isLocked) {
+                        tileClass += ' locked';
+                        
+                        if (i === q.correct && selected) {
+                            tileClass += ' correct-selected';
+                        } else if (i === q.correct && !selected) {
+                            tileClass += ' correct-answer';
+                        } else if (selected && i !== q.correct) {
+                            tileClass += ' incorrect-selected';
+                        } else if (selected) {
+                            tileClass += ' selected';
+                        }
+                    } else {
+                        if (selected) {
+                            tileClass += ' selected';
+                        }
+                    }
+                    
                     const letter = String.fromCharCode(65 + i);
+                    
                     html += `
-                        <div class="answer-tile ${selected ? 'selected' : ''}" data-index="${i}">
+                        <div class="${tileClass}" data-index="${i}">
                             <div class="answer-letter">${letter}</div>
                             <div class="answer-text">${ans.label}</div>
+                            <div class="answer-mark"></div>
                         </div>
                     `;
                 });
                 answersPanel.innerHTML = html;
 
-                document.querySelectorAll('.answer-tile').forEach(tile => {
-                    tile.addEventListener('click', () => {
-                        const idx = parseInt(tile.dataset.index);
-                        userAnswers[currentIndex] = idx;
-                        saveState();
-                        render();
+                if (!isLocked) {
+                    document.querySelectorAll('.answer-tile').forEach(tile => {
+                        tile.addEventListener('click', () => {
+                            const idx = parseInt(tile.dataset.index);
+                            userAnswers[currentIndex] = idx;
+                            render();
+                        });
                     });
-                });
+                }
 
-                updateNextButton();
+                updateNavigation();
                 updateProgress();
             }
 
-            function updateNextButton() {
+            function updateNavigation() {
                 if (userAnswers[currentIndex] !== null && userAnswers[currentIndex] !== undefined) {
                     nextBtn.classList.remove('disabled');
                 } else {
                     nextBtn.classList.add('disabled');
+                }
+                
+                if (currentIndex === 0) {
+                    prevBtn.classList.add('disabled');
+                } else {
+                    prevBtn.classList.remove('disabled');
                 }
             }
 
@@ -611,9 +648,14 @@
                     render();
                 } else {
                     quizCompleted = true;
-                    saveState();
                     showResults();
                 }
+            }
+
+            function goPrev() {
+                if (prevBtn.classList.contains('disabled')) return;
+                currentIndex--;
+                render();
             }
 
             function calculateScore() {
@@ -638,10 +680,10 @@
             }
 
             function resetQuiz() {
+                questions = shuffleQuestionsAndAnswers(baseQuestions);
                 userAnswers = new Array(questions.length).fill(null);
                 currentIndex = 0;
                 quizCompleted = false;
-                clearState();
                 startScreen.classList.add('hidden');
                 quizScreen.classList.remove('hidden');
                 resultScreen.classList.add('hidden');
@@ -650,24 +692,12 @@
 
             startBtn.addEventListener('click', resetQuiz);
             nextBtn.addEventListener('click', goNext);
+            prevBtn.addEventListener('click', goPrev);
             restartBtn.addEventListener('click', resetQuiz);
 
-            loadState();
-            if (userAnswers.some(a => a !== null) && !quizCompleted) {
-                startScreen.classList.add('hidden');
-                quizScreen.classList.remove('hidden');
-                resultScreen.classList.add('hidden');
-                render();
-            } else if (quizCompleted) {
-                startScreen.classList.add('hidden');
-                quizScreen.classList.add('hidden');
-                resultScreen.classList.remove('hidden');
-                showResults();
-            } else {
-                startScreen.classList.remove('hidden');
-                quizScreen.classList.add('hidden');
-                resultScreen.classList.add('hidden');
-            }
+            startScreen.classList.remove('hidden');
+            quizScreen.classList.add('hidden');
+            resultScreen.classList.add('hidden');
         })();
     </script>
 </body>
