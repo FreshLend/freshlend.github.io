@@ -564,7 +564,7 @@
                 
                 if (isLocked) {
                     const isCorrect = checkAnswer(userAnswer);
-                    questionStatus.innerText = isCorrect ? '✓ Правильно (ответ сохранён)' : '✗ Неправильно (ответ заблокирован)';
+                    questionStatus.innerText = isCorrect ? '✓ Правильно (ответ сохранён)' : '✗ Неправильно (ответ сохранён)';
                     questionStatus.style.color = isCorrect ? '#4caf50' : '#f44336';
                     lockedMessage.classList.remove('hidden');
                 } else {
