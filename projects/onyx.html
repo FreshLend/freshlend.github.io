@@ -525,6 +525,33 @@
 
     <article class="release latest">
       <div class="release-head">
+        <span class="release-version">v1.1.1</span>
+        <span class="release-tag">latest</span>
+        <span class="release-date">2026-10-18</span>
+      </div>
+      <p class="release-desc">Headless System Test, secret masking, hardening.</p>
+      <ul class="release-list">
+        <li><b>System Test — headless mode:</b> run all 100+ steps without a GUI via <code>python -m modules.system_test.cli --format text|json</code></li>
+        <li><b>System Test — CI-ready:</b> correct exit codes and JSON output make it usable as a build gate</li>
+        <li><b>System Test — proxy port:</b> TestProxy no longer hardcodes 8888 — the OS picks a free port, so parallel runs never collide</li>
+        <li><b>HTTP Client — masked history:</b> history now stores the request template (Bearer {{vault.token}}) instead of the resolved secret; the actual request is unchanged</li>
+        <li><b>HTTP Client — response body limit:</b> history truncates response_body at 64 KB with a [truncated N chars] marker, keeping the database small</li>
+        <li><b>Vault — safe key rotation:</b> rotate now updates only the source that holds the key (keyring or .vault_key); a keyring hiccup no longer leaves the vault unreadable on the next boot</li>
+        <li><b>Vault — key source in stats:</b> vault.stats() reports key_source next to mode</li>
+        <li><b>Collections — history masking:</b> collection runs store the raw template in history, so Authorization, X-API-Key and similar headers never reach the history table with resolved secrets</li>
+        <li><b>Collections — concurrent-safe run log:</b> the _runs.json file is now written under a lock; simultaneous GUI and CLI runs no longer drop entries</li>
+        <li><b>Collections — smarter JSON assertions:</b> json_equals is compared by type first, so true vs "true" and 5 vs "5" behave as expected</li>
+        <li><b>Encoder / Decoder — per-row XOR key:</b> the key is now a field next to the operation instead of a pop-up dialog; typing in the input no longer spawns a modal on every keystroke</li>
+        <li><b>Encoder / Decoder — dynamic visibility:</b> the key field appears only when the row's operation is XOR hex</li>
+        <li><b>JWT Decoder — faster brute force:</b> secret guesses no longer do a linear lookup per hit</li>
+        <li><b>Reporter — HTML escaping:</b> every user-controlled value in HTML reports is escaped; a malicious &lt;/script&gt; in a response body can no longer execute when the report is opened in a browser</li>
+        <li><b>Reporter — Markdown escaping:</b> grouped reports escape | inside the status column, not only in the URL</li>
+        <li><b>WebSocket Client — serialized sends:</b> outgoing frames and pings from different threads are ordered, eliminating the rare dropped-frame race</li>
+      </ul>
+    </article>
+
+    <article class="release">
+      <div class="release-head">
         <span class="release-version">v1.1.0</span>
         <span class="release-tag">latest</span>
         <span class="release-date">2026-10-15</span>
