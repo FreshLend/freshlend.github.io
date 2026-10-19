@@ -141,6 +141,12 @@
         .subtitle {
             font-size: 1.2rem;
             color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        .action-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
             margin-bottom: 3rem;
         }
         .preview-container {
@@ -264,6 +270,13 @@
     <main class="container">
         <h1>MusicForge <span>Desktop</span></h1>
         <p class="subtitle">Кроссплатформенный десктопный клиент на PySide6 для комфортного прослушивания музыки с вашего личного сервера.</p>
+
+        <div class="action-links">
+            <a href="https://github.com/FreshLend/MusicForge-Desktop" target="_blank" class="btn-outline-neon">GitHub Репозиторий</a>
+            <a href="https://github.com/FreshLend/MusicForge-Desktop/releases/download/v1.0.0/MusicForge-v1.0.0_win64.exe" target="_blank" class="btn-neon">Скачать для Windows</a>
+            <a href="https://github.com/FreshLend/MusicForge-Desktop/releases/download/v1.0.0/MusicForge-v1.0.0_macos.dmg" target="_blank" class="btn-neon">Скачать для macOS</a>
+            <a href="https://github.com/FreshLend/MusicForge-Desktop/releases/download/v1.0.0/MusicForge-v1.0.0_x86-64.AppImage" target="_blank" class="btn-neon">Скачать для Linux</a>
+        </div>
 
         <div class="preview-container">
             <img src="../data/images/musicforge/desktop.png" alt="MusicForge Desktop Preview" class="preview-img">
