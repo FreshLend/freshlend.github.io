@@ -303,6 +303,20 @@
         <div class="version-list">
             <div class="version-item">
                 <div class="version-header">
+                    <span class="version-tag">v1.2.0</span>
+                    <span class="version-date">Переход на FastAPI и оптимизация</span>
+                </div>
+                <ul class="version-desc">
+                    <li>Полный переход на асинхронный <strong>FastAPI + Uvicorn</strong> (вместо Flask).</li>
+                    <li>Внедрение бесконечного скролла (Infinite Scroll) на страницах релизов и профилей.</li>
+                    <li>Оптимизация загрузки изображений: ленивая загрузка (Lazy Loading) и приоритеты для первых обложек.</li>
+                    <li>Нативные WebSockets для мгновенного обновления виджетов «Сейчас играет».</li>
+                    <li>Кастомная асинхронная защита от брутфорса и CSRF-атак.</li>
+                </ul>
+            </div>
+            
+            <div class="version-item">
+                <div class="version-header">
                     <span class="version-tag">v1.1.0</span>
                     <span class="version-date">Безопасный вход и исправления</span>
                 </div>
